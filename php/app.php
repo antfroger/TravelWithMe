@@ -16,6 +16,11 @@ $loader->register(true);
 require_once __DIR__.'/../app/AppKernel.php';
 //require_once __DIR__.'/../app/AppCache.php';
 
+$_SERVER['SYMFONY__DATABASE__PORT'] = getenv('OPENSHIFT_MYSQL_DB_HOST');
+$_SERVER['SYMFONY__DATABASE__HOST'] = getenv('OPENSHIFT_MYSQL_DB_PORT');
+$_SERVER['SYMFONY__DATABASE__USER'] = getenv('OPENSHIFT_MYSQL_DB_USERNAME');
+$_SERVER['SYMFONY__DATABASE__PASSWORD'] = getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
+
 $kernel = new AppKernel('prod', false);
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);
