@@ -18,4 +18,4 @@ if [ ! -d $OPENSHIFT_REPO_DIR/app/logs ]; then
 fi
 chmod -v 777 $OPENSHIFT_REPO_DIR/app/logs
 
-#mv $OPENSHIFT_REPO_DIR/web $OPENSHIFT_REPO_DIR/php
+mv $OPENSHIFT_REPO_DIR/web $OPENSHIFT_REPO_DIR/php
