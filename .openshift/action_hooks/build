@@ -3,3 +3,19 @@
 # available.  Otherwise it will execute while your application is stopped
 # before the deploy step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
+
+set -e
+ 
+# Create cache dir if needed
+if [ ! -d $OPENSHIFT_REPO_DIR/app/cache ]; then
+    mkdir $OPENSHIFT_REPO_DIR/app/cache
+fi
+chmod -v 777 $OPENSHIFT_REPO_DIR/app/cache
+ 
+# Create logs dir if needed
+if [ ! -d $OPENSHIFT_REPO_DIR/app/logs ]; then
+    mkdir $OPENSHIFT_REPO_DIR/app/logs
+fi
+chmod -v 777 $OPENSHIFT_REPO_DIR/app/logs
+
+#mv $OPENSHIFT_REPO_DIR/web $OPENSHIFT_REPO_DIR/php

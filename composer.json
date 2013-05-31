@@ -39,7 +39,7 @@
     "minimum-stability": "alpha",
     "extra": {
         "symfony-app-dir": "app",
-        "symfony-web-dir": "web",
+        "symfony-web-dir": "php",
         "branch-alias": {
             "dev-master": "2.2-dev"
         }
