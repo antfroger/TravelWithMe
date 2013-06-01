@@ -1,3 +1,5 @@
 antfroger_travel_with_me_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: AntfrogerTravelWithMeBundle:Default:index, name: World }
+    pattern:  /{_locale}/hello/{name}
+    defaults: { _controller: AntfrogerTravelWithMeBundle:Default:index, name: World, _locale: %locale% }
+    requirements:
+        _locale: en|fr
