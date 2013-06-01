@@ -1,5 +1,6 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-Hello {{ name }}!
+  <p>{% trans with {'%name%': name} from "demo" %}hello{% endtrans %}</p>
+  <p>{{ 'hello'|trans({'%name%': name}, "demo") }}</p>
 {% endblock %}
