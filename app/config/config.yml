@@ -2,6 +2,12 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
+services:
+    twig.text_extension:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - name: twig.extension
+
 framework:
     #esi:             ~
     translator:      { fallback: %locale% }
@@ -63,3 +69,18 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+
+#JMSTranslation Configuration
+jms_translation:
+    configs:
+        twm:
+          dirs: [%kernel.root_dir%/../src/Antfroger/TravelWithMeBundle]
+          output_dir: %kernel.root_dir%/../src/Antfroger/TravelWithMeBundle/Resources/translations
+          excluded_names: [*TestCase.php, *Test.php]
+          excluded_dirs: [cache, data, logs]
+
+#JMSI18nRouting Configuration
+jms_i18n_routing:
+    default_locale: %locale%
+    locales: [fr, en]
+    strategy: prefix_except_default
