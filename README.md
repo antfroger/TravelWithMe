@@ -1,11 +1,11 @@
 TravelWithMe
 ============
 
-### Commandes utiles
+Un [système de traduction] (http://travelwithme/app_dev.php/_trans/) des différentes variables utilisées sur toutes l'application est disponible.
 
-  php app/console translation:extract fr --bundle=AntfrogerTravelWithMeBundle
-  php app/console cache:clear (à exécuter à chaque nouvelle variable de traduction)
+---
 
-### URLs utiles
+Quelques commandes pratiques :
 
-  Traduction : http://travelwithme/app_dev.php/_trans/
+    php app/console translation:extract fr --bundle=AntfrogerTravelWithMeBundle
+    php app/console cache:clear (à exécuter à chaque nouvelle variable de traduction)
