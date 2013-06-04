@@ -12,5 +12,6 @@ A [translation service] (http://travelwithme/app_dev.php/_trans/) is available.
 
 Some usefull commands :
 
-    php app/console translation:extract fr --bundle=AntfrogerTravelWithMeBundle
-    php app/console cache:clear (à exécuter à chaque nouvelle variable de traduction)
+    php app/console translation:extract fr --bundle=AntfrogerTravelWithMeBundle (extrait toutes les variables de trad utilisées sur l'application et les enregistre dans des fichiers)
+    php app/console cache:clear
+    php app/console assetic:dump --env=prod --no-debug (génère et enregistre chaque asset utilisé - à exécuter à chaque MEP)
