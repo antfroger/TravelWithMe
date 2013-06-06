@@ -1,5 +1,21 @@
 {% extends '::base.html.twig' %}
 
+{% block stylesheets %}
+  {% stylesheets '@AntfrogerTravelWithMeBundle/Resources/assets/stylesheets/public/*'
+      filter='compass'
+      output='assets/css/main.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
 {% block body %}
   <p>{{ 'hello'|trans({'%name%': name}, "demo") }}</p>
+{% endblock %}
+
+{% block javascripts %}
+  {% javascripts '@AntfrogerTravelWithMeBundle/Resources/assets/js/public/*'
+      filter='?yui_js'
+      output='assets/js/main.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
 {% endblock %}
