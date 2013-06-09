@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "325d9f9600f2b1ddd10a0ac331875775",
+    "hash": "709de8dc77114a12b6a554a61029aa87",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -811,36 +811,39 @@
         },
         {
             "name": "jms/i18n-routing-bundle",
-            "version": "dev-master",
+            "version": "1.1.0",
             "target-dir": "JMS/I18nRoutingBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSI18nRoutingBundle.git",
-                "reference": "5e8b7199ee109c266eb353d137195eb56ba86521"
+                "reference": "1.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSI18nRoutingBundle/zipball/5e8b7199ee109c266eb353d137195eb56ba86521",
-                "reference": "5e8b7199ee109c266eb353d137195eb56ba86521",
+                "url": "https://api.github.com/repos/schmittjoh/JMSI18nRoutingBundle/zipball/1.1.0",
+                "reference": "1.1.0",
                 "shasum": ""
             },
             "require": {
-                "jms/translation-bundle": ">=1.0,<2.0-dev",
-                "symfony/framework-bundle": ">=2.1,<2.3-dev"
+                "jms/translation-bundle": ">=1.0,<2.0",
+                "symfony/framework-bundle": ">=2.1,<3.0"
             },
             "require-dev": {
                 "jms/di-extra-bundle": "*",
-                "sensio/framework-extra-bundle": "*",
-                "symfony/browser-kit": "*",
-                "symfony/class-loader": "*",
-                "symfony/css-selector": "*",
-                "symfony/finder": "*",
-                "symfony/form": "*",
-                "symfony/http-kernel": "*",
-                "symfony/process": "*",
-                "symfony/twig-bundle": "*",
-                "symfony/validator": "*",
-                "symfony/yaml": "*"
+                "sensio/framework-extra-bundle": "<2.1.5",
+                "symfony/browser-kit": "<2.1.5",
+                "symfony/class-loader": "<2.1.5",
+                "symfony/css-selector": "<2.1.5",
+                "symfony/finder": "<2.1.5",
+                "symfony/form": "<2.1.5",
+                "symfony/framework-bundle": "<2.1.5",
+                "symfony/http-foundation": "<2.1.5",
+                "symfony/http-kernel": "<2.1.5",
+                "symfony/process": "<2.1.5",
+                "symfony/routing": "<2.1.5",
+                "symfony/twig-bundle": "<2.1.5",
+                "symfony/validator": "<2.1.5",
+                "symfony/yaml": "<2.1.5"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -872,7 +875,7 @@
                 "routing",
                 "translation"
             ],
-            "time": "2013-02-11 21:00:49"
+            "time": "2013-06-08 14:01:20"
         },
         {
             "name": "jms/metadata",
@@ -1034,23 +1037,23 @@
         },
         {
             "name": "jms/translation-bundle",
-            "version": "dev-master",
+            "version": "1.1.0",
             "target-dir": "JMS/TranslationBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSTranslationBundle.git",
-                "reference": "982736a8e04f1efa3105bc64371affc5af4ec4a4"
+                "reference": "1.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/982736a8e04f1efa3105bc64371affc5af4ec4a4",
-                "reference": "982736a8e04f1efa3105bc64371affc5af4ec4a4",
+                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/1.1.0",
+                "reference": "1.1.0",
                 "shasum": ""
             },
             "require": {
                 "nikic/php-parser": "0.9.1",
                 "symfony/console": "*",
-                "symfony/framework-bundle": ">=2.1,<2.3-dev"
+                "symfony/framework-bundle": ">=2.1,<3.0"
             },
             "conflict": {
                 "twig/twig": "1.10.2"
@@ -1104,7 +1107,7 @@
                 "ui",
                 "webinterface"
             ],
-            "time": "2013-05-18 06:44:01"
+            "time": "2013-06-08 14:08:19"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -1934,10 +1937,9 @@
 
     ],
     "minimum-stability": "alpha",
-    "stability-flags": {
-        "jms/translation-bundle": 20,
-        "jms/i18n-routing-bundle": 20
-    },
+    "stability-flags": [
+
+    ],
     "platform": {
         "php": ">=5.3.3"
     },
