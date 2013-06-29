@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
   {% stylesheets '@AntfrogerTravelWithMeBundle/Resources/assets/stylesheets/public/*/*'
-      filter='compass'
+      filter='compass,?yui_css'
       output='assets/css/main.css' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
   {% endstylesheets %}
