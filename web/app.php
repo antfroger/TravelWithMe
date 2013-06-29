@@ -25,7 +25,6 @@ $_SERVER['SYMFONY__DATABASE__PASSWORD'] = getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
 $kernel = new AppKernel('prod', false);
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);
-Request::enableHttpMethodParameterOverride();
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();

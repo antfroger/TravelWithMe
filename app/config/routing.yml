@@ -1,4 +1,3 @@
 antfroger_travel_with_me:
     resource: "@AntfrogerTravelWithMeBundle/Resources/config/routing.yml"
     prefix:   /
-
