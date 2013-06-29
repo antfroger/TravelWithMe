@@ -20,3 +20,8 @@ sed -i '/database_password/d' parameters.yml
 echo 'Update composer.json configuration'
 cd $OPENSHIFT_REPO_DIR/
 sed -i 's/"symfony-web-dir": "web"/"symfony-web-dir": "php"/' composer.json
+
+echo 'Update vendors'
+curl -sS https://getcomposer.org/installer | php
+php composer.phar install --prefer-dist
+php composer.phar dump-autoload --optimize
