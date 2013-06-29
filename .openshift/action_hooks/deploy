@@ -9,7 +9,7 @@ cd $OPENSHIFT_REPO_DIR/app/config
 cp parameters.yml.dist parameters.yml
 
 # Update the configuration of the parameters.yml file
-sed -i '/database_host/d' app/config/parameters.yml
-sed -i '/database_port/d' app/config/parameters.yml
-sed -i '/database_user/d' app/config/parameters.yml
-sed -i '/database_password/d' app/config/parameters.yml
+sed -i '/database_host/d' parameters.yml
+sed -i '/database_port/d' parameters.yml
+sed -i '/database_user/d' parameters.yml
+sed -i '/database_password/d' parameters.yml
