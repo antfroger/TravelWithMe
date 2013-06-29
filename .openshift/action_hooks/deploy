@@ -5,15 +5,18 @@
 # ruby, etc.
 
 # Copy parameters.yml.dist
+echo 'Copy parameters'
 cd $OPENSHIFT_REPO_DIR/app/config
 cp parameters.yml.dist parameters.yml
 
 # Update the configuration of the parameters.yml file
+echo 'Update parameters.yml configuration'
 sed -i '/database_host/d' parameters.yml
 sed -i '/database_port/d' parameters.yml
 sed -i '/database_user/d' parameters.yml
 sed -i '/database_password/d' parameters.yml
 
 # Update the web directory in composer.json
+echo 'Update composer.json configuration'
 cd $OPENSHIFT_REPO_DIR/
-sed 's/"symfony-web-dir": "web"/"symfony-web-dir": "php"/' composer.json
+sed -i 's/"symfony-web-dir": "web"/"symfony-web-dir": "php"/' composer.json
