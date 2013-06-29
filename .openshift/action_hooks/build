@@ -19,4 +19,4 @@ fi
 chmod -v 777 $OPENSHIFT_REPO_DIR/app/logs
 
 # Rename php dir in web
-mv $OPENSHIFT_REPO_DIR/php/ $OPENSHIFT_REPO_DIR/web/
+#mv $OPENSHIFT_REPO_DIR/php/ $OPENSHIFT_REPO_DIR/web/
