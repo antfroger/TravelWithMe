@@ -13,3 +13,7 @@ sed -i '/database_host/d' parameters.yml
 sed -i '/database_port/d' parameters.yml
 sed -i '/database_user/d' parameters.yml
 sed -i '/database_password/d' parameters.yml
+
+# Update the web directory in composer.json
+cd $OPENSHIFT_REPO_DIR/
+sed 's/"symfony-web-dir": "web"/"symfony-web-dir": "php"/' composer.json
