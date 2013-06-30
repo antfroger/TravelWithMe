@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+  {% stylesheets '@AntfrogerTravelWithMeBundle/Resources/assets/stylesheets/public/*/*'
+      filter='compass,?yui_css'
+      output='assets/css/main.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+  {% javascripts '@AntfrogerTravelWithMeBundle/Resources/assets/js/public/*'
+      filter='?yui_js'
+      output='assets/js/main.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}{# empty Twig template #}
