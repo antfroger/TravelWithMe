@@ -35,7 +35,7 @@ class User
     protected $username;
 
     /**
-     * @ORM\Column
+     * @ORM\Column()
      */
     protected $email;
 
@@ -44,14 +44,14 @@ class User
      */
     protected $password;
 
-    public function __construct($id = null, DateTime $creationTime = null,
-                                DateTime $lastModificationTime = null, $userName = null,
-                                $email = null, $password = null)
+    public function __construct($userName = null, $email = null, $password = null,
+                                $id = null, DateTime $creationTime = null,
+                                DateTime $lastModificationTime = null)
     {
         $this->id                   = $id;
         $this->creationTime         = $creationTime ?: new DateTime();
         $this->lastModificationTime = $lastModificationTime ?: new DateTime();
-        $this->userName             = $userName;
+        $this->username             = $userName;
         $this->email                = $email;
         $this->password             = $password;
     }

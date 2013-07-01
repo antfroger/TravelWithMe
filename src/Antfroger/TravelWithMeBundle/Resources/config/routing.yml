@@ -4,4 +4,8 @@ antfroger_travel_with_me_homepage:
 
 antfroger_travel_with_me_show_user:
     pattern:  /user/{username}
-    defaults: { _controller: AntfrogerTravelWithMeBundle:User:show}
+    defaults: { _controller: AntfrogerTravelWithMeBundle:User:show }
+
+antfroger_travel_with_me_save_user:
+    pattern:  /user/{username}/create
+    defaults: { _controller: AntfrogerTravelWithMeBundle:User:create }

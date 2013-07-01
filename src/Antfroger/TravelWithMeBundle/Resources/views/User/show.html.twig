@@ -2,4 +2,6 @@
 
 {% block body %}
   <p>{{ user.username }}</p>
+  {% if user.email is defined %}<p>{{ user.email }}</p>{% endif %}
+  {% if user.password is defined %}<p>{{ user.password }}</p>{% endif %}
 {% endblock %}
