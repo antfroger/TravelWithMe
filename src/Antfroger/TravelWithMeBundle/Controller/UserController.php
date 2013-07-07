@@ -3,7 +3,6 @@
 namespace Antfroger\TravelWithMeBundle\Controller;
 
 use Antfroger\TravelWithMeBundle\Entity\User;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,13 +16,7 @@ class UserController extends Controller
      */
     public function showAction(User $user)
     {
-        return $this->render(
-            'AntfrogerTravelWithMeBundle:User:show.html.twig',
-            array('user' => $user)
-        );
-    }
-    /*public function showAction($username)
-    {
+        /* Not necessary, the user is automatically retrieved by doctrine because the parameter is casted
         $user = $this->getDoctrine()
             ->getRepository('AntfrogerTravelWithMeBundle:User')
             ->findOneBy(array('username' => $username));
@@ -32,13 +25,13 @@ class UserController extends Controller
             throw $this->createNotFoundException(
                 'No user found for name ' . $username
             );
-        }
+        }*/
 
         return $this->render(
             'AntfrogerTravelWithMeBundle:User:show.html.twig',
             array('user' => $user)
         );
-    }*/
+    }
 
     /**
      * Creates a User
@@ -47,13 +40,13 @@ class UserController extends Controller
      */
     public function createAction($username)
     {
-        $user = new User($username, 'test@test.fr', hash('sha256', 'mypassword'));
+        $user = new User($username, $username . '@' . $username . '.fr', hash('sha256', $username));
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
 
-        return new Response('Created user id ' . $user->getId());
+        return $this->forward('AntfrogerTravelWithMeBundle:User:show', array('username' => $user->getUsername()));
     }
 
 }
