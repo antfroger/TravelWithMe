@@ -3,6 +3,7 @@
 /app/config/parameters.yml
 /app/cache/*
 /app/logs/*
+/doc/
 /build/
 /vendor/
 /bin/

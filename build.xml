@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project default="sync-database" phingVersion="2.4.2">
+
+  <property name="documentation.directory" value="./doc" />
+
+
+  <target name="sync-database" description="Update database from the application's schema">
+    <exec command="php app/console doctrine:schema:update --force" dir="." passthru="true" />
+  </target>
+
+  <target name="gen-entity" description="Generate the getters and setters of an entity">
+    <exec command="php app/console doctrine:generate:entities ${e} --no-backup" dir="." passthru="true" />
+  </target>
+
+  <target name="check" description="Run unit tests">
+    <exec command="phpunit -c app/ --testdox-html ${documentation.directory}/agile-documentation/index.html --coverage-html ${documentation.directory}/code-coverage --colors" dir="." passthru="true" />
+  </target>
+
+  <target name="translate" description="Extract all translation variables">
+    <exec command="php app/console translation:extract fr --bundle=${b}" dir="." passthru="true" />
+  </target>
+
+  <target name="dump-asset" description="Dump the assets">
+    <exec command="php app/console assetic:dump --env=prod --no-debug" dir="." passthru="true" />
+  </target>
+
+  <target name="clear-cache" description="Clear cache">
+    <exec command="php app/console cache:clear" dir="." passthru="true" />
+  </target>
+
+</project>
