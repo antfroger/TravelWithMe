@@ -44,16 +44,20 @@ class User
      */
     protected $password;
 
-    public function __construct($userName = null, $email = null, $password = null,
-                                $id = null, DateTime $creationTime = null,
-                                DateTime $lastModificationTime = null)
+    /**
+     * @ORM\Column
+     */
+    protected $salt;
+
+    public function __construct($userName = '', $email = '', $password = '', $id = 0, DateTime $creationTime = null, DateTime $lastModificationTime = null)
     {
         $this->id                   = $id;
-        $this->creationTime         = $creationTime ?: new DateTime();
-        $this->lastModificationTime = $lastModificationTime ?: new DateTime();
+        $this->creationTime         = $creationTime ? : new DateTime();
+        $this->lastModificationTime = $lastModificationTime ? : new DateTime();
         $this->username             = $userName;
         $this->email                = $email;
         $this->password             = $password;
+        $this->salt                 = '';
     }
 
     /**
@@ -179,6 +183,29 @@ class User
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->salt;
     }
 
 }
