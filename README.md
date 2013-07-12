@@ -13,7 +13,8 @@ A [translation service] (http://travelwithme/app_dev.php/_trans/) is available.
 Some usefull commands :
 
     phing sync-database
-    phing gen-entity -De=Acme/StoreBundle/Entity/Product
+    phing load-fixtures
+    phing gen-entity -De=Antfroger/TravelWithMeBundle/Entity/Product
     phing check
     phing translate -Db=AntfrogerTravelWithMeBundle
     phing clear-cache

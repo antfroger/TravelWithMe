@@ -10,7 +10,7 @@
   </target>
 
   <target name="load-fixtures" description="Load the fixtures in the database">
-    <exec command="php app/console doctrine:fixtures:load --purge-with-truncate -n" dir="." passthru="true" />
+    <exec command="php app/console doctrine:fixtures:load -n" dir="." passthru="true" />
   </target>
 
   <target name="gen-entity" description="Generate the getters and setters of an entity">
