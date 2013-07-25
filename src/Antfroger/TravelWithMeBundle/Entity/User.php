@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 /**
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Antfroger\TravelWithMeBundle\Entity\UserRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 //@ORM\Table(name="`User`")
 class User implements AdvancedUserInterface, Serializable
@@ -63,13 +64,11 @@ class User implements AdvancedUserInterface, Serializable
      */
     private $roles;
 
-    public function __construct($userName = '', $email = '', $password = '',
-                                $id = 0, DateTime $creationTime = null,
-                                DateTime $lastModificationTime = null)
+    public function __construct($userName = '', $email = '', $password = '', $id = 0, DateTime $creationTime = null, DateTime $lastModificationTime = null)
     {
         $this->id                   = $id;
-        $this->creationTime         = $creationTime ? : new DateTime();
-        $this->lastModificationTime = $lastModificationTime ? : new DateTime();
+        $this->creationTime         = $creationTime;
+        $this->lastModificationTime = $lastModificationTime;
         $this->username             = $userName;
         $this->email                = $email;
         $this->password             = $password;
@@ -285,6 +284,7 @@ class User implements AdvancedUserInterface, Serializable
      */
     public function eraseCredentials()
     {
+
     }
 
     public function isAccountNonExpired()
@@ -324,7 +324,24 @@ class User implements AdvancedUserInterface, Serializable
     {
         list (
             $this->id,
-        ) = unserialize($serialized);
+            ) = unserialize($serialized);
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreationTimeValue()
+    {
+        $this->creationTime = new DateTime();
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setLastModificationTimeValue()
+    {
+        $this->lastModificationTime = new DateTime();
     }
 
 }
