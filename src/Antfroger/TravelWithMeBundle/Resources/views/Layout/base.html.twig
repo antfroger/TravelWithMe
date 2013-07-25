@@ -1,17 +1,15 @@
-{% extends '::base.html.twig' %}
+{% extends "TwigBundle::layout.html.twig" %}
 
-{% block stylesheets %}
-  {% stylesheets '@AntfrogerTravelWithMeBundle/Resources/assets/stylesheets/public/*/*'
+{% block head %}
+  {% stylesheets '@AntfrogerTravelWithMeBundle/Resources/public/stylesheets/public/*/*'
       filter='compass,?yui_css'
-      output='assets/css/main.css' %}
+      output='public/css/main.css' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
   {% endstylesheets %}
-{% endblock %}
 
-{% block javascripts %}
-  {% javascripts '@AntfrogerTravelWithMeBundle/Resources/assets/js/public/*'
+  {% javascripts '@AntfrogerTravelWithMeBundle/Resources/public/js/public/*'
       filter='?yui_js'
-      output='assets/js/main.js' %}
+      output='public/js/main.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
   {% endjavascripts %}
 {% endblock %}{# empty Twig template #}

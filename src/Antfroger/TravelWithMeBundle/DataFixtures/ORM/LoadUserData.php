@@ -23,8 +23,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $this->manager = $manager;
 
         $this->loadUser('admin', 'admin', 'admin@twm.com');
+        $this->loadUser('superadmin', 'superadmin', 'sa@twm.com');
         $this->loadUser('antoine', 'antoine', 'antoine@twm.com');
-        $this->loadUser('carole', 'carole', 'carole@twm.com');
         $this->loadUser('inactive', 'inactive', 'inactive@twm.com', false);
     }
 

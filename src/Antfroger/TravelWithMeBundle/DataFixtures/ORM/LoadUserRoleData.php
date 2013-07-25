@@ -16,8 +16,8 @@ class LoadUserRoleData extends AbstractFixture implements OrderedFixtureInterfac
         $this->manager = $manager;
 
         $this->loadUserRole('admin', 'admin');
-        $this->loadUserRole('antoine', 'superadmin');
-        $this->loadUserRole('carole', 'user');
+        $this->loadUserRole('superadmin', 'superadmin');
+        $this->loadUserRole('antoine', 'user');
     }
 
     /**

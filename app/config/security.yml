@@ -25,21 +25,22 @@ security:
             security: false
 
         login:
-            pattern:  ^/demo/secured/login$
+            pattern:  ^/twm/demo/secured/login$
             security: false
 
         secured_area:
-            pattern:    ^/demo/secured/
+            pattern:    ^/twm/demo/secured/
             form_login:
-                check_path: _security_check
-                login_path: _demo_login
+                check_path: _twm_security_check
+                login_path: _twm_demo_login
+                default_target_path: antfroger_travel_with_me_homepage
             logout:
-                path:   _demo_logout
-                target: _demo
+                path:   _twm_demo_logout
+                target: antfroger_travel_with_me_homepage
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
 
     access_control:
-        - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
+        - { path: ^/twm/demo/secured/hello/admin/, roles: ROLE_ADMIN }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

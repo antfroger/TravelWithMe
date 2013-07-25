@@ -9,3 +9,7 @@ antfroger_travel_with_me_show_user:
 antfroger_travel_with_me_save_user:
     pattern:  /user/{username}/create
     defaults: { _controller: AntfrogerTravelWithMeBundle:User:create }
+
+antfroger_demo_secured:
+    resource: "@AntfrogerTravelWithMeBundle/Controller/SecuredController.php"
+    type: annotation
