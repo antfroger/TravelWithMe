@@ -1,6 +1,6 @@
 security:
     encoders:
-        Antfroger\DemoBundle\Entity\User:
+        TWM\DemoBundle\Entity\User:
           algorithm: sha512
           iterations: 6100
 
@@ -10,7 +10,7 @@ security:
 
     providers:
         main:
-            entity: { class: AntfrogerDemoBundle:User }
+            entity: { class: TWMDemoBundle:User }
 
     firewalls:
         dev:
@@ -26,10 +26,10 @@ security:
             form_login:
                 check_path: _twm_security_check
                 login_path: _twm_demo_login
-                default_target_path: antfroger_demo_homepage
+                default_target_path: twm_demo_homepage
             logout:
                 path:   _twm_demo_logout
-                target: antfroger_demo_homepage
+                target: twm_demo_homepage
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"

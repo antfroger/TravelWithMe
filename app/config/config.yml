@@ -43,7 +43,7 @@ assetic:
     debug:          "%kernel.debug%"
     use_controller: "%kernel.debug%"
     bundles:
-      - AntfrogerDemoBundle
+      - TWMDemoBundle
     java: "/usr/bin/java"
     sass: "/usr/local/bin/sass"
     filters:
@@ -84,8 +84,8 @@ swiftmailer:
 jms_translation:
     configs:
         twm:
-          dirs: ["%kernel.root_dir%/../src/Antfroger/DemoBundle"]
-          output_dir: "%kernel.root_dir%/../src/Antfroger/DemoBundle/Resources/translations"
+          dirs: ["%kernel.root_dir%/../src/TWM/DemoBundle"]
+          output_dir: "%kernel.root_dir%/../src/TWM/DemoBundle/Resources/translations"
           excluded_names: [*TestCase.php, *Test.php]
           excluded_dirs: [cache, data, logs]
 

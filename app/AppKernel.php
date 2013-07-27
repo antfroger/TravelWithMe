@@ -19,7 +19,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
-            new Antfroger\DemoBundle\AntfrogerDemoBundle(),
+            new TWM\DemoBundle\TWMDemoBundle(),
             new TWM\SiteBundle\TWMSiteBundle(),
         );
 

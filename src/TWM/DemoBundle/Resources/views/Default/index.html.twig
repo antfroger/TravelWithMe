@@ -1,0 +1,12 @@
+{% extends 'TWMDemoBundle:Layout:layout.html.twig' %}
+
+{% trans_default_domain "demo" %}
+
+{% block body %}
+  <p class="test">{{ 'hello'|trans({'%name%': name}) }}</p>
+
+  <ul id="demo-list">
+        <li><a href="{{ path('_twm_demo_login') }}">{{ 'demo.login'|trans }}</a></li>
+        <li><a href="{{ path('_twm_demo_secured_hello', {'name': 'World'}) }}">{{ 'demo.secured'|trans }}</a></li>
+    </ul>
+{% endblock %}
