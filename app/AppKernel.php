@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new Antfroger\DemoBundle\AntfrogerDemoBundle(),
+            new TWM\SiteBundle\TWMSiteBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

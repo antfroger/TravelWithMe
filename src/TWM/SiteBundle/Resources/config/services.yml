@@ -1,0 +1,7 @@
+parameters:
+#    twm_site.example.class: TWM\SiteBundle\Example
+
+services:
+#    twm_site.example:
+#        class: %twm_site.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,3 +1,7 @@
+twm_site:
+    resource: "@TWMSiteBundle/Resources/config/routing.yml"
+    prefix:   /
+
 antfroger_demo:
     resource: "@AntfrogerDemoBundle/Resources/config/routing.yml"
     prefix:   /
