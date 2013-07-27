@@ -14,8 +14,8 @@ Some usefull commands :
 
     phing sync-database
     phing load-fixtures
-    phing gen-entity -De=Antfroger/TravelWithMeBundle/Entity/Product
+    phing gen-entity -De=Antfroger/DemoBundle/Entity/Product
     phing check
-    phing translate -Db=AntfrogerTravelWithMeBundle
+    phing translate -Db=AntfrogerDemoBundle
     phing clear-cache
     phing dump-asset

@@ -1,0 +1,15 @@
+antfroger_demo_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: AntfrogerDemoBundle:Default:index, name: World }
+
+antfroger_demo_show_user:
+    pattern:  /user/{username}
+    defaults: { _controller: AntfrogerDemoBundle:User:show }
+
+antfroger_demo_save_user:
+    pattern:  /user/{username}/create
+    defaults: { _controller: AntfrogerDemoBundle:User:create }
+
+antfroger_demo_secured:
+    resource: "@AntfrogerDemoBundle/Controller/SecuredController.php"
+    type: annotation

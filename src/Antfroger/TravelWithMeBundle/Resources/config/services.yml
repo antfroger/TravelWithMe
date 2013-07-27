@@ -1,7 +1,0 @@
-parameters:
-#    antfroger_travel_with_me.example.class: Antfroger\TravelWithMeBundle\Example
-
-services:
-#    antfroger_travel_with_me.example:
-#        class: %antfroger_travel_with_me.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
