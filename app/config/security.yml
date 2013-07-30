@@ -24,6 +24,7 @@ security:
 
         secured_area:
             pattern:    ^/demo/secured/
+            switch_user: true
             form_login:
                 check_path: twm_security_check
                 login_path: twm_demo_login
