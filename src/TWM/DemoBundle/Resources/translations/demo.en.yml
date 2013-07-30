@@ -1,1 +1,5 @@
+demo:
+    login: 'Login'
+    secured: 'Secured zone'
+
 hello: 'Hello %name%'
