@@ -1,0 +1,20 @@
+twm_demo_login:
+    pattern:  /login
+    defaults: { _controller: TWMDemoBundle:Secured:login }
+
+twm_security_check:
+    pattern:  /login_check
+    defaults: { _controller: TWMDemoBundle:Secured:securityCheck}
+
+twm_demo_logout:
+    pattern:  /logout
+    defaults: { _controller: TWMDemoBundle:Secured:logout }
+
+twm_demo_secured_hello:
+    pattern:  /hello/{name}
+    defaults: { _controller: TWMDemoBundle:Secured:hello, name: World }
+    defaults: { _controller: TWMDemoBundle:Secured:hello }
+
+twm_demo_secured_hello_admin:
+    pattern:  /hello/admin/{name}
+    defaults: { _controller: TWMDemoBundle:Secured:helloadmin }

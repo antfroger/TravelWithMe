@@ -1,15 +1,15 @@
 twm_demo_homepage:
-    pattern:  /{name}
+    pattern:  /demo/{name}
     defaults: { _controller: TWMDemoBundle:Default:index, name: World }
 
 twm_demo_show_user:
-    pattern:  /user/{username}
+    pattern:  /demo/user/{username}
     defaults: { _controller: TWMDemoBundle:User:show }
 
 twm_demo_save_user:
-    pattern:  /user/{username}/create
+    pattern:  /demo/user/{username}/create
     defaults: { _controller: TWMDemoBundle:User:create }
 
 twm_demo_secured:
-    resource: "@TWMDemoBundle/Controller/SecuredController.php"
-    type: annotation
+    resource: "@TWMDemoBundle/Resources/config/routing/secured.yml"
+    prefix:   /demo/secured
