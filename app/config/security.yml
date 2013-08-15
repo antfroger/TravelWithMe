@@ -4,7 +4,7 @@ security:
 #          algorithm: sha512
 #          iterations: 6100
 #          encode_as_base64: true
-        TWM\CommonBundle\Model\UserInterface:
+        TWM\UserBundle\Entity\User:
           algorithm: sha512
           iterations: 3869
           encode_as_base64: true

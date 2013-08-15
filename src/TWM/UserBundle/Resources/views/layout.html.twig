@@ -1,0 +1,10 @@
+{% extends 'TWMSiteBundle:Layout:layout.html.twig' %}
+
+{% trans_default_domain "login" %}
+
+{% block title 'title.login'|trans %}
+
+{% block content %}
+  {{ parent() }}
+  {% block fos_user_content %}{% endblock %}
+{% endblock %}

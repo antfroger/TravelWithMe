@@ -1,7 +1,7 @@
-{% extends "TwigBundle::layout.html.twig" %}
+{% extends "TwigBundle::layout.html.twig" %}{# FIXME it's temporary #}
 
 {% block head %}
-  {% stylesheets '@TWMDemoBundle/Resources/public/stylesheets/public/*/*'
+  {#% stylesheets '@TWMDemoBundle/Resources/public/stylesheets/public/*/*'
       filter='compass,?yui_css'
       output='public/css/main.css' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
@@ -11,5 +11,5 @@
       filter='?yui_js'
       output='public/js/main.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
-  {% endjavascripts %}
-{% endblock %}{# empty Twig template #}
+  {% endjavascripts %#}
+{% endblock %}

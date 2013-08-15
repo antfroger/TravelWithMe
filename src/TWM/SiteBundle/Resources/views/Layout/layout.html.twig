@@ -1,0 +1,26 @@
+{% extends 'TWMSiteBundle:Layout:base.html.twig' %}
+
+{% block head %}
+  {{ parent() }}
+  <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
+{% endblock %}
+
+{% block title 'title.home'|trans({}, 'site') %}
+
+{% block body %}
+  {% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="flash-message">
+      <em>Notice</em>: {{ flashMessage }}
+    </div>
+  {% endfor %}
+
+  {% block content_header %}
+    <ul id="menu">
+      {% block content_header_more %}{% endblock %}
+    </ul>
+  {% endblock %}
+
+  <div class="block">
+    {% block content %}{% endblock %}
+  </div>
+{% endblock %}

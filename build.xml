@@ -22,7 +22,7 @@
   </target>
 
   <target name="translate" description="Extract all translation variables">
-    <exec command="php app/console translation:extract fr --bundle=${b}" dir="." passthru="true" />
+    <exec command="php app/console translation:extract fr --bundle=${b} --output-format=xliff" dir="." passthru="true" />
   </target>
 
   <target name="dump-asset" description="Dump the assets">
