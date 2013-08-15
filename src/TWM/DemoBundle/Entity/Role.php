@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\RoleInterface;
 
 /**
- * @ORM\Table
- * @ORM\Entity()
+ * @ORM\Entity
+ * @ORM\Table(name="`DemoRole`")
  */
 class Role implements RoleInterface
 {

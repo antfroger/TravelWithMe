@@ -1,8 +1,12 @@
 security:
     encoders:
-        TWM\DemoBundle\Entity\User:
+#        TWM\DemoBundle\Entity\User:
+#          algorithm: sha512
+#          iterations: 6100
+#          encode_as_base64: true
+        TWM\CommonBundle\Model\UserInterface:
           algorithm: sha512
-          iterations: 6100
+          iterations: 3869
           encode_as_base64: true
 
     role_hierarchy:
@@ -10,32 +14,49 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        main:
-            entity: { class: TWMDemoBundle:User }
+ #       main:
+#            entity: { class: TWMDemoBundle:User }
+        fos_userbundle:
+            id: fos_user.user_provider.username
 
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
+#        login:
+#            pattern:  ^/demo/secured/login$
+#            security: false
 
-        secured_area:
-            pattern:    ^/demo/secured/
-            switch_user: true
-            form_login:
-                check_path: twm_security_check
-                login_path: twm_demo_login
-                default_target_path: twm_demo_homepage
-            logout:
-                path:   twm_demo_logout
-                target: twm_demo_homepage
+#        secured_area:
+#            pattern:    ^/demo/secured/
+#            switch_user: true
+#            form_login:
+#                check_path: twm_security_check
+#                login_path: twm_demo_login
+#                default_target_path: twm_demo_homepage
+#            logout:
+#                path:   twm_demo_logout
+#                target: twm_demo_homepage
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
 
+        # FOSUserBundle configuration
+        fos_user:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+            logout:       true
+            anonymous:    true
+
     access_control:
-        - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
+ #       - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+
+        # FOSUserBundle configuration
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }

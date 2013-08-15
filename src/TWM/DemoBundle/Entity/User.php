@@ -12,8 +12,8 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="TWM\DemoBundle\Entity\UserRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ORM\Table(name="`DemoUser`")
  */
-//@ORM\Table(name="`User`")
 class User implements AdvancedUserInterface, Serializable
 {
 

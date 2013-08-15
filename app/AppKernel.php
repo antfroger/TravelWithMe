@@ -21,11 +21,14 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
-            new TWM\DemoBundle\TWMDemoBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new TWM\CommonBundle\TWMCommonBundle(),
             new TWM\SiteBundle\TWMSiteBundle(),
+            new TWM\UserBundle\TWMUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+//            $bundles[] = new TWM\DemoBundle\TWMDemoBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();

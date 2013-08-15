@@ -43,7 +43,7 @@ assetic:
     debug:          "%kernel.debug%"
     use_controller: "%kernel.debug%"
     bundles:
-      - TWMDemoBundle
+#      - TWMDemoBundle
       - TWMSiteBundle
     java: "/usr/bin/java"
     sass: "/usr/local/bin/sass"
@@ -82,9 +82,14 @@ swiftmailer:
 #JMSTranslation Configuration
 jms_translation:
     configs:
-        twm:
+        twm_demo:
           dirs: ["%kernel.root_dir%/../src/TWM/DemoBundle"]
           output_dir: "%kernel.root_dir%/../src/TWM/DemoBundle/Resources/translations"
+          excluded_names: ["*TestCase.php", "*Test.php"]
+          excluded_dirs: [cache, data, logs]
+        twm_site:
+          dirs: ["%kernel.root_dir%/../src/TWM/SiteBundle"]
+          output_dir: "%kernel.root_dir%/../src/TWM/SiteBundle/Resources/translations"
           excluded_names: ["*TestCase.php", "*Test.php"]
           excluded_dirs: [cache, data, logs]
 
@@ -93,3 +98,9 @@ jms_i18n_routing:
     default_locale: "%locale%"
     locales: [fr, en]
     strategy: prefix_except_default
+
+# FOSUser Configuration
+fos_user:
+    db_driver: orm
+    firewall_name: fos_user
+    user_class: TWM\UserBundle\Entity\User
