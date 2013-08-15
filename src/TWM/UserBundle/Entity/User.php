@@ -8,11 +8,10 @@ use TWM\CommonBundle\Model\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="`User`")
+ * @ORM\MappedSuperclass
  * @ORM\HasLifecycleCallbacks()
  */
-class User extends BaseUser implements EntityInterface
+abstract class User extends BaseUser implements EntityInterface
 {
 
     /**
@@ -31,6 +30,14 @@ class User extends BaseUser implements EntityInterface
      * @ORM\Column(type="datetime")
      */
     protected $modificatedAt;
+
+    public function __construct(DateTime $createdAt = null, DateTime $modificatedAt = null)
+    {
+        parent::__construct();
+
+        $this->createdAt     = $createdAt ? : new DateTime();
+        $this->modificatedAt = $modificatedAt ? : new DateTime();
+    }
 
     public function setId($id)
     {
@@ -54,7 +61,7 @@ class User extends BaseUser implements EntityInterface
      */
     public function setCreatedAt(DateTime $date = null)
     {
-        $this->createdAt = $date ?: new DateTime();
+        $this->createdAt = $date ? : new DateTime();
 
         return $this;
     }
@@ -65,7 +72,7 @@ class User extends BaseUser implements EntityInterface
      */
     public function setModificatedAt(DateTime $date = null)
     {
-        $this->modificatedAt = $date ?: new DateTime();
+        $this->modificatedAt = $date ? : new DateTime();
 
         return $this;
     }
