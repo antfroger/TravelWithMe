@@ -1,6 +1,6 @@
 <?php
 
-namespace TWM\SiteBundle\Entity\Travel;
+namespace TWM\SiteBundle\Entity\Travel\Travel;
 
 use TWM\CommonBundle\Entity\Entity;
 use Doctrine\ORM\Mapping as ORM;
@@ -19,7 +19,7 @@ abstract class TravelDependency extends Entity
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Travel", mappedBy="author", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Travel", mappedBy="author", cascade={"persist"})
      */
     protected $travels;
 

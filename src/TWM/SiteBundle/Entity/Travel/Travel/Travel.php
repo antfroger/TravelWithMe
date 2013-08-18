@@ -1,15 +1,15 @@
 <?php
 
-namespace TWM\SiteBundle\Entity\Travel;
+namespace TWM\SiteBundle\Entity\Travel\Travel;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use TWM\CommonBundle\Entity\Entity;
-use TWM\SiteBundle\Entity\Travel\Budget;
-use TWM\SiteBundle\Entity\Travel\Duration;
-use TWM\SiteBundle\Entity\Travel\Theme;
-use TWM\SiteBundle\Entity\Travel\TravellersProfile;
-use TWM\SiteBundle\Entity\Travel\Type;
+use TWM\SiteBundle\Entity\Travel\Travel\Budget;
+use TWM\SiteBundle\Entity\Travel\Travel\Duration;
+use TWM\SiteBundle\Entity\Travel\Travel\Theme;
+use TWM\SiteBundle\Entity\Travel\Travel\TravellersProfile;
+use TWM\SiteBundle\Entity\Travel\Travel\Type;
 use TWM\SiteBundle\Entity\User\User;
 
 /**
@@ -39,27 +39,27 @@ class Travel extends Entity
     protected $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Theme", inversedBy="travels")
+     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Theme", inversedBy="travels")
      */
     protected $theme;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Type", inversedBy="travels")
+     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Type", inversedBy="travels")
      */
     protected $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\TravellersProfile", inversedBy="travels")
+     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\TravellersProfile", inversedBy="travels")
      */
     protected $travellersProfile;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Duration", inversedBy="travels")
+     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Duration", inversedBy="travels")
      */
     protected $duration;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Budget", inversedBy="travels")
+     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Budget", inversedBy="travels")
      */
     protected $budget;
 
@@ -74,7 +74,7 @@ class Travel extends Entity
     protected $photos;
 
     /**
-     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Evaluation", mappedBy="travel")
+     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Evaluation", mappedBy="travel")
      */
     protected $evaluations;
 
@@ -178,7 +178,7 @@ class Travel extends Entity
     /**
      * Set theme
      *
-     * @param \TWM\SiteBundle\Entity\Travel\Theme $theme
+     * @param \TWM\SiteBundle\Entity\Travel\Travel\Theme $theme
      * @return Travel
      */
     public function setTheme(Theme $theme = null)
@@ -191,7 +191,7 @@ class Travel extends Entity
     /**
      * Get theme
      *
-     * @return \TWM\SiteBundle\Entity\Travel\Theme
+     * @return \TWM\SiteBundle\Entity\Travel\Travel\Theme
      */
     public function getTheme()
     {
@@ -201,7 +201,7 @@ class Travel extends Entity
     /**
      * Set type
      *
-     * @param \TWM\SiteBundle\Entity\Travel\Type $type
+     * @param \TWM\SiteBundle\Entity\Travel\Travel\Type $type
      * @return Travel
      */
     public function setType(Type $type = null)
@@ -214,7 +214,7 @@ class Travel extends Entity
     /**
      * Get type
      *
-     * @return \TWM\SiteBundle\Entity\Travel\Type
+     * @return \TWM\SiteBundle\Entity\Travel\Travel\Type
      */
     public function getType()
     {
@@ -224,7 +224,7 @@ class Travel extends Entity
     /**
      * Set travellers profile
      *
-     * @param \TWM\SiteBundle\Entity\Travel\TravellersProfile $travellersProfile
+     * @param \TWM\SiteBundle\Entity\Travel\Travel\TravellersProfile $travellersProfile
      * @return Travel
      */
     public function setTravellersProfile(TravellersProfile $travellersProfile = null)
@@ -237,7 +237,7 @@ class Travel extends Entity
     /**
      * Get travellers profile
      *
-     * @return \TWM\SiteBundle\Entity\Travel\TravellersProfile
+     * @return \TWM\SiteBundle\Entity\Travel\Travel\TravellersProfile
      */
     public function getTravellersProfile()
     {
@@ -247,7 +247,7 @@ class Travel extends Entity
     /**
      * Set duration
      *
-     * @param \TWM\SiteBundle\Entity\Travel\Duration $duration
+     * @param \TWM\SiteBundle\Entity\Travel\Travel\Duration $duration
      * @return Travel
      */
     public function setDuration(Duration $duration = null)
@@ -260,7 +260,7 @@ class Travel extends Entity
     /**
      * Get duration
      *
-     * @return \TWM\SiteBundle\Entity\Travel\Duration
+     * @return \TWM\SiteBundle\Entity\Travel\Travel\Duration
      */
     public function getDuration()
     {
@@ -270,7 +270,7 @@ class Travel extends Entity
     /**
      * Set budget
      *
-     * @param \TWM\SiteBundle\Entity\Travel\Budget $budget
+     * @param \TWM\SiteBundle\Entity\Travel\Travel\Budget $budget
      * @return Travel
      */
     public function setBudget(Budget $budget = null)
@@ -283,7 +283,7 @@ class Travel extends Entity
     /**
      * Get budget
      *
-     * @return \TWM\SiteBundle\Entity\Travel\Budget
+     * @return \TWM\SiteBundle\Entity\Travel\Travel\Budget
      */
     public function getBudget()
     {

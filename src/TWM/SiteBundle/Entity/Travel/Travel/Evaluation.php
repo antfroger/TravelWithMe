@@ -1,6 +1,6 @@
 <?php
 
-namespace TWM\SiteBundle\Entity\Travel;
+namespace TWM\SiteBundle\Entity\Travel\Travel;
 
 use TWM\CommonBundle\Entity\Entity;
 use TWM\SiteBundle\Entity\Community\EvaluationInterface;
@@ -14,7 +14,7 @@ class Evaluation extends Entity implements EvaluationInterface
 {
 
     /**
-     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel", inversedBy="evaluations")
+     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Travel", inversedBy="evaluations")
      */
     protected $travel;
 
@@ -54,10 +54,10 @@ class Evaluation extends Entity implements EvaluationInterface
     /**
      * Set travel
      *
-     * @param \TWM\SiteBundle\Entity\Travel\Travel $travel
+     * @param \TWM\SiteBundle\Entity\Travel\Travel\Travel $travel
      * @return Evaluation
      */
-    public function setTravel(\TWM\SiteBundle\Entity\Travel\Travel $travel = null)
+    public function setTravel(\TWM\SiteBundle\Entity\Travel\Travel\Travel $travel = null)
     {
         $this->travel = $travel;
 
@@ -67,7 +67,7 @@ class Evaluation extends Entity implements EvaluationInterface
     /**
      * Get travel
      *
-     * @return \TWM\SiteBundle\Entity\Travel\Travel
+     * @return \TWM\SiteBundle\Entity\Travel\Travel\Travel
      */
     public function getTravel()
     {

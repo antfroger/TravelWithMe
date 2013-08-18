@@ -1,6 +1,6 @@
 <?php
 
-namespace TWM\SiteBundle\Entity\Travel;
+namespace TWM\SiteBundle\Entity\Travel\Travel;
 
 use Doctrine\ORM\Mapping as ORM;
 

@@ -4,7 +4,7 @@ namespace TWM\SiteBundle\Entity\User;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use TWM\SiteBundle\Entity\Travel\Travel;
+use TWM\SiteBundle\Entity\Travel\Travel\Travel;
 use TWM\UserBundle\Entity\User as BaseUser;
 
 /**
@@ -15,7 +15,7 @@ class User extends BaseUser
 {
 
     /**
-     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Travel", mappedBy="author", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Travel", mappedBy="author", cascade={"persist"})
      */
     protected $travels;
 
