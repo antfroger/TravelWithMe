@@ -2,8 +2,10 @@
 
 namespace TWM\SiteBundle\Entity\Travel\Travel;
 
-use TWM\CommonBundle\Entity\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use TWM\CommonBundle\Entity\Entity;
 
 /**
  * @ORM\MappedSuperclass
@@ -15,6 +17,7 @@ abstract class TravelDependency extends Entity
 
     /**
      * @ORM\Column
+     * @Assert\NotBlank
      */
     protected $name;
 

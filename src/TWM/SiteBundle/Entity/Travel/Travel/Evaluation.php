@@ -5,6 +5,7 @@ namespace TWM\SiteBundle\Entity\Travel\Travel;
 use TWM\CommonBundle\Entity\Entity;
 use TWM\SiteBundle\Entity\Community\EvaluationInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -13,6 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Evaluation extends Entity implements EvaluationInterface
 {
 
+    const DEFAULT_GRADE   = 0;
+    const DEFAULT_COMMENT = '';
+
     /**
      * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Travel", inversedBy="evaluations")
      */
@@ -20,13 +24,21 @@ class Evaluation extends Entity implements EvaluationInterface
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
      */
     protected $grade;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $comment;
+
+    public function __construct($grade = self::DEFAULT_GRADE, $comment = self::DEFAULT_COMMENT)
+    {
+        $this->travel  = null;
+        $this->grade   = $grade;
+        $this->comment = $comment;
+    }
 
     /**
      * Set grade

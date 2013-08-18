@@ -3,7 +3,9 @@
 namespace TWM\SiteBundle\Entity\Travel\Travel;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use TWM\CommonBundle\Entity\Entity;
 use TWM\SiteBundle\Entity\Travel\Travel\Budget;
 use TWM\SiteBundle\Entity\Travel\Travel\Duration;
@@ -18,18 +20,21 @@ use TWM\SiteBundle\Entity\User\User;
 class Travel extends Entity
 {
 
+    const DEFAULT_NAME       = '';
+
     /**
      * @ORM\Column
+     * @Assert\NotBlank
      */
     protected $name;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $startedAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $finishedAt;
 
@@ -64,23 +69,35 @@ class Travel extends Entity
     protected $budget;
 
     /**
-     *
+     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Step\Step", mappedBy="travel", cascade={"persist", "remove"})
      */
     protected $steps;
 
     /**
-     *
+     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Photo", mappedBy="travel", cascade={"persist", "remove"})
      */
     protected $photos;
 
     /**
-     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Evaluation", mappedBy="travel")
+     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Evaluation", mappedBy="travel", cascade={"persist", "remove"})
      */
     protected $evaluations;
 
-    public function __construct()
+    public function __construct($name = self::DEFAULT_NAME, DateTime $startedAt = null,
+                                DateTime $finishedAt = null, User $author = null)
     {
-        // ... FIXME ...
+        $this->name              = $name;
+        $this->startedAt         = $startedAt ? : new DateTime();
+        $this->finishedAt        = $finishedAt ? : new DateTime();
+        $this->author            = $author;
+        $this->theme             = null;
+        $this->type              = null;
+        $this->travellersProfile = null;
+        $this->duration          = null;
+        $this->budget            = null;
+        $this->steps             = new ArrayCollection();
+        $this->photos            = new ArrayCollection();
+        $this->evaluations       = new ArrayCollection();
     }
 
     /**
@@ -290,11 +307,22 @@ class Travel extends Entity
         return $this->budget;
     }
 
+    /**
+     * Get evaluations
+     *
+     * @return array
+     */
     public function getEvaluations()
     {
         return $this->evaluations ? : $this->evaluations = new ArrayCollection();
     }
 
+    /**
+     * Add an evaluation
+     *
+     * @param TWM\SiteBundle\Entity\Travel\Travel\Evaluation
+     * @return Travel
+     */
     public function addEvaluation(Evaluation $evaluation)
     {
         if (!$this->getEvaluations()->contains($evaluation)) {
@@ -304,6 +332,12 @@ class Travel extends Entity
         return $this;
     }
 
+    /**
+     * Remove an evaluation
+     *
+     * @param TWM\SiteBundle\Entity\Travel\Travel\Evaluation
+     * @return Travel
+     */
     public function removeEvaluation(Evaluation $evaluation)
     {
         if ($this->getEvaluations()->contains($evaluation)) {
