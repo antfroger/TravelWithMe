@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table
+ * @ORM\Table(name="TravelProfile")
  */
-class TravellersProfile extends TravelDependency
+class Profile extends TravelDependency
 {
 
 }

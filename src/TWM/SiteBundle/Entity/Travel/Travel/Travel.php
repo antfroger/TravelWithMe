@@ -7,10 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use TWM\CommonBundle\Entity\Entity;
+use TWM\SiteBundle\Entity\Travel\Step\Step;
 use TWM\SiteBundle\Entity\Travel\Travel\Budget;
-use TWM\SiteBundle\Entity\Travel\Travel\Duration;
+use TWM\SiteBundle\Entity\Travel\Travel\Photo;
 use TWM\SiteBundle\Entity\Travel\Travel\Theme;
-use TWM\SiteBundle\Entity\Travel\Travel\TravellersProfile;
+use TWM\SiteBundle\Entity\Travel\Travel\Profile;
 use TWM\SiteBundle\Entity\Travel\Travel\Type;
 use TWM\SiteBundle\Entity\User\User;
 
@@ -20,7 +21,7 @@ use TWM\SiteBundle\Entity\User\User;
 class Travel extends Entity
 {
 
-    const DEFAULT_NAME       = '';
+    const DEFAULT_NAME = '';
 
     /**
      * @ORM\Column
@@ -39,6 +40,11 @@ class Travel extends Entity
     protected $finishedAt;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $duration;
+
+    /**
      * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\User\User", inversedBy="travels")
      */
     protected $author;
@@ -54,14 +60,9 @@ class Travel extends Entity
     protected $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\TravellersProfile", inversedBy="travels")
+     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Profile", inversedBy="travels")
      */
-    protected $travellersProfile;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Duration", inversedBy="travels")
-     */
-    protected $duration;
+    protected $profile;
 
     /**
      * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Budget", inversedBy="travels")
@@ -92,8 +93,8 @@ class Travel extends Entity
         $this->author            = $author;
         $this->theme             = null;
         $this->type              = null;
-        $this->travellersProfile = null;
-        $this->duration          = null;
+        $this->profile           = null;
+        $this->duration          = 0;
         $this->budget            = null;
         $this->steps             = new ArrayCollection();
         $this->photos            = new ArrayCollection();
@@ -241,12 +242,12 @@ class Travel extends Entity
     /**
      * Set travellers profile
      *
-     * @param \TWM\SiteBundle\Entity\Travel\Travel\TravellersProfile $travellersProfile
+     * @param \TWM\SiteBundle\Entity\Travel\Travel\Profile $profile
      * @return Travel
      */
-    public function setTravellersProfile(TravellersProfile $travellersProfile = null)
+    public function setProfile(Profile $profile = null)
     {
-        $this->type = $travellersProfile;
+        $this->type = $profile;
 
         return $this;
     }
@@ -254,20 +255,20 @@ class Travel extends Entity
     /**
      * Get travellers profile
      *
-     * @return \TWM\SiteBundle\Entity\Travel\Travel\TravellersProfile
+     * @return \TWM\SiteBundle\Entity\Travel\Travel\Profile
      */
-    public function getTravellersProfile()
+    public function getProfile()
     {
-        return $this->travellersProfile;
+        return $this->profile;
     }
 
     /**
      * Set duration
      *
-     * @param \TWM\SiteBundle\Entity\Travel\Travel\Duration $duration
+     * @param integer $duration
      * @return Travel
      */
-    public function setDuration(Duration $duration = null)
+    public function setDuration($duration = null)
     {
         $this->duration = $duration;
 
@@ -277,7 +278,7 @@ class Travel extends Entity
     /**
      * Get duration
      *
-     * @return \TWM\SiteBundle\Entity\Travel\Travel\Duration
+     * @return integer
      */
     public function getDuration()
     {
@@ -305,6 +306,86 @@ class Travel extends Entity
     public function getBudget()
     {
         return $this->budget;
+    }
+
+    /**
+     * Get steps
+     *
+     * @return array
+     */
+    public function getSteps()
+    {
+        return $this->steps ? : $this->steps = new ArrayCollection();
+    }
+
+    /**
+     * Add a step
+     *
+     * @param TWM\SiteBundle\Entity\Travel\Step\Step
+     * @return Travel
+     */
+    public function addStep(Step $step)
+    {
+        if (!$this->getSteps()->contains($step)) {
+            $this->getSteps()->add($step);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove a step
+     *
+     * @param TWM\SiteBundle\Entity\Travel\Step\Step
+     * @return Travel
+     */
+    public function removeStep(Step $step)
+    {
+        if ($this->getSteps()->contains($step)) {
+            $this->getSteps()->removeElement($step);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get photos
+     *
+     * @return array
+     */
+    public function getPhotos()
+    {
+        return $this->photos ? : $this->photos = new ArrayCollection();
+    }
+
+    /**
+     * Add a photo
+     *
+     * @param TWM\SiteBundle\Entity\Travel\Travel\Photo
+     * @return Travel
+     */
+    public function addPhoto(Photo $photo)
+    {
+        if (!$this->getPhotos()->contains($photo)) {
+            $this->getPhotos()->add($photo);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove a photo
+     *
+     * @param TWM\SiteBundle\Entity\Travel\Travel\Photo
+     * @return Travel
+     */
+    public function removePhoto(Photo $photo)
+    {
+        if ($this->getPhotos()->contains($photo)) {
+            $this->getPhotos()->removeElement($photo);
+        }
+
+        return $this;
     }
 
     /**
