@@ -50,16 +50,19 @@ class Step extends Entity
 
     /**
      * @ORM\ManyToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Step\Place", cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="Step_Place")
      */
     protected $places;
 
     /**
      * @ORM\ManyToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Step\Restaurant", cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="Step_Restaurant")
      */
     protected $restaurants;
 
     /**
      * @ORM\ManyToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Step\Hotel", cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="Step_Hotel")
      */
     protected $hotels;
 
