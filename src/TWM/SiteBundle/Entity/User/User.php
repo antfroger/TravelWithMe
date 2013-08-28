@@ -19,16 +19,22 @@ class User extends BaseUser
      */
     protected $travels;
 
+    /**
+     * @ORM\Column(length=20)
+     */
+    protected $ip;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->travels = new ArrayCollection();
+        $this->ip      = '';
     }
 
     public function getTravels()
     {
-        return $this->travels ?: $this->travels = new ArrayCollection();
+        return $this->travels;
     }
 
     public function addTravel(Travel $travel)
@@ -47,6 +53,29 @@ class User extends BaseUser
         }
 
         return $this;
+    }
+
+    /**
+     * Set ip
+     *
+     * @param string $ip
+     * @return User
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    /**
+     * Get ip
+     *
+     * @return string
+     */
+    public function getIp()
+    {
+        return $this->ip;
     }
 
 }
