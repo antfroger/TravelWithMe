@@ -56,9 +56,6 @@ abstract class User extends BaseUser implements EntityInterface
         return $this->modificatedAt;
     }
 
-    /**
-     * @ORM\PrePersist
-     */
     public function setCreatedAt(DateTime $date = null)
     {
         $this->createdAt = $date ? : new DateTime();
@@ -66,15 +63,19 @@ abstract class User extends BaseUser implements EntityInterface
         return $this;
     }
 
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
     public function setModificatedAt(DateTime $date = null)
     {
         $this->modificatedAt = $date ? : new DateTime();
 
         return $this;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $this->setModificatedAt(new DateTime('now'));
     }
 
 }
