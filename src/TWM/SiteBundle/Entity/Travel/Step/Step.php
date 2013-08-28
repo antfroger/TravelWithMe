@@ -10,6 +10,7 @@ use TWM\SiteBundle\Entity\Travel\Travel\Travel;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Step extends Entity
 {
@@ -74,8 +75,8 @@ class Step extends Entity
     public function __construct(DateTime $startedAt = null, DateTime $finishedAt = null)
     {
         $this->travel      = null;
-        $this->startedAt   = $startedAt ?: new DateTime();
-        $this->finishedAt  = $finishedAt ?: new DateTime();
+        $this->startedAt   = $startedAt;
+        $this->finishedAt  = $finishedAt;
         $this->duration    = 0;
         $this->city        = null;
         $this->travelTime  = null;
@@ -156,26 +157,13 @@ class Step extends Entity
     }
 
     /**
-     * Set duration
-     *
-     * @param integer $duration
-     * @return Step
-     */
-    public function setDuration($duration)
-    {
-        $this->duration = $duration;
-
-        return $this;
-    }
-
-    /**
      * Get duration
      *
      * @return integer
      */
     public function getDuration()
     {
-        return $this->duration;
+        return $this->guessDuration();
     }
 
     /**
@@ -359,6 +347,31 @@ class Step extends Entity
         }
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+        $this->duration = $this->guessDuration();
+    }
+
+    /**
+     * Guess the duration in function of the starting date and the ending date
+     *
+     * @return int
+     */
+    private function guessDuration()
+    {
+        if (!$this->startedAt || !$this->finishedAt) {
+            return 0;
+        }
+
+        $interval = $this->finishedAt->diff($this->startedAt);
+
+        return (int) $interval->format('%a');
     }
 
 }
