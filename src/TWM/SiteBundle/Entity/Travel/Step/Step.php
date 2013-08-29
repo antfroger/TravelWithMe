@@ -46,6 +46,7 @@ class Step extends Entity
     protected $travelTime;
 
     /**
+     * @todo
      */
     protected $transport;
 
@@ -74,10 +75,10 @@ class Step extends Entity
 
     public function __construct(DateTime $startedAt = null, DateTime $finishedAt = null)
     {
-        $this->travel      = null;
         $this->startedAt   = $startedAt;
         $this->finishedAt  = $finishedAt;
         $this->duration    = 0;
+        $this->travel      = null;
         $this->city        = null;
         $this->travelTime  = null;
         $this->transport   = null;

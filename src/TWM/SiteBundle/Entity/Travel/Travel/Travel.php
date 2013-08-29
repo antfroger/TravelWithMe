@@ -85,21 +85,20 @@ class Travel extends Entity
      */
     protected $evaluations;
 
-    public function __construct($name = self::DEFAULT_NAME, DateTime $startedAt = null,
-                                DateTime $finishedAt = null, User $author = null)
+    public function __construct($name = self::DEFAULT_NAME, User $author = null)
     {
-        $this->name              = $name;
-        $this->startedAt         = $startedAt;
-        $this->finishedAt        = $finishedAt;
-        $this->author            = $author;
-        $this->theme             = null;
-        $this->type              = null;
-        $this->profile           = null;
-        $this->duration          = 0;
-        $this->budget            = null;
-        $this->steps             = new ArrayCollection();
-        $this->photos            = new ArrayCollection();
-        $this->evaluations       = new ArrayCollection();
+        $this->name        = $name;
+        $this->author      = $author;
+        $this->startedAt   = null;
+        $this->finishedAt  = null;
+        $this->theme       = null;
+        $this->type        = null;
+        $this->profile     = null;
+        $this->duration    = 0;
+        $this->budget      = null;
+        $this->steps       = new ArrayCollection();
+        $this->photos      = new ArrayCollection();
+        $this->evaluations = new ArrayCollection();
     }
 
     /**
@@ -126,39 +125,13 @@ class Travel extends Entity
     }
 
     /**
-     * Set startedAt
-     *
-     * @param DateTime $startedAt
-     * @return Travel
-     */
-    public function setStartedAt(DateTime $startedAt = null)
-    {
-        $this->startedAt = $startedAt;
-
-        return $this;
-    }
-
-    /**
      * Get startedAt
      *
      * @return DateTime
      */
     public function getStartedAt()
     {
-        return $this->startedAt;
-    }
-
-    /**
-     * Set finishedAt
-     *
-     * @param DateTime $finishedAt
-     * @return Travel
-     */
-    public function setFinishedAt(DateTime $finishedAt = null)
-    {
-        $this->finishedAt = $finishedAt;
-
-        return $this;
+        return $this->guessStartedAt();
     }
 
     /**
@@ -168,7 +141,7 @@ class Travel extends Entity
      */
     public function getFinishedAt()
     {
-        return $this->finishedAt;
+        return $this->guessFinishedAt();
     }
 
     /**
@@ -309,7 +282,7 @@ class Travel extends Entity
     /**
      * Add a step
      *
-     * @param TWM\SiteBundle\Entity\Travel\Step\Step
+     * @param TWM\SiteBundle\Entity\Travel\Step\Step $step
      * @return Travel
      */
     public function addStep(Step $step)
@@ -324,7 +297,7 @@ class Travel extends Entity
     /**
      * Remove a step
      *
-     * @param TWM\SiteBundle\Entity\Travel\Step\Step
+     * @param TWM\SiteBundle\Entity\Travel\Step\Step $step
      * @return Travel
      */
     public function removeStep(Step $step)
@@ -349,7 +322,7 @@ class Travel extends Entity
     /**
      * Add a photo
      *
-     * @param TWM\SiteBundle\Entity\Travel\Travel\Photo
+     * @param TWM\SiteBundle\Entity\Travel\Travel\Photo $photo
      * @return Travel
      */
     public function addPhoto(Photo $photo)
@@ -364,7 +337,7 @@ class Travel extends Entity
     /**
      * Remove a photo
      *
-     * @param TWM\SiteBundle\Entity\Travel\Travel\Photo
+     * @param TWM\SiteBundle\Entity\Travel\Travel\Photo $photo
      * @return Travel
      */
     public function removePhoto(Photo $photo)
@@ -422,7 +395,9 @@ class Travel extends Entity
      */
     public function preUpdate()
     {
-        $this->duration = $this->guessDuration();
+        $this->duration   = $this->guessDuration();
+        $this->startedAt  = $this->guessStartedAt();
+        $this->finishedAt = $this->guessFinishedAt();
     }
 
     /**
@@ -439,6 +414,32 @@ class Travel extends Entity
         $interval = $this->finishedAt->diff($this->startedAt);
 
         return (int) $interval->format('%a');
+    }
+
+    private function guessStartedAt()
+    {
+        $startedAt = null;
+
+        foreach ($this->getSteps() as $step) {
+            if ($startedAt > $step->getStartedAt()) {
+                $startedAt = $step->getStartedAt();
+            }
+        }
+
+        return $startedAt;
+    }
+
+    private function guessFinishedAt()
+    {
+        $finishedAt = null;
+
+        foreach ($this->getSteps() as $step) {
+            if ($finishedAt < $step->getFinishedAt()) {
+                $finishedAt = $step->getFinishedAt();
+            }
+        }
+
+        return $finishedAt;
     }
 
 }
