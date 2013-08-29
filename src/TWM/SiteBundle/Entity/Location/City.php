@@ -12,6 +12,8 @@ use TWM\CommonBundle\Entity\Entity;
 class City extends Entity
 {
 
+    const DEFAULT_NAME = '';
+
     /**
      * @ORM\Column
      * @Assert\NotBlank
@@ -20,7 +22,122 @@ class City extends Entity
 
     /**
      * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Location\Country", inversedBy="cities")
+     * @Assert\NotBlank
      */
     protected $country;
+
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank
+     */
+    protected $latitude;
+
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank
+     */
+    protected $longitude;
+
+    public function __construct($name = self::DEFAULT_NAME)
+    {
+        parent::__construct();
+
+        $this->name      = $name;
+        $this->country   = null;
+        $this->latitude  = 0;
+        $this->longitude = 0;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return City
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set country
+     *
+     * @param \TWM\SiteBundle\Entity\Location\Country $country
+     * @return City
+     */
+    public function setCountry(\TWM\SiteBundle\Entity\Location\Country $country = null)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return \TWM\SiteBundle\Entity\Location\Country
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param float $latitude
+     * @return City
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param float $longitude
+     * @return City
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
 
 }
