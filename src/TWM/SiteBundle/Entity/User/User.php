@@ -26,8 +26,6 @@ class User extends BaseUser
 
     public function __construct()
     {
-        parent::__construct();
-
         $this->travels = new ArrayCollection();
         $this->ip      = '';
     }

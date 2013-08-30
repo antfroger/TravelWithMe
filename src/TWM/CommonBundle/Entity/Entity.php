@@ -54,21 +54,6 @@ abstract class Entity implements EntityInterface
     }
 
     /**
-     * Set createdAt
-     *
-     * @param DateTime $createdAt
-     * @return Entity
-     *
-     * @ORM\PrePersist
-     */
-    public function setCreatedAt(DateTime $createdAt = null)
-    {
-        $this->createdAt = $createdAt ?: new DateTime();
-
-        return $this;
-    }
-
-    /**
      * Get createdAt
      *
      * @return DateTime
@@ -79,17 +64,14 @@ abstract class Entity implements EntityInterface
     }
 
     /**
-     * Set modificatedAt
+     * Set createdAt
      *
-     * @param DateTime $modificatedAt
+     * @param DateTime $createdAt
      * @return Entity
-     *
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
      */
-    public function setModificatedAt(DateTime $modificatedAt = null)
+    public function setCreatedAt(DateTime $date = null)
     {
-        $this->modificatedAt = $modificatedAt ?: new DateTime();
+        $this->createdAt = $date ? : new DateTime();
 
         return $this;
     }
@@ -102,6 +84,36 @@ abstract class Entity implements EntityInterface
     public function getModificatedAt()
     {
         return $this->modificatedAt;
+    }
+
+    /**
+     * Set modificatedAt
+     *
+     * @param DateTime $modificatedAt
+     * @return Entity
+     */
+    public function setModificatedAt(DateTime $date = null)
+    {
+        $this->modificatedAt = $date ? : new DateTime();
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        $this->setCreatedAt(new DateTime('now'));
+        $this->setModificatedAt(new DateTime('now'));
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $this->setModificatedAt(new DateTime('now'));
     }
 
 }

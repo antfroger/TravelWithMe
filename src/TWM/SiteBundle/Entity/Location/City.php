@@ -38,8 +38,6 @@ class City extends Entity
 
     public function __construct($name = self::DEFAULT_NAME)
     {
-        parent::__construct();
-
         $this->name      = $name;
         $this->country   = null;
         $this->latitude  = 0;

@@ -12,6 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Place extends Entity
 {
 
+    const DEFAULT_NAME = '';
+
     /**
      * @ORM\Column
      * @Assert\NotBlank
@@ -42,6 +44,16 @@ class Place extends Entity
      * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Location\City")
      */
     protected $city;
+
+    public function __construct($name = self::DEFAULT_NAME)
+    {
+        $this->name           = $name;
+        $this->price          = '';
+        $this->description    = '';
+        $this->type           = null;
+        $this->address        = '';
+        $this->city           = null;
+    }
 
     /**
      * Set name
