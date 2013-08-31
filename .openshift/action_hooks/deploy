@@ -23,5 +23,10 @@ sed -i 's/"symfony-web-dir": "web"/"symfony-web-dir": "php"/' composer.json
 
 echo 'Update vendors'
 curl -sS https://getcomposer.org/installer | php
-php composer.phar install --prefer-dist
-php composer.phar dump-autoload --optimize
+php composer.phar install --prefer-dist --optimize-autoloader
+
+echo 'Clear cache'
+php app/console cache:clear --env=prod --no-debug
+
+echo 'Dump assets'
+php app/console assetic:dump --env=prod --no-debug
