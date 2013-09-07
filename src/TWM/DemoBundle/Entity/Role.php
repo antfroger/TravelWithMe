@@ -69,7 +69,7 @@ class Role implements RoleInterface
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Role
      */
     public function setName($name)
@@ -100,7 +100,7 @@ class Role implements RoleInterface
     /**
      * Set role
      *
-     * @param string $role
+     * @param  string $role
      * @return Role
      */
     public function setRole($role)
@@ -113,7 +113,7 @@ class Role implements RoleInterface
     /**
      * Add users
      *
-     * @param \TWM\DemoBundle\Entity\User $users
+     * @param  \TWM\DemoBundle\Entity\User $users
      * @return Role
      */
     public function addUser(\TWM\DemoBundle\Entity\User $users)

@@ -104,7 +104,7 @@ class Step extends Entity
     /**
      * Set travel
      *
-     * @param Travel $travel
+     * @param  Travel $travel
      * @return Step
      */
     public function setTravel(Travel $travel = null)
@@ -127,7 +127,7 @@ class Step extends Entity
     /**
      * Set startedAt
      *
-     * @param DateTime $startedAt
+     * @param  DateTime $startedAt
      * @return Travel
      */
     public function setStartedAt(DateTime $startedAt = null)
@@ -150,7 +150,7 @@ class Step extends Entity
     /**
      * Set finishedAt
      *
-     * @param DateTime $finishedAt
+     * @param  DateTime $finishedAt
      * @return Travel
      */
     public function setFinishedAt(DateTime $finishedAt = null)
@@ -183,7 +183,7 @@ class Step extends Entity
     /**
      * Set travelTime
      *
-     * @param integer $travelTime
+     * @param  integer $travelTime
      * @return Step
      */
     public function setTravelTime($travelTime)

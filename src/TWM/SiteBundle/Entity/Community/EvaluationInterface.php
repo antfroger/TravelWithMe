@@ -29,7 +29,7 @@ interface EvaluationInterface
     /**
      * Set the grade
      *
-     * @param integer $grade
+     * @param  integer             $grade
      * @return EvaluationInterface
      */
     public function setGrade($grade);
@@ -44,7 +44,7 @@ interface EvaluationInterface
     /**
      * Set the comment
      *
-     * @param string $comment
+     * @param  string              $comment
      * @return EvaluationInterface
      */
     public function setComment($comment);

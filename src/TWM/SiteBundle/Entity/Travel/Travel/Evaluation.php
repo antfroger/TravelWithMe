@@ -56,7 +56,7 @@ class Evaluation extends Entity implements EvaluationInterface
     /**
      * Set grade
      *
-     * @param integer $grade
+     * @param  integer    $grade
      * @return Evaluation
      */
     public function setGrade($grade)
@@ -79,7 +79,7 @@ class Evaluation extends Entity implements EvaluationInterface
     /**
      * Set travel
      *
-     * @param \TWM\SiteBundle\Entity\Travel\Travel\Travel $travel
+     * @param  \TWM\SiteBundle\Entity\Travel\Travel\Travel $travel
      * @return Evaluation
      */
     public function setTravel(\TWM\SiteBundle\Entity\Travel\Travel\Travel $travel = null)
@@ -102,7 +102,7 @@ class Evaluation extends Entity implements EvaluationInterface
     /**
      * Set comment
      *
-     * @param string $comment
+     * @param  string     $comment
      * @return Evaluation
      */
     public function setComment($comment)

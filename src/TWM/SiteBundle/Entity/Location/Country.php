@@ -64,7 +64,7 @@ class Country extends Entity
     /**
      * Set code
      *
-     * @param string $code
+     * @param  string  $code
      * @return Country
      */
     public function setCode($code)
@@ -87,7 +87,7 @@ class Country extends Entity
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return string
      */
     public function setName($name)
@@ -110,7 +110,7 @@ class Country extends Entity
     /**
      * Add cities
      *
-     * @param \TWM\SiteBundle\Entity\Location\City $city
+     * @param  \TWM\SiteBundle\Entity\Location\City $city
      * @return Country
      */
     public function addCity(\TWM\SiteBundle\Entity\Location\City $city)
@@ -149,7 +149,7 @@ class Country extends Entity
     /**
      * Set continent
      *
-     * @param string $continent
+     * @param  string  $continent
      * @return Country
      */
     public function setContinent($continent)

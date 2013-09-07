@@ -47,7 +47,7 @@ abstract class User extends BaseUser implements EntityInterface
     /**
      * Set id
      *
-     * @param integer $id
+     * @param  integer $id
      * @return Entity
      */
     public function setId($id)
@@ -70,7 +70,7 @@ abstract class User extends BaseUser implements EntityInterface
     /**
      * Set createdAt
      *
-     * @param DateTime $createdAt
+     * @param  DateTime $createdAt
      * @return Entity
      */
     public function setCreatedAt(DateTime $date = null)
@@ -93,7 +93,7 @@ abstract class User extends BaseUser implements EntityInterface
     /**
      * Set modificatedAt
      *
-     * @param DateTime $modificatedAt
+     * @param  DateTime $modificatedAt
      * @return Entity
      */
     public function setModificatedAt(DateTime $date = null)

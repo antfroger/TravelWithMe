@@ -69,7 +69,7 @@ class User extends BaseUser
     /**
      * Set ip
      *
-     * @param string $ip
+     * @param  string $ip
      * @return User
      */
     public function setIp($ip)

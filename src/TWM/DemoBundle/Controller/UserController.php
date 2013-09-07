@@ -25,7 +25,7 @@ class UserController extends Controller
 
     /**
      * Displays User data
-     * @param string $username
+     * @param  string   $username
      * @return Response
      */
     public function showAction(User $user)
@@ -49,7 +49,7 @@ class UserController extends Controller
 
     /**
      * Creates a User
-     * @param string $username
+     * @param  string   $username
      * @return Response
      */
     public function createAction($username)

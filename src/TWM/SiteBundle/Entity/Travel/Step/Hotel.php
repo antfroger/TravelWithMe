@@ -71,7 +71,7 @@ class Hotel extends Entity
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Hotel
      */
     public function setName($name)
@@ -94,7 +94,7 @@ class Hotel extends Entity
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string $description
      * @return Hotel
      */
     public function setDescription($description)
@@ -117,7 +117,7 @@ class Hotel extends Entity
     /**
      * Set address
      *
-     * @param string $address
+     * @param  string $address
      * @return Hotel
      */
     public function setAddress($address)
@@ -140,7 +140,7 @@ class Hotel extends Entity
     /**
      * Set city
      *
-     * @param \TWM\SiteBundle\Entity\Location\City $city
+     * @param  \TWM\SiteBundle\Entity\Location\City $city
      * @return Hotel
      */
     public function setCity(\TWM\SiteBundle\Entity\Location\City $city = null)

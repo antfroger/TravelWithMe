@@ -71,7 +71,7 @@ class Place extends Entity
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Place
      */
     public function setName($name)
@@ -94,7 +94,7 @@ class Place extends Entity
     /**
      * Set price
      *
-     * @param string $price
+     * @param  string $price
      * @return Place
      */
     public function setPrice($price)
@@ -117,7 +117,7 @@ class Place extends Entity
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string $description
      * @return Place
      */
     public function setDescription($description)
@@ -140,7 +140,7 @@ class Place extends Entity
     /**
      * Set address
      *
-     * @param string $address
+     * @param  string $address
      * @return Place
      */
     public function setAddress($address)
@@ -163,7 +163,7 @@ class Place extends Entity
     /**
      * Set city
      *
-     * @param \TWM\SiteBundle\Entity\Location\City $city
+     * @param  \TWM\SiteBundle\Entity\Location\City $city
      * @return Place
      */
     public function setCity(\TWM\SiteBundle\Entity\Location\City $city = null)

@@ -60,7 +60,7 @@ class City extends Entity
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return City
      */
     public function setName($name)
@@ -83,7 +83,7 @@ class City extends Entity
     /**
      * Set country
      *
-     * @param \TWM\SiteBundle\Entity\Location\Country $country
+     * @param  \TWM\SiteBundle\Entity\Location\Country $country
      * @return City
      */
     public function setCountry(\TWM\SiteBundle\Entity\Location\Country $country = null)
@@ -106,7 +106,7 @@ class City extends Entity
     /**
      * Set latitude
      *
-     * @param float $latitude
+     * @param  float $latitude
      * @return City
      */
     public function setLatitude($latitude)
@@ -129,7 +129,7 @@ class City extends Entity
     /**
      * Set longitude
      *
-     * @param float $longitude
+     * @param  float $longitude
      * @return City
      */
     public function setLongitude($longitude)

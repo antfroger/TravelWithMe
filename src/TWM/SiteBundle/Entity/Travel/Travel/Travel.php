@@ -117,7 +117,7 @@ class Travel extends Entity
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Travel
      */
     public function setName($name)
@@ -160,7 +160,7 @@ class Travel extends Entity
     /**
      * Set author
      *
-     * @param User $author
+     * @param  User   $author
      * @return Travel
      */
     public function setAuthor(User $author = null)
@@ -183,7 +183,7 @@ class Travel extends Entity
     /**
      * Set theme
      *
-     * @param \TWM\SiteBundle\Entity\Travel\Travel\Theme $theme
+     * @param  \TWM\SiteBundle\Entity\Travel\Travel\Theme $theme
      * @return Travel
      */
     public function setTheme(Theme $theme = null)
@@ -206,7 +206,7 @@ class Travel extends Entity
     /**
      * Set type
      *
-     * @param \TWM\SiteBundle\Entity\Travel\Travel\Type $type
+     * @param  \TWM\SiteBundle\Entity\Travel\Travel\Type $type
      * @return Travel
      */
     public function setType(Type $type = null)
@@ -229,7 +229,7 @@ class Travel extends Entity
     /**
      * Set travellers profile
      *
-     * @param \TWM\SiteBundle\Entity\Travel\Travel\Profile $profile
+     * @param  \TWM\SiteBundle\Entity\Travel\Travel\Profile $profile
      * @return Travel
      */
     public function setProfile(Profile $profile = null)
@@ -262,7 +262,7 @@ class Travel extends Entity
     /**
      * Set budget
      *
-     * @param \TWM\SiteBundle\Entity\Travel\Travel\Budget $budget
+     * @param  \TWM\SiteBundle\Entity\Travel\Travel\Budget $budget
      * @return Travel
      */
     public function setBudget(Budget $budget = null)
@@ -295,7 +295,7 @@ class Travel extends Entity
     /**
      * Add a step
      *
-     * @param TWM\SiteBundle\Entity\Travel\Step\Step $step
+     * @param  TWM\SiteBundle\Entity\Travel\Step\Step $step
      * @return Travel
      */
     public function addStep(Step $step)
@@ -310,7 +310,7 @@ class Travel extends Entity
     /**
      * Remove a step
      *
-     * @param TWM\SiteBundle\Entity\Travel\Step\Step $step
+     * @param  TWM\SiteBundle\Entity\Travel\Step\Step $step
      * @return Travel
      */
     public function removeStep(Step $step)
@@ -335,7 +335,7 @@ class Travel extends Entity
     /**
      * Add a photo
      *
-     * @param TWM\SiteBundle\Entity\Travel\Travel\Photo $photo
+     * @param  TWM\SiteBundle\Entity\Travel\Travel\Photo $photo
      * @return Travel
      */
     public function addPhoto(Photo $photo)
@@ -350,7 +350,7 @@ class Travel extends Entity
     /**
      * Remove a photo
      *
-     * @param TWM\SiteBundle\Entity\Travel\Travel\Photo $photo
+     * @param  TWM\SiteBundle\Entity\Travel\Travel\Photo $photo
      * @return Travel
      */
     public function removePhoto(Photo $photo)

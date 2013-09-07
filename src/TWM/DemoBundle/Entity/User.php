@@ -103,7 +103,7 @@ class User implements AdvancedUserInterface, Serializable
     /**
      * Set creationTime
      *
-     * @param DateTime $creationTime
+     * @param  DateTime $creationTime
      * @return User
      */
     public function setCreationTime($creationTime)
@@ -126,7 +126,7 @@ class User implements AdvancedUserInterface, Serializable
     /**
      * Set lastModificationTime
      *
-     * @param DateTime $lastModificationTime
+     * @param  DateTime $lastModificationTime
      * @return User
      */
     public function setLastModificationTime($lastModificationTime)
@@ -149,7 +149,7 @@ class User implements AdvancedUserInterface, Serializable
     /**
      * Set username
      *
-     * @param string $username
+     * @param  string $username
      * @return User
      */
     public function setUsername($username)
@@ -172,7 +172,7 @@ class User implements AdvancedUserInterface, Serializable
     /**
      * Set email
      *
-     * @param string $email
+     * @param  string $email
      * @return User
      */
     public function setEmail($email)
@@ -195,7 +195,7 @@ class User implements AdvancedUserInterface, Serializable
     /**
      * Set password
      *
-     * @param string $password
+     * @param  string $password
      * @return User
      */
     public function setPassword($password)
@@ -218,7 +218,7 @@ class User implements AdvancedUserInterface, Serializable
     /**
      * Set salt
      *
-     * @param string $salt
+     * @param  string $salt
      * @return User
      */
     public function setSalt($salt)
@@ -241,7 +241,7 @@ class User implements AdvancedUserInterface, Serializable
     /**
      * Set isActive
      *
-     * @param boolean $isActive
+     * @param  boolean $isActive
      * @return User
      */
     public function setIsActive($isActive)
@@ -272,7 +272,7 @@ class User implements AdvancedUserInterface, Serializable
     /**
      * Add roles
      *
-     * @param \TWM\DemoBundle\Entity\Role $roles
+     * @param  \TWM\DemoBundle\Entity\Role $roles
      * @return User
      */
     public function addRole(\TWM\DemoBundle\Entity\Role $roles)

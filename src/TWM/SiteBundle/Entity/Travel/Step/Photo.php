@@ -35,7 +35,7 @@ class Photo extends BasePhoto
     /**
      * Set step
      *
-     * @param \TWM\SiteBundle\Entity\Travel\Step\Step $step
+     * @param  \TWM\SiteBundle\Entity\Travel\Step\Step $step
      * @return Photo
      */
     public function setStep(Step $step = null)

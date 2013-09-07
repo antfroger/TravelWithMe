@@ -42,7 +42,7 @@ abstract class Photo extends File
     /**
      * Set comment
      *
-     * @param string $comment
+     * @param  string $comment
      * @return Photo
      */
     public function setComment($comment)

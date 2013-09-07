@@ -34,7 +34,7 @@ class Photo extends BasePhoto
     /**
      * Set travel
      *
-     * @param \TWM\SiteBundle\Entity\Travel\Travel\Travel $travel
+     * @param  \TWM\SiteBundle\Entity\Travel\Travel\Travel $travel
      * @return Photo
      */
     public function setTravel(Travel $travel = null)

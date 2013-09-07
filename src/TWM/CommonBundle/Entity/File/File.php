@@ -54,7 +54,7 @@ abstract class File extends Entity
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return File
      */
     public function setName($name)
@@ -77,7 +77,7 @@ abstract class File extends Entity
     /**
      * Set path
      *
-     * @param string $path
+     * @param  string $path
      * @return File
      */
     public function setPath($path)
@@ -100,7 +100,7 @@ abstract class File extends Entity
     /**
      * Set file
      *
-     * @param string $file
+     * @param  string $file
      * @return File
      */
     public function setFile($file)
@@ -119,7 +119,6 @@ abstract class File extends Entity
     {
         return $this->file;
     }
-
 
     public function getAbsolutePath()
     {
