@@ -16,6 +16,10 @@ use TWM\SiteBundle\Entity\File\Photo as BasePhoto;
 use TWM\SiteBundle\Entity\Travel\Travel\Travel;
 
 /**
+ * Represents a Photo of a Travel
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ *
  * @ORM\Entity
  * @ORM\Table(name="TravelPhoto")
  */

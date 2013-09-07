@@ -13,6 +13,11 @@ namespace TWM\DemoBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+/**
+ * Demo Bundle
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ */
 class TWMDemoBundle extends Bundle
 {
 }

@@ -13,6 +13,11 @@ namespace TWM\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Default Controller.
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ */
 class DefaultController extends Controller
 {
     public function indexAction()

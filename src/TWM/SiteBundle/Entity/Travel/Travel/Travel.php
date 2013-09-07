@@ -25,6 +25,10 @@ use TWM\SiteBundle\Entity\Travel\Travel\Type;
 use TWM\SiteBundle\Entity\User\User;
 
 /**
+ * Represents a travel
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ *
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
  */

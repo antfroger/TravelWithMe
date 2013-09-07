@@ -15,6 +15,11 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * Load Role/User interactions
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ */
 class LoadUserRoleData extends AbstractFixture implements OrderedFixtureInterface
 {
 

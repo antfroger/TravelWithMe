@@ -15,6 +15,11 @@ use TWM\DemoBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * User Controller.
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ */
 class UserController extends Controller
 {
 

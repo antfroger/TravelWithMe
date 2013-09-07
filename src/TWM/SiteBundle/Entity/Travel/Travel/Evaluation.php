@@ -17,6 +17,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Represents an Evaluation
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ *
  * @ORM\Entity
  * @ORM\Table(name="TravelEvaluation")
  */

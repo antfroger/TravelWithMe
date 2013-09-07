@@ -16,6 +16,10 @@ use Doctrine\ORM\Mapping as ORM;
 use TWM\CommonBundle\Entity\Entity;
 
 /**
+ * Represents a Country
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ *
  * @ORM\Entity
  */
 class Country extends Entity

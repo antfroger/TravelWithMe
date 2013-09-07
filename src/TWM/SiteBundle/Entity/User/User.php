@@ -17,6 +17,10 @@ use TWM\SiteBundle\Entity\Travel\Travel\Travel;
 use TWM\UserBundle\Entity\User as BaseUser;
 
 /**
+ * Represents a User
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ *
  * @ORM\Entity
  * @ORM\Table(name="`User`")
  */

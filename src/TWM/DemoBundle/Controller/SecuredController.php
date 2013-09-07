@@ -16,6 +16,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 
+/**
+ * Secured Controller.
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ */
 class SecuredController extends Controller
 {
     /**

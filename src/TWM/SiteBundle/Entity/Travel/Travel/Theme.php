@@ -14,6 +14,10 @@ namespace TWM\SiteBundle\Entity\Travel\Travel;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Represents a Theme
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ *
  * @ORM\Entity
  * @ORM\Table(name="TravelTheme")
  */

@@ -17,6 +17,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 use TWM\CommonBundle\Entity\Entity;
 
 /**
+ * Base class for making a simple link between a Travel and its dependency
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ *
  * @ORM\MappedSuperclass
  */
 abstract class TravelDependency extends Entity

@@ -18,6 +18,11 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 
+/**
+ * User Repository
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ */
 class UserRepository extends EntityRepository implements UserProviderInterface
 {
     public function loadUserByUsername($username)

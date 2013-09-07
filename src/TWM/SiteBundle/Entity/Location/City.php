@@ -16,6 +16,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 use TWM\CommonBundle\Entity\Entity;
 
 /**
+ * Represents a City
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ *
  * @ORM\Entity
  */
 class City extends Entity

@@ -18,6 +18,10 @@ use TWM\CommonBundle\Entity\Entity;
 use TWM\SiteBundle\Entity\Travel\Travel\Travel;
 
 /**
+ * Represents a Step
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ *
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
  */

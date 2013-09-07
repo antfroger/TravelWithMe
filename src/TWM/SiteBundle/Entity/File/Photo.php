@@ -15,6 +15,10 @@ use Doctrine\ORM\Mapping as ORM;
 use TWM\CommonBundle\Entity\File\File;
 
 /**
+ * Base class for Photo implementations.
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ *
  * @ORM\MappedSuperclass
  */
 abstract class Photo extends File

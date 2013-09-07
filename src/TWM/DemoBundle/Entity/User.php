@@ -18,6 +18,10 @@ use Serializable;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
+ * Represents a User
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ *
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="TWM\DemoBundle\Entity\UserRepository")
  * @ORM\HasLifecycleCallbacks()

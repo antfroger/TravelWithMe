@@ -13,6 +13,11 @@ namespace TWM\SiteBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+/**
+ * TravelWithMe website Bundle
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ */
 class TWMSiteBundle extends Bundle
 {
 }

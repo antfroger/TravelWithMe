@@ -9,9 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace TWM\DemoBundle\DataFixtures\ORM;
+namespace TWM\SiteBundle\DataFixtures\ORM;
 
-use TWM\DemoBundle\Entity\User;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -36,10 +35,13 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     {
         $this->manager = $manager;
 
-        $this->loadUser('admin', 'admin', 'admin@twm.com');
-        $this->loadUser('superadmin', 'superadmin', 'sa@twm.com');
-        $this->loadUser('antoine', 'antoine', 'antoine@twm.com');
-        $this->loadUser('inactive', 'inactive', 'inactive@twm.com', false);
+        shell_exec(<<<COMMAND
+            php app/console fos:user:create antoine antoine@travelwithme.eu antoine --super-admin;
+            php app/console fos:user:create inactive inactive@travelwithme.eu inactive --inactive;
+            php app/console fos:user:create admin admin@travelwithme.eu admin;
+            php app/console fos:user:promote admin ROLE_ADMIN;
+COMMAND
+        );
     }
 
     /**
@@ -56,27 +58,6 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
-    }
-
-    private function loadUser($username, $password, $email, $isActive = true)
-    {
-        $user = new User();
-        $user->setUsername($username);
-        $user->setSalt(md5(uniqid()));
-
-        $encoder = $this->container
-            ->get('security.encoder_factory')
-            ->getEncoder($user)
-        ;
-
-        $user->setPassword($encoder->encodePassword($password, $user->getSalt()));
-        $user->setEmail($email);
-        $user->setIsActive($isActive);
-
-        $this->manager->persist($user);
-        $this->manager->flush();
-
-        $this->addReference($username . '-user', $user);
     }
 
 }

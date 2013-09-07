@@ -16,6 +16,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 use TWM\CommonBundle\Entity\Entity;
 
 /**
+ * Base class for File implementations.
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ *
  * @ORM\MappedSuperclass
  * @ORM\HasLifecycleCallbacks()
  */

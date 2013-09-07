@@ -17,6 +17,10 @@ use TWM\CommonBundle\Model\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Base class for User implementations.
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ *
  * @ORM\MappedSuperclass
  * @ORM\HasLifecycleCallbacks()
  */

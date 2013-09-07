@@ -11,6 +11,11 @@
 
 namespace TWM\SiteBundle\Entity\Community;
 
+/**
+ * Interface for Evaluation implementations.
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ */
 interface EvaluationInterface
 {
 

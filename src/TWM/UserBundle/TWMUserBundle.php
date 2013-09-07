@@ -13,6 +13,11 @@ namespace TWM\UserBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+/**
+ * TravelWithMe User Bundle
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
+ */
 class TWMUserBundle extends Bundle
 {
 
