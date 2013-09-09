@@ -19,3 +19,11 @@ Some usefull commands :
     phing translate -Db=TWMDemoBundle
     phing clear-cache
     phing dump-asset
+
+---
+
+Hooks
+
+Install hooks in the .git/hooks/ by a simple command
+
+    ln -s ../.hooks/ .git/hooks

@@ -1,0 +1,71 @@
+#!/usr/bin/php
+<?php
+
+$status    = 0;
+$diffFiles = array();
+
+exec("git diff-index --cached --name-status HEAD", $diffFiles);
+
+foreach ($diffFiles as $diffFile) {
+    list($status, $fileName) = explode("\t", $diffFile);
+
+    // skip deleted files
+    if ('D' === $status) {
+        continue;
+    }
+
+    $content = file_get_contents($fileName);
+
+    switch (true) {
+        // PHP
+        case preg_match('/\.php$/', $fileName):
+            // Parse errors
+            $output = array();
+            $return = 0;
+            exec("php -d 'display_errors=Off' -l " . escapeshellarg($fileName), $output, $return);
+
+            if (0 !== $return) {
+                echo implode("\n", $output), "\n\n";
+                $status = 1;
+                continue;
+            }
+
+            // detects var_dump
+            if (preg_match('#var_dump#', $content)) {
+                echo "var_dump detected in file " . $fileName . "\n\n";
+                $status = 1;
+                continue;
+            }
+
+            // psr-2
+            $output = array();
+            $return = 0;
+            exec("php-cs-fixer fix " . escapeshellarg($fileName) . " --level=all --dry-run --verbose", $output, $return);
+
+            if (0 !== $return) {
+                echo "The psr-2 convention is not respected, check the file :\n"
+                    . "php-cs-fixer fix " . escapeshellarg($fileName) . " --level=all --dry-run --verbose --diff\n\n";
+                $status = 1;
+                continue;
+            }
+
+            break;
+
+        // Twig
+        case preg_match('/\.twig$/', $fileName):
+            // detects dump
+            if (preg_match('#dump *\(#', $content)) {
+                echo "dump detected in file " . $fileName . "\n\n";
+                $status = 1;
+                continue;
+            }
+
+            break;
+    }
+}
+
+if ($status > 0) {
+    echo 'Errors have been detected. Commit aborted ...' . "\n";
+}
+
+exit($status);
