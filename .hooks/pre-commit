@@ -8,96 +8,102 @@ $errors = "";
 exec("git diff-index --cached --name-status HEAD", $files);
 
 foreach ($files as $file) {
-    list($status, $fileName) = explode("\t", $file);
+    list($fileStatus, $fileName) = explode("\t", $file);
 
     // skip deleted files
-    if ('D' === $status) {
+    if ('D' === $fileStatus) {
         continue;
     }
-	
-	try {
-		$helper = new FileHelper($fileName);
-		$helper->check();
-	} catch (Exception $e) {
-		$errors .= $e->getMessage() . "\n";
-		$status = 1;
-	}
-    
+
+    try {
+        $helper = new FileHelper($fileName);
+        $helper->check();
+    } catch (Exception $e) {
+        $errors .= $e->getMessage() . "\n\n";
+        $status = 1;
+    }
 }
 
 if ($status > 0) {
-	echo 'Errors have been detected. Commit aborted ...' . "\n"
-		. $errors;
+    echo $errors
+        . 'Errors have been detected. Commit aborted ...';
 }
 
 exit($status);
 
-
 class FileHelper
 {
 
-	private $content;
-	private $fileName;
+    private $content;
+    private $fileName;
 
-	public function __construct($fileName)
-	{
-		$this->fileName = $fileName;
-	}
-	
-	public function getContent()
-	{
-		if (!$this->content) {
-			$this->content = file_get_contents($this->fileName);
-		}
-		
-		return $this->content;
-	}
+    public function __construct($fileName)
+    {
+        $this->fileName = $fileName;
+    }
 
-	public function check()
-	{
-		$matches = array();
-		preg_match('/\.(\w+)$/', $this->fileName, $matches);
-		
-		$methodName = 'check' . ucfirst(strtolower($matches[0])) . 'File';
-		if (method_exists($this, $methodName)) {
-			$this->$methodName();
-		}
-	}
-	
-	private function checkPhpFile()
-	{
-		$output  = array();
-		$return  = 0;
-		
-		// Parse errors
-		exec("php -d 'display_errors=Off' -l " . escapeshellarg($this->fileName), $output, $return);
-		
-		if ($return) {
-			throw new Exception(implode("\n", $output));
-		}
+    public function getContent()
+    {
+        if (!$this->content) {
+            $this->content = file_get_contents($this->fileName);
+        }
 
-		// detects var_dump
-		if (preg_match('#var_dump#', $this->getContent())) {
-			throw new Exception("var_dump detected in file " . $this->fileName);
-		}
+        return $this->content;
+    }
 
-		// psr-2
-		exec("php-cs-fixer fix " . escapeshellarg($this->fileName) . " --level=all --dry-run --verbose", $output, $return);
+    public function check()
+    {
+        $matches = array();
+        preg_match('/\.(\w+)$/', $this->fileName, $matches);
 
-		if ($return) {
-			throw new Exception(implode("\n", $output));
-		}
-		
-		return true;
-	}
-	
-	private function checkTwigFile()
-	{
-		// detects dump
-		if (preg_match('#dump *\(#', $this->getContent())) {
-			throw new Exception("dump detected in file " . $this->fileName);
-		}
-		
-		return true;
-	}
+        if (count($matches) >= 2) {
+            $methodName = 'check' . ucfirst(strtolower($matches[1])) . 'File';
+            if (method_exists($this, $methodName)) {
+                $this->$methodName();
+            }
+        }
+    }
+
+    private function checkPhpFile()
+    {
+        // Parse errors
+        $output = array();
+        $return = 0;
+
+        exec("php -d 'display_errors=Off' -l " . escapeshellarg($this->fileName), $output, $return);
+
+        if ($return) {
+            throw new Exception(implode("\n", $output));
+        }
+
+        // detects var_dump
+        if (preg_match('#var_dump#', $this->getContent())) {
+            throw new Exception("var_dump detected in file " . $this->fileName);
+        }
+
+        // psr-2
+        $output = array();
+        $return = 0;
+
+        exec("php-cs-fixer fix " . escapeshellarg($this->fileName) . " --level=all --dry-run --verbose", $output, $return);
+
+        if ($return) {
+            throw new Exception(
+                "The psr-2 convention is not respected, check the file :\n"
+                . implode("\n", $output)
+            );
+        }
+
+        return true;
+    }
+
+    private function checkTwigFile()
+    {
+        // detects dump
+        if (preg_match('#dump *\(#', $this->getContent())) {
+            throw new Exception("dump detected in file " . $this->fileName);
+        }
+
+        return true;
+    }
 }
