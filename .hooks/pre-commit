@@ -1,71 +1,103 @@
 #!/usr/bin/php
 <?php
 
-$status    = 0;
-$diffFiles = array();
+$status = 0;
+$files  = array();
+$errors = "";
 
-exec("git diff-index --cached --name-status HEAD", $diffFiles);
+exec("git diff-index --cached --name-status HEAD", $files);
 
-foreach ($diffFiles as $diffFile) {
-    list($status, $fileName) = explode("\t", $diffFile);
+foreach ($files as $file) {
+    list($status, $fileName) = explode("\t", $file);
 
     // skip deleted files
     if ('D' === $status) {
         continue;
     }
-
-    $content = file_get_contents($fileName);
-
-    switch (true) {
-        // PHP
-        case preg_match('/\.php$/', $fileName):
-            // Parse errors
-            $output = array();
-            $return = 0;
-            exec("php -d 'display_errors=Off' -l " . escapeshellarg($fileName), $output, $return);
-
-            if (0 !== $return) {
-                echo implode("\n", $output), "\n\n";
-                $status = 1;
-                continue;
-            }
-
-            // detects var_dump
-            if (preg_match('#var_dump#', $content)) {
-                echo "var_dump detected in file " . $fileName . "\n\n";
-                $status = 1;
-                continue;
-            }
-
-            // psr-2
-            $output = array();
-            $return = 0;
-            exec("php-cs-fixer fix " . escapeshellarg($fileName) . " --level=all --dry-run --verbose", $output, $return);
-
-            if (0 !== $return) {
-                echo "The psr-2 convention is not respected, check the file :\n"
-                    . "php-cs-fixer fix " . escapeshellarg($fileName) . " --level=all --dry-run --verbose --diff\n\n";
-                $status = 1;
-                continue;
-            }
-
-            break;
-
-        // Twig
-        case preg_match('/\.twig$/', $fileName):
-            // detects dump
-            if (preg_match('#dump *\(#', $content)) {
-                echo "dump detected in file " . $fileName . "\n\n";
-                $status = 1;
-                continue;
-            }
-
-            break;
-    }
+	
+	try {
+		$helper = new FileHelper($fileName);
+		$helper->check();
+	} catch (Exception $e) {
+		$errors .= $e->getMessage() . "\n";
+		$status = 1;
+	}
+    
 }
 
 if ($status > 0) {
-    echo 'Errors have been detected. Commit aborted ...' . "\n";
+	echo 'Errors have been detected. Commit aborted ...' . "\n"
+		. $errors;
 }
 
 exit($status);
+
+
+class FileHelper
+{
+
+	private $content;
+	private $fileName;
+
+	public function __construct($fileName)
+	{
+		$this->fileName = $fileName;
+	}
+	
+	public function getContent()
+	{
+		if (!$this->content) {
+			$this->content = file_get_contents($this->fileName);
+		}
+		
+		return $this->content;
+	}
+
+	public function check()
+	{
+		$matches = array();
+		preg_match('/\.(\w+)$/', $this->fileName, $matches);
+		
+		$methodName = 'check' . ucfirst(strtolower($matches[0])) . 'File';
+		if (method_exists($this, $methodName)) {
+			$this->$methodName();
+		}
+	}
+	
+	private function checkPhpFile()
+	{
+		$output  = array();
+		$return  = 0;
+		
+		// Parse errors
+		exec("php -d 'display_errors=Off' -l " . escapeshellarg($this->fileName), $output, $return);
+		
+		if ($return) {
+			throw new Exception(implode("\n", $output));
+		}
+
+		// detects var_dump
+		if (preg_match('#var_dump#', $this->getContent())) {
+			throw new Exception("var_dump detected in file " . $this->fileName);
+		}
+
+		// psr-2
+		exec("php-cs-fixer fix " . escapeshellarg($this->fileName) . " --level=all --dry-run --verbose", $output, $return);
+
+		if ($return) {
+			throw new Exception(implode("\n", $output));
+		}
+		
+		return true;
+	}
+	
+	private function checkTwigFile()
+	{
+		// detects dump
+		if (preg_match('#dump *\(#', $this->getContent())) {
+			throw new Exception("dump detected in file " . $this->fileName);
+		}
+		
+		return true;
+	}
+}
