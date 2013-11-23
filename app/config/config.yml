@@ -108,4 +108,4 @@ jms_i18n_routing:
 fos_user:
     db_driver: orm
     firewall_name: fos_user
-    user_class: TWM\UserBundle\Entity\User
+    user_class: TWM\SiteBundle\Entity\User\User
