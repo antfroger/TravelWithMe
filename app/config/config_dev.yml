@@ -11,6 +11,16 @@ web_profiler:
     toolbar: true
     intercept_redirects: false
 
+bazinga_faker:
+    orm: doctrine
+    locale: "%locale%"
+    entities:
+        TWM\SiteBundle\Entity\Travel\Travel\Travel:
+            number: 1
+            custom_formatters:
+              name: { method: sentence, parameters: [ 3 ] }
+              duration: { method: null }
+
 monolog:
     handlers:
         main:
