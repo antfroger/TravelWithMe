@@ -49,7 +49,7 @@ abstract class TravelDependency extends Entity
 
     public function getTravels()
     {
-        return $this->travels;
+        return $this->travels ?: $this->travels = new ArrayCollection();
     }
 
     public function addTravel(Travel $travel)

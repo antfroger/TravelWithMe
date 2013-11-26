@@ -210,7 +210,7 @@ class Step extends Entity
      */
     public function getPlaces()
     {
-        return $this->places ? : $this->places = new ArrayCollection();
+        return $this->places ?: $this->places = new ArrayCollection();
     }
 
     /**

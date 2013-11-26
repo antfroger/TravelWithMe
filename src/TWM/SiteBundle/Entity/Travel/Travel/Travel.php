@@ -289,7 +289,7 @@ class Travel extends Entity
      */
     public function getSteps()
     {
-        return $this->steps;
+        return $this->steps ?: $this->steps = new ArrayCollection();
     }
 
     /**
@@ -329,7 +329,7 @@ class Travel extends Entity
      */
     public function getPhotos()
     {
-        return $this->photos;
+        return $this->photos ?: $this->photos = new ArrayCollection();
     }
 
     /**
@@ -369,7 +369,7 @@ class Travel extends Entity
      */
     public function getEvaluations()
     {
-        return $this->evaluations;
+        return $this->evaluations ?: $this->evaluations = new ArrayCollection();
     }
 
     /**

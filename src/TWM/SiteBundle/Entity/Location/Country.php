@@ -143,7 +143,7 @@ class Country extends Entity
      */
     public function getCities()
     {
-        return $this->cities;
+        return $this->cities ?: $this->cities = new ArrayCollection();
     }
 
     /**
