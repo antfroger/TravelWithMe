@@ -408,9 +408,9 @@ class Travel extends Entity
      */
     public function preUpdate()
     {
-        $this->duration   = $this->guessDuration();
         $this->startedAt  = $this->guessStartedAt();
         $this->finishedAt = $this->guessFinishedAt();
+        $this->duration   = $this->guessDuration();
     }
 
     /**

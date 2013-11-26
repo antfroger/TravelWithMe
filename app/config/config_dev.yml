@@ -19,6 +19,8 @@ bazinga_faker:
             number: 1
             custom_formatters:
               name: { method: sentence, parameters: [ 3 ] }
+              startedAt: { method: null }
+              finishedAt: { method: null }
               duration: { method: null }
 
 monolog:
