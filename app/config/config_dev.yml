@@ -1,5 +1,6 @@
 imports:
     - { resource: config.yml }
+    - { resource: "@TWMSiteBundle/Resources/config/config_dev.yml" }
 
 framework:
     router:
@@ -11,17 +12,7 @@ web_profiler:
     toolbar: true
     intercept_redirects: false
 
-bazinga_faker:
-    orm: doctrine
-    locale: "%locale%"
-    entities:
-        TWM\SiteBundle\Entity\Travel\Travel\Travel:
-            number: 1
-            custom_formatters:
-              name: { method: sentence, parameters: [ 3 ] }
-              startedAt: { method: null }
-              finishedAt: { method: null }
-              duration: { method: null }
+bazinga_faker: ~
 
 monolog:
     handlers:
