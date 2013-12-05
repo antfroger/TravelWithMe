@@ -1,0 +1,54 @@
+TWM\SiteBundle\Entity\Travel\Travel\Budget:
+    budget1:
+        name: "0 - 500 €"
+    budget2:
+        name: "500 - 1000 €"
+    budget3:
+        name: "1000 - 2000 €"
+    budget4:
+        name: "2000 - 5000 €"
+    budget5:
+        name: "+ de 5000 €"
+
+TWM\SiteBundle\Entity\Travel\Travel\Profile:
+    profile1:
+        name: "Couple"
+    profile2:
+        name: "Famille"
+    profile3:
+        name: "Baroudeur"
+    profile4:
+        name: "Quinquagénaire"
+    profile5:
+        name: "Bande d'amis"
+
+TWM\SiteBundle\Entity\Travel\Travel\Type:
+    type1:
+        name: "En projet"
+    type2:
+        name: "En cours"
+    type3:
+        name: "Effectué"
+
+TWM\SiteBundle\Entity\Travel\Travel\Theme:
+    theme1:
+        name: "Aventure"
+    theme2:
+        name: "Luxe"
+    theme3:
+        name: "Nature - écolo"
+    theme4:
+        name: "Farniente"
+    theme5:
+        name: "Visites culturelles"
+    theme6:
+        name: "Safari"
+    theme7:
+        name: "Sports d'hiver"
+
+TWM\SiteBundle\Entity\Travel\Travel\Travel:
+    travel{1..8}:
+        name: <sentence(3)>
+        budget: @budget*
+        profile: @profile*
+        theme: @theme*
