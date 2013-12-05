@@ -41,8 +41,6 @@ abstract class TravelDependency extends Entity
 
     public function __construct($name = self::DEFAULT_NAME)
     {
-        parent::__construct();
-
         $this->name    = $name;
         $this->travels = new ArrayCollection();
     }
