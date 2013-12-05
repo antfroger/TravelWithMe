@@ -196,7 +196,7 @@ class Travel extends Entity
     /**
      * Get theme
      *
-     * @return \TWM\SiteBundle\Entity\Travel\Travel\Theme
+     * @return Theme
      */
     public function getTheme()
     {
@@ -219,7 +219,7 @@ class Travel extends Entity
     /**
      * Get type
      *
-     * @return \TWM\SiteBundle\Entity\Travel\Travel\Type
+     * @return Type
      */
     public function getType()
     {
@@ -234,7 +234,7 @@ class Travel extends Entity
      */
     public function setProfile(Profile $profile = null)
     {
-        $this->type = $profile;
+        $this->profile = $profile;
 
         return $this;
     }
@@ -242,7 +242,7 @@ class Travel extends Entity
     /**
      * Get travellers profile
      *
-     * @return \TWM\SiteBundle\Entity\Travel\Travel\Profile
+     * @return Profile
      */
     public function getProfile()
     {
@@ -275,7 +275,7 @@ class Travel extends Entity
     /**
      * Get budget
      *
-     * @return \TWM\SiteBundle\Entity\Travel\Travel\Budget
+     * @return Budget
      */
     public function getBudget()
     {
@@ -295,7 +295,7 @@ class Travel extends Entity
     /**
      * Add a step
      *
-     * @param  TWM\SiteBundle\Entity\Travel\Step\Step $step
+     * @param  \TWM\SiteBundle\Entity\Travel\Step\Step $step
      * @return Travel
      */
     public function addStep(Step $step)
@@ -310,7 +310,7 @@ class Travel extends Entity
     /**
      * Remove a step
      *
-     * @param  TWM\SiteBundle\Entity\Travel\Step\Step $step
+     * @param  \TWM\SiteBundle\Entity\Travel\Step\Step $step
      * @return Travel
      */
     public function removeStep(Step $step)
@@ -335,7 +335,7 @@ class Travel extends Entity
     /**
      * Add a photo
      *
-     * @param  TWM\SiteBundle\Entity\Travel\Travel\Photo $photo
+     * @param  \TWM\SiteBundle\Entity\Travel\Travel\Photo $photo
      * @return Travel
      */
     public function addPhoto(Photo $photo)
@@ -350,7 +350,7 @@ class Travel extends Entity
     /**
      * Remove a photo
      *
-     * @param  TWM\SiteBundle\Entity\Travel\Travel\Photo $photo
+     * @param  \TWM\SiteBundle\Entity\Travel\Travel\Photo $photo
      * @return Travel
      */
     public function removePhoto(Photo $photo)
@@ -375,7 +375,7 @@ class Travel extends Entity
     /**
      * Add an evaluation
      *
-     * @param TWM\SiteBundle\Entity\Travel\Travel\Evaluation
+     * @param \TWM\SiteBundle\Entity\Travel\Travel\Evaluation
      * @return Travel
      */
     public function addEvaluation(Evaluation $evaluation)
@@ -390,7 +390,7 @@ class Travel extends Entity
     /**
      * Remove an evaluation
      *
-     * @param TWM\SiteBundle\Entity\Travel\Travel\Evaluation
+     * @param \TWM\SiteBundle\Entity\Travel\Travel\Evaluation
      * @return Travel
      */
     public function removeEvaluation(Evaluation $evaluation)
@@ -411,12 +411,14 @@ class Travel extends Entity
         $this->startedAt  = $this->guessStartedAt();
         $this->finishedAt = $this->guessFinishedAt();
         $this->duration   = $this->guessDuration();
+        // FIXME
+//        $this->type       = $this->guessType();
     }
 
     /**
      * Guess the duration in function of the starting date and the ending date
      *
-     * @return int
+     * @return integer
      */
     private function guessDuration()
     {
@@ -429,6 +431,11 @@ class Travel extends Entity
         return (int) $interval->format('%a');
     }
 
+    /**
+     * Guess the start date in function of the start dates of the travel's steps
+     *
+     * @return \DateTime
+     */
     private function guessStartedAt()
     {
         $startedAt = null;
@@ -442,6 +449,11 @@ class Travel extends Entity
         return $startedAt;
     }
 
+    /**
+     * Guess the end date in function of the end dates of the travel's steps
+     *
+     * @return \DateTime
+     */
     private function guessFinishedAt()
     {
         $finishedAt = null;
@@ -453,6 +465,54 @@ class Travel extends Entity
         }
 
         return $finishedAt;
+    }
+
+    /**
+     * Guess the type in function of the start and end dates
+     *
+     * @return Type
+     */
+    private function guessType()
+    {
+        if (is_null($this->startedAt) && is_null($this->finishedAt)) {
+            return null;
+        }
+
+        $typeId = null;
+        $now    = new DateTime();
+
+        if ($this->startedAt instanceof DateTime
+            && is_null($this->finishedAt)
+        ) {
+            if ($this->startedAt <= $now) {
+                $typeId = Type::IN_PROGRESS;
+            } else {
+                $typeId = Type::DRAFT;
+            }
+        } elseif (is_null($this->startedAt)
+            && $this->finishedAt instanceof DateTime
+        ) {
+            if ($this->finishedAt < $now) {
+                $typeId = Type::DONE;
+            } else {
+                $typeId = Type::IN_PROGRESS;
+            }
+        } elseif ($this->startedAt instanceof DateTime
+            && $this->finishedAt instanceof DateTime
+        ) {
+            if ($now < $this->startedAt) {
+                $typeId = Type::DRAFT;
+            } elseif ($this->startedAt <= $now && $now <= $this->finishedAt) {
+                $typeId = Type::IN_PROGRESS;
+            } else {
+                $typeId = Type::DONE;
+            }
+        }
+
+        $type = new Type();
+        $type->setId($typeId);
+
+        return $type;
     }
 
 }

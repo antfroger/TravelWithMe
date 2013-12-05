@@ -24,4 +24,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Type extends TravelDependency
 {
 
+    /** @const integer */
+    const DRAFT = 1;
+    /** @const integer */
+    const IN_PROGRESS = 2;
+    /** @const integer */
+    const DONE = 3;
 }
