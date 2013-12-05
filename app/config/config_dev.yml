@@ -12,8 +12,6 @@ web_profiler:
     toolbar: true
     intercept_redirects: false
 
-bazinga_faker: ~
-
 monolog:
     handlers:
         main:

@@ -12,9 +12,6 @@
   <!--<target name="load-fixtures" description="Load the fixtures in the database">
     <exec command="php app/console doctrine:fixtures:load -n" dir="." passthru="true" />
   </target>-->
-  <target name="faker:populate" description="Populate the database with fake data">
-    <exec command="php app/console faker:populate" dir="." passthru="true" />
-  </target>
 
   <target name="gen-entity" description="Generate the getters and setters of an entity">
     <exec command="php app/console doctrine:generate:entities ${e} --no-backup" dir="." passthru="true" />

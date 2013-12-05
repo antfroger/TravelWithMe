@@ -18,7 +18,6 @@ Some usefull commands :
 
     phing sync-database
     //phing load-fixtures
-    phing faker:populate
     phing gen-entity -De=TWM/DemoBundle/Entity/Product
     phing check
     phing translate -Db=TWMDemoBundle
