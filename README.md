@@ -23,6 +23,7 @@ Some usefull commands :
     phing translate -Db=TWMDemoBundle
     phing clear-cache
     phing dump-asset
+    app/console h4cc_alice_fixtures:load:sets file_1 file_2 file_3
 
 ---
 
