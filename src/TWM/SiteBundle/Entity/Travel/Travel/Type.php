@@ -11,23 +11,47 @@
 
 namespace TWM\SiteBundle\Entity\Travel\Travel;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Represents a Travel Type
  *
  * @author Antoine Froger <antfroger@gmail.com>
  *
- * @ORM\Entity
- * @ORM\Table(name="TravelType")
  */
-class Type extends TravelDependency
+class Type
 {
 
     /** @const integer */
-    const DRAFT = 1;
+    const DRAFT       = 1;
     /** @const integer */
-    const IN_PROGRESS = 2;
+    const SCHEDULED   = 2;
     /** @const integer */
-    const DONE = 3;
+    const IN_PROGRESS = 3;
+    /** @const integer */
+    const DONE        = 4;
+
+    /**
+     * Gets all types
+     *
+     * @return array
+     */
+    public static function getAll()
+    {
+        return array(
+            self::DRAFT,
+            self::SCHEDULED,
+            self::IN_PROGRESS,
+            self::DONE
+        );
+    }
+
+    /**
+     * Checks if the given type id valid
+     *
+     * @param  integer $type
+     * @return boolean
+     */
+    public static function isValidType($type)
+    {
+        return in_array($type, self::getAll());
+    }
 }

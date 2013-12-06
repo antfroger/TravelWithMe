@@ -22,14 +22,6 @@ TWM\SiteBundle\Entity\Travel\Travel\Profile:
     profile5:
         name: "Bande d'amis"
 
-TWM\SiteBundle\Entity\Travel\Travel\Type:
-    type1:
-        name: "En projet"
-    type2:
-        name: "En cours"
-    type3:
-        name: "Effectué"
-
 TWM\SiteBundle\Entity\Travel\Travel\Theme:
     theme1:
         name: "Aventure"

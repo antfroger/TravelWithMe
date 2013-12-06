@@ -69,7 +69,7 @@ class Travel extends Entity
     protected $theme;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Type", inversedBy="travels")
+     * @ORM\Column(type="integer")
      */
     protected $type;
 
@@ -204,22 +204,9 @@ class Travel extends Entity
     }
 
     /**
-     * Set type
-     *
-     * @param  \TWM\SiteBundle\Entity\Travel\Travel\Type $type
-     * @return Travel
-     */
-    public function setType(Type $type = null)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
      * Get type
      *
-     * @return Type
+     * @return integer
      */
     public function getType()
     {
@@ -411,8 +398,7 @@ class Travel extends Entity
         $this->startedAt  = $this->guessStartedAt();
         $this->finishedAt = $this->guessFinishedAt();
         $this->duration   = $this->guessDuration();
-        // FIXME
-//        $this->type       = $this->guessType();
+        $this->type       = $this->guessType();
     }
 
     /**
@@ -470,47 +456,44 @@ class Travel extends Entity
     /**
      * Guess the type in function of the start and end dates
      *
-     * @return Type
+     * @return intege
      */
     private function guessType()
     {
         if (is_null($this->startedAt) && is_null($this->finishedAt)) {
-            return null;
+            return Type::DRAFT;
         }
 
-        $typeId = null;
+        $type = null;
         $now    = new DateTime();
 
         if ($this->startedAt instanceof DateTime
             && is_null($this->finishedAt)
         ) {
             if ($this->startedAt <= $now) {
-                $typeId = Type::IN_PROGRESS;
+                $type = Type::IN_PROGRESS;
             } else {
-                $typeId = Type::DRAFT;
+                $type = Type::SCHEDULED;
             }
         } elseif (is_null($this->startedAt)
             && $this->finishedAt instanceof DateTime
         ) {
             if ($this->finishedAt < $now) {
-                $typeId = Type::DONE;
+                $type = Type::DONE;
             } else {
-                $typeId = Type::IN_PROGRESS;
+                $type = Type::IN_PROGRESS;
             }
         } elseif ($this->startedAt instanceof DateTime
             && $this->finishedAt instanceof DateTime
         ) {
             if ($now < $this->startedAt) {
-                $typeId = Type::DRAFT;
+                $type = Type::SCHEDULED;
             } elseif ($this->startedAt <= $now && $now <= $this->finishedAt) {
-                $typeId = Type::IN_PROGRESS;
+                $type = Type::IN_PROGRESS;
             } else {
-                $typeId = Type::DONE;
+                $type = Type::DONE;
             }
         }
-
-        $type = new Type();
-        $type->setId($typeId);
 
         return $type;
     }
