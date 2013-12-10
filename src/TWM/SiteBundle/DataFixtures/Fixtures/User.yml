@@ -17,7 +17,7 @@ TWM\SiteBundle\Entity\User\User:
         plainPassword: inactive
         roles: [ROLE_USER]
     user{1..20}:
-        username: <username()>
+        username (unique): <username()>
         email: <email()>
         plainPassword: user
         enabled: 1
