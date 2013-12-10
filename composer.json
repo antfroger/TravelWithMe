@@ -9,6 +9,8 @@
         "symfony/symfony": "2.3.*",
         "doctrine/orm": ">=2.2.3,<2.4-dev",
         "doctrine/doctrine-bundle": "1.2.*",
+        "doctrine/data-fixtures" : "dev-master",
+        "doctrine/doctrine-fixtures-bundle" : "dev-master",
         "twig/extensions": "1.0.*",
         "symfony/assetic-bundle": "2.3.*",
         "symfony/swiftmailer-bundle": "2.3.*",
@@ -20,8 +22,7 @@
         "jms/di-extra-bundle": "1.*",
         "jms/i18n-routing-bundle": "1.*",
         "jms/translation-bundle": "1.*",
-        "friendsofsymfony/user-bundle": "~2.0@dev",
-        "h4cc/alice-fixtures-bundle": "0.*"
+        "friendsofsymfony/user-bundle": "~2.0@dev"
     },
     "scripts": {
         "post-install-cmd": [

@@ -12,10 +12,6 @@ web_profiler:
     toolbar: true
     intercept_redirects: false
 
-h4cc_alice_fixtures:
-    object_manager: doctrine.orm.entity_manager
-    locale: %locale%
-
 monolog:
     handlers:
         main:
