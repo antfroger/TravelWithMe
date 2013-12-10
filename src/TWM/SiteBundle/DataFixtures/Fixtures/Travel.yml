@@ -44,3 +44,10 @@ TWM\SiteBundle\Entity\Travel\Travel\Travel:
         budget: @budget*
         profile: @profile*
         theme: @theme*
+
+TWM\SiteBundle\Entity\Travel\Step\Step:
+    step{1..30}:
+        travelTime: <numberBetween(1, 10)>
+        startedAt: <dateTimeBetween('-500 days', 'now')>
+        finishedAt: <dateTimeBetween($startedAt, $startedAt + <numberBetween(1, 10)>)>
+        travel: @travel*
