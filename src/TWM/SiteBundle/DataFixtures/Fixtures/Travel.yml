@@ -46,8 +46,8 @@ TWM\SiteBundle\Entity\Travel\Travel\Travel:
         theme: @theme*
 
 TWM\SiteBundle\Entity\Travel\Step\Step:
-    step{1..30}:
+    step{1..10}:
         travelTime: <numberBetween(1, 10)>
-        startedAt: <dateTimeBetween('-500 days', 'now')>
-        finishedAt: <dateTimeBetween($startedAt, $startedAt + <numberBetween(1, 10)>)>
+        startedAt: <dateTimeBetween('-1500 days', 'now')>
+        finishedAt: <dateTimeAddInterval($startedAt, 'P' . rand(1, 6) . 'D')>
         travel: @travel*
