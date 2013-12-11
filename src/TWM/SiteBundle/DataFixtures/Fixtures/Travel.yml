@@ -38,6 +38,14 @@ TWM\SiteBundle\Entity\Travel\Travel\Theme:
     theme7:
         name: "Sports d'hiver"
 
+TWM\SiteBundle\Entity\Travel\Travel\Evaluation:
+    evaluation{1..23}:
+        travel: @travel*
+        grade: <numberBetween(0, 5)>
+        comment: 60%? <text(rand(100, 500))>
+
+#TWM\SiteBundle\Entity\Travel\Travel\Photo:
+
 TWM\SiteBundle\Entity\Travel\Travel\Travel:
     travel{1..8}:
         name: <sentence(3)>
@@ -45,9 +53,40 @@ TWM\SiteBundle\Entity\Travel\Travel\Travel:
         profile: @profile*
         theme: @theme*
 
+
+TWM\SiteBundle\Entity\Travel\Step\Hotel:
+    hotel{1..37}:
+        name: <company()>
+        description: <paragraph(rand(1, 4))>
+        address: <address()>
+#        city:
+
+TWM\SiteBundle\Entity\Travel\Step\Place:
+    place{1..15}:
+        name: <sentence(rand(1, 4))>
+        price: <text(rand(50, 300))>
+        description: <paragraph(rand(1, 4))>
+        address: <address()>
+#        city:
+
+TWM\SiteBundle\Entity\Travel\Step\Restaurant:
+    restaurant{1..42}:
+        name: <sentence(rand(1, 3))>
+        description: <paragraph(rand(1, 4))>
+        address: <address()>
+#        city:
+
+#TWM\SiteBundle\Entity\Travel\Step\Photo:
+
+# WIP
+# the city of the hotel/restaurant/place must be the same as the city of the step
+# a travel should have x steps
 TWM\SiteBundle\Entity\Travel\Step\Step:
     step{1..10}:
         travelTime: <numberBetween(1, 10)>
         startedAt: <dateTimeBetween('-1500 days', 'now')>
         finishedAt: <dateTimeAddInterval($startedAt, 'P' . rand(1, 6) . 'D')>
         travel: @travel*
+        places: 85%? <numberBetween(1, 4)>x @place*
+        restaurants: 85%? <numberBetween(1, 4)>x @restaurant*
+        hotels: 85%? <numberBetween(1, 4)>x @hotel*
