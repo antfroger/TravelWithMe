@@ -270,6 +270,23 @@ class Travel extends Entity
     }
 
     /**
+     * Set steps
+     *
+     * @param  \Doctrine\Common\Collections\ArrayCollection $steps
+     * @return Travel
+     */
+    public function setSteps(ArrayCollection $steps)
+    {
+        $this->clearSteps();
+
+        foreach ($steps as $step) {
+            $this->addStep($step);
+        }
+
+        return $this;
+    }
+
+    /**
      * Get steps
      *
      * @return array
@@ -288,6 +305,7 @@ class Travel extends Entity
     public function addStep(Step $step)
     {
         if (!$this->getSteps()->contains($step)) {
+            $step->setTravel($this);
             $this->getSteps()->add($step);
         }
 
@@ -305,6 +323,18 @@ class Travel extends Entity
         if ($this->getSteps()->contains($step)) {
             $this->getSteps()->removeElement($step);
         }
+
+        return $this;
+    }
+
+    /**
+     * Remove all the steps
+     *
+     * @return Travel
+     */
+    public function clearSteps()
+    {
+        $this->getSteps()->clear();
 
         return $this;
     }
@@ -328,6 +358,7 @@ class Travel extends Entity
     public function addPhoto(Photo $photo)
     {
         if (!$this->getPhotos()->contains($photo)) {
+            $photo->setTravel($this);
             $this->getPhotos()->add($photo);
         }
 
@@ -345,6 +376,18 @@ class Travel extends Entity
         if ($this->getPhotos()->contains($photo)) {
             $this->getPhotos()->removeElement($photo);
         }
+
+        return $this;
+    }
+
+    /**
+     * Remove all the photos
+     *
+     * @return Travel
+     */
+    public function clearPhotos()
+    {
+        $this->getPhotos()->clear();
 
         return $this;
     }
@@ -427,7 +470,7 @@ class Travel extends Entity
         $startedAt = null;
 
         foreach ($this->getSteps() as $step) {
-            if ($startedAt > $step->getStartedAt()) {
+            if (is_null($startedAt) || $startedAt > $step->getStartedAt()) {
                 $startedAt = $step->getStartedAt();
             }
         }
@@ -445,7 +488,7 @@ class Travel extends Entity
         $finishedAt = null;
 
         foreach ($this->getSteps() as $step) {
-            if ($finishedAt < $step->getFinishedAt()) {
+            if (is_null($finishedAt) || $finishedAt < $step->getFinishedAt()) {
                 $finishedAt = $step->getFinishedAt();
             }
         }

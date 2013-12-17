@@ -93,7 +93,7 @@ class Step extends Entity
         $this->duration    = 0;
         $this->travel      = null;
         $this->city        = null;
-        $this->travelTime  = null;
+        $this->travelTime  = 0;
         $this->transport   = null;
         $this->places      = new ArrayCollection();
         $this->restaurants = new ArrayCollection();
