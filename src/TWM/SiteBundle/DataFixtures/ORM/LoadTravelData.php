@@ -29,12 +29,18 @@ class LoadTravelData extends AbstractDataFixtureLoader
     {
         parent::load($om);
 
+        $faker = \Faker\Factory::create();
+        $faker->addProvider(new \TWM\CommonBundle\Provider\DateTime($faker));
+
         Fixtures::load(
             array(__DIR__ . '/../Fixtures/Travel.yml'),
             $om,
             array(
                 'locale'    => $this->locale,
-                'providers' => array('\TWM\CommonBundle\Provider\DateTime')
+                'providers' => array(
+//                    '\TWM\CommonBundle\Provider\DateTime',
+                    new \TWM\SiteBundle\DataFixtures\Provider\Travel\Step($faker)
+                )
             )
         );
     }
