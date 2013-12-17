@@ -45,6 +45,11 @@ TWM\SiteBundle\Entity\Travel\Travel\Evaluation:
         comment: 60%? <text(rand(100, 500))>
 
 #TWM\SiteBundle\Entity\Travel\Travel\Photo:
+#    photo{1..15}:
+#        name: 60%? <word()>
+#        path: <image('web/' . \TWM\SiteBundle\Entity\Travel\Step\Photo::getUploadDir(), 50, 50)>
+#        comment: 40%? <text(rand(50, 250))>
+#        step:
 
 TWM\SiteBundle\Entity\Travel\Travel\Travel:
     travel{1..8}:
@@ -77,16 +82,21 @@ TWM\SiteBundle\Entity\Travel\Step\Restaurant:
 #        city:
 
 #TWM\SiteBundle\Entity\Travel\Step\Photo:
+#    photo{1..20}:
+#        name: 60%? <word()>
+#        path: <image('web/' . \TWM\SiteBundle\Entity\Travel\Step\Photo::getUploadDir(), 50, 50)>
+#        comment: 40%? <text(rand(50, 250))>
+#        step:
 
 # WIP
 # the city of the hotel/restaurant/place must be the same as the city of the step
 # a travel should have x steps
-TWM\SiteBundle\Entity\Travel\Step\Step:
-    step{1..10}:
-        travelTime: <numberBetween(1, 10)>
-        startedAt: <dateTimeBetween('-1500 days', 'now')>
-        finishedAt: <dateTimeAddInterval($startedAt, 'P' . rand(1, 6) . 'D')>
-        travel: @travel*
-        places: 85%? <numberBetween(1, 4)>x @place*
-        restaurants: 85%? <numberBetween(1, 4)>x @restaurant*
-        hotels: 85%? <numberBetween(1, 4)>x @hotel*
+#TWM\SiteBundle\Entity\Travel\Step\Step:
+#    step{1..10}:
+#        travelTime: <numberBetween(1, 10)>
+#        startedAt: <dateTimeBetween('-1500 days', 'now')>
+#        finishedAt: <dateTimeAddInterval($startedAt, 'P' . rand(1, 6) . 'D')>
+#        travel: @travel*
+#        places: 85%? <numberBetween(1, 4)>x @place*
+#        restaurants: 85%? <numberBetween(1, 4)>x @restaurant*
+#        hotels: 85%? <numberBetween(1, 4)>x @hotel*

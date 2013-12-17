@@ -44,6 +44,21 @@ abstract class File extends Entity
      */
     private $file;
 
+    public static function getUploadRootDir()
+    {
+        // FIXME
+        // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
+        return __DIR__ . '/../../../../../web/' . static::getUploadDir();
+    }
+
+    public static function getUploadDir()
+    {
+        // FIXME
+        // on se débarrasse de « __DIR__ » afin de ne pas avoir de problème lorsqu'on affiche
+        // le document/image dans la vue.
+        return 'uploads/documents';
+    }
+
     public function __construct($path = self::DEFAULT_PATH, $name = self::DEFAULT_NAME)
     {
         $this->path = $path;
@@ -165,21 +180,6 @@ abstract class File extends Entity
         if ($file = $this->getAbsolutePath()) {
             unlink($file);
         }
-    }
-
-    protected function getUploadRootDir()
-    {
-        // FIXME
-        // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
-        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
-    }
-
-    protected function getUploadDir()
-    {
-        // FIXME
-        // on se débarrasse de « __DIR__ » afin de ne pas avoir de problème lorsqu'on affiche
-        // le document/image dans la vue.
-        return 'uploads/documents';
     }
 
 }
