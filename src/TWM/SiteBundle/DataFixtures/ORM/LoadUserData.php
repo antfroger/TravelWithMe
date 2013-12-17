@@ -12,7 +12,6 @@
 namespace TWM\SiteBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Nelmio\Alice\Fixtures;
 
 /**
@@ -20,7 +19,7 @@ use Nelmio\Alice\Fixtures;
  *
  * @author Antoine Froger <antfroger@gmail.com>
  */
-class LoadUserData implements FixtureInterface
+class LoadUserData extends AbstractDataFixtureLoader
 {
 
     /**
@@ -28,9 +27,14 @@ class LoadUserData implements FixtureInterface
      */
     public function load(ObjectManager $om)
     {
+        parent::load($om);
+
         Fixtures::load(
             array(__DIR__ . '/../Fixtures/User.yml'),
-            $om
+            $om,
+            array(
+                'locale' => $this->locale,
+            )
         );
     }
 

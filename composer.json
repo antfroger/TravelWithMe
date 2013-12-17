@@ -22,7 +22,8 @@
         "jms/di-extra-bundle": "1.*",
         "jms/i18n-routing-bundle": "1.*",
         "jms/translation-bundle": "1.*",
-        "friendsofsymfony/user-bundle": "~2.0@dev"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "nelmio/alice": "1.5.*"
     },
     "scripts": {
         "post-install-cmd": [

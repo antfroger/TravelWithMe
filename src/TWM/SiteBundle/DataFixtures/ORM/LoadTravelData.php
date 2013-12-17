@@ -12,7 +12,6 @@
 namespace TWM\SiteBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Nelmio\Alice\Fixtures;
 
 /**
@@ -20,7 +19,7 @@ use Nelmio\Alice\Fixtures;
  *
  * @author Antoine Froger <antfroger@gmail.com>
  */
-class LoadTravelData implements FixtureInterface
+class LoadTravelData extends AbstractDataFixtureLoader
 {
 
     /**
@@ -28,10 +27,15 @@ class LoadTravelData implements FixtureInterface
      */
     public function load(ObjectManager $om)
     {
+        parent::load($om);
+
         Fixtures::load(
             array(__DIR__ . '/../Fixtures/Travel.yml'),
             $om,
-            array('providers' => array('\TWM\CommonBundle\Provider\DateTime'))
+            array(
+                'locale'    => $this->locale,
+                'providers' => array('\TWM\CommonBundle\Provider\DateTime')
+            )
         );
     }
 
