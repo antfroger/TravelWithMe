@@ -204,6 +204,23 @@ class Step extends Entity
     }
 
     /**
+     * Set places
+     *
+     * @param  \Doctrine\Common\Collections\ArrayCollection $places
+     * @return Travel
+     */
+    public function setPlaces(ArrayCollection $places)
+    {
+        $this->clearPlaces();
+
+        foreach ($places as $place) {
+            $this->addPlace($place);
+        }
+
+        return $this;
+    }
+
+    /**
      * Get places
      *
      * @return array
@@ -238,6 +255,35 @@ class Step extends Entity
     {
         if ($this->getPlaces()->contains($place)) {
             $this->getPlaces()->removeElement($place);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove all the places
+     *
+     * @return Travel
+     */
+    public function clearPlaces()
+    {
+        $this->getPlaces()->clear();
+
+        return $this;
+    }
+
+    /**
+     * Set restaurants
+     *
+     * @param  \Doctrine\Common\Collections\ArrayCollection $restaurants
+     * @return Travel
+     */
+    public function setRestaurants(ArrayCollection $restaurants)
+    {
+        $this->clearRestaurants();
+
+        foreach ($restaurants as $restaurant) {
+            $this->addRestaurant($restaurant);
         }
 
         return $this;
@@ -284,6 +330,35 @@ class Step extends Entity
     }
 
     /**
+     * Remove all the restaurants
+     *
+     * @return Travel
+     */
+    public function clearRestaurants()
+    {
+        $this->getRestaurants()->clear();
+
+        return $this;
+    }
+
+    /**
+     * Set hotels
+     *
+     * @param  \Doctrine\Common\Collections\ArrayCollection $hotels
+     * @return Travel
+     */
+    public function setHotels(ArrayCollection $hotels)
+    {
+        $this->clearHotels();
+
+        foreach ($hotels as $hotel) {
+            $this->addHotel($hotel);
+        }
+
+        return $this;
+    }
+
+    /**
      * Get hotels
      *
      * @return array
@@ -318,6 +393,35 @@ class Step extends Entity
     {
         if ($this->getHotels()->contains($hotel)) {
             $this->getHotels()->removeElement($hotel);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove all the hotels
+     *
+     * @return Travel
+     */
+    public function clearHotels()
+    {
+        $this->getHotels()->clear();
+
+        return $this;
+    }
+
+    /**
+     * Set photos
+     *
+     * @param  \Doctrine\Common\Collections\ArrayCollection $photos
+     * @return Travel
+     */
+    public function setPhotos(ArrayCollection $photos)
+    {
+        $this->clearPhotos();
+
+        foreach ($photos as $photo) {
+            $this->addPhoto($photo);
         }
 
         return $this;
@@ -359,6 +463,18 @@ class Step extends Entity
         if ($this->getPhotos()->contains($photo)) {
             $this->getPhotos()->removeElement($photo);
         }
+
+        return $this;
+    }
+
+    /**
+     * Remove all the photos
+     *
+     * @return Travel
+     */
+    public function clearPhotos()
+    {
+        $this->getPhotos()->clear();
 
         return $this;
     }
