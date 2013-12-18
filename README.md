@@ -17,12 +17,12 @@ Commands
 Some usefull commands :
 
     phing sync-database
+    phing load-fixtures
     phing gen-entity -De=TWM/DemoBundle/Entity/Product
     phing check
     phing translate -Db=TWMDemoBundle
     phing clear-cache
     phing dump-asset
-    php app/console doctrine:fixtures:load -n
 
 ---
 
