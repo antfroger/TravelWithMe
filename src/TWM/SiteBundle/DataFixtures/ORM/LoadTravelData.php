@@ -29,7 +29,7 @@ class LoadTravelData extends AbstractDataFixtureLoader
     {
         parent::load($om);
 
-        $faker = \Faker\Factory::create();
+        $faker = \Faker\Factory::create($this->locale);
         $faker->addProvider(new \TWM\CommonBundle\Provider\DateTime($faker));
 
         Fixtures::load(
