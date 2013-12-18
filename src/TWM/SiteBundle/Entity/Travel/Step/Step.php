@@ -29,7 +29,10 @@ class Step extends Entity
 {
 
     /**
-     * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Travel", inversedBy="steps")
+     * @ORM\ManyToOne(
+     *  targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Travel",
+     *  inversedBy="steps"
+     * )
      */
     protected $travel;
 
@@ -64,25 +67,39 @@ class Step extends Entity
     protected $transport;
 
     /**
-     * @ORM\ManyToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Step\Place", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(
+     *  targetEntity="TWM\SiteBundle\Entity\Travel\Step\Place",
+     *  cascade={"persist", "remove"}
+     * )
      * @ORM\JoinTable(name="Step_Place")
      */
     protected $places;
 
     /**
-     * @ORM\ManyToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Step\Restaurant", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(
+     *  targetEntity="TWM\SiteBundle\Entity\Travel\Step\Restaurant",
+     *  cascade={"persist", "remove"}
+     * )
      * @ORM\JoinTable(name="Step_Restaurant")
      */
     protected $restaurants;
 
     /**
-     * @ORM\ManyToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Step\Hotel", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(
+     *  targetEntity="TWM\SiteBundle\Entity\Travel\Step\Hotel",
+     *  cascade={"persist", "remove"}
+     * )
      * @ORM\JoinTable(name="Step_Hotel")
      */
     protected $hotels;
 
     /**
-     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Step\Photo", mappedBy="step", cascade={"persist", "remove"});
+     * @ORM\OneToMany(
+     *  targetEntity="TWM\SiteBundle\Entity\Travel\Step\Photo",
+     *  mappedBy="step",
+     *  cascade={"persist", "remove"},
+     *  orphanRemoval=true
+     * );
      */
     protected $photos;
 
@@ -446,6 +463,7 @@ class Step extends Entity
     public function addPhoto(Photo $photo)
     {
         if (!$this->getPhotos()->contains($photo)) {
+            $photo->setStep($this);
             $this->getPhotos()->add($photo);
         }
 
@@ -461,6 +479,7 @@ class Step extends Entity
     public function removePhoto(Photo $photo)
     {
         if ($this->getPhotos()->contains($photo)) {
+            $photo->setStep(null);
             $this->getPhotos()->removeElement($photo);
         }
 

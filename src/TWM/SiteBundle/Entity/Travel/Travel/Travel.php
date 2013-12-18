@@ -321,6 +321,7 @@ class Travel extends Entity
     public function removeStep(Step $step)
     {
         if ($this->getSteps()->contains($step)) {
+            $step->setTravel(null);
             $this->getSteps()->removeElement($step);
         }
 
