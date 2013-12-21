@@ -9,47 +9,56 @@
  * file that was distributed with this source code.
  */
 
-namespace TWM\SiteBundle\DataFixtures\ORM;
-
-use Doctrine\Common\Persistence\ObjectManager;
-use Nelmio\Alice\Fixtures;
-
 /**
- * Load fake Travel entities (and its dependencies) to fill the database
- *
- * @author Antoine Froger <antfroger@gmail.com>
+ * @unused
+ * While Alice does not allow managing references between fixtures files
+ * this file is not used
  */
-class LoadTravelData extends AbstractDataFixtureLoader
-{
 
-    /**
-     * {@inheritDoc}
-     */
-    public function load(ObjectManager $om)
-    {
-        parent::load($om);
-
-        $faker = \Faker\Factory::create($this->locale);
-        $faker->addProvider(new \TWM\CommonBundle\Provider\DateTime($faker));
-
-        Fixtures::load(
-            array(__DIR__ . '/../Fixtures/Travel.yml'),
-            $om,
-            array(
-                'locale'    => $this->locale,
-                'providers' => array(
-//                    '\TWM\CommonBundle\Provider\DateTime',
-                    new \TWM\SiteBundle\DataFixtures\Provider\Travel\Step($faker)
-                )
-            )
-        );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 2;
-    }
-}
+//namespace TWM\SiteBundle\DataFixtures\ORM;
+//
+//use Doctrine\Common\Persistence\ObjectManager;
+//use Faker\Factory;
+//use Nelmio\Alice\Fixtures;
+//use TWM\CommonBundle\Provider\DateTime;
+//
+///**
+// * Load fake Travel entities (and its dependencies) to fill the database
+// *
+// * @author Antoine Froger <antfroger@gmail.com>
+// */
+//class LoadTravelData extends AbstractDataFixtureLoader
+//{
+//
+//    /**
+//     * {@inheritDoc}
+//     */
+//    public function load(ObjectManager $om)
+//    {
+//        parent::load($om);
+//
+//        $faker = Factory::create($this->locale);
+//        $faker->addProvider(new DateTime($faker));
+//
+//        Fixtures::load(
+//            array(
+//                __DIR__ . '/../Fixtures/Travel.yml'
+//            ),
+//            $om,
+//            array(
+//                'locale'    => $this->locale,
+//                'providers' => array(
+//                    new \TWM\SiteBundle\DataFixtures\Provider\Travel\Step($faker)
+//                )
+//            )
+//        );
+//    }
+//
+//    /**
+//     * {@inheritDoc}
+//     */
+//    public function getOrder()
+//    {
+//        return 2;
+//    }
+//}

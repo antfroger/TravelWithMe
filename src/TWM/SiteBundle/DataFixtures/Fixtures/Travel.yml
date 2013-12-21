@@ -49,7 +49,7 @@ TWM\SiteBundle\Entity\Travel\Travel\Evaluation:
 #        name: 60%? <word()>
 #        path: <image('web/' . \TWM\SiteBundle\Entity\Travel\Step\Photo::getUploadDir(), 50, 50)>
 #        comment: 40%? <text(rand(50, 250))>
-#        step:
+#        travel:
 
 TWM\SiteBundle\Entity\Travel\Travel\Travel:
     travel{1..8}:
@@ -58,4 +58,4 @@ TWM\SiteBundle\Entity\Travel\Travel\Travel:
         profile: @profile*
         theme: @theme*
         steps: <steps(rand(1, 10))>
-        #author: @user*
+        author: @user*

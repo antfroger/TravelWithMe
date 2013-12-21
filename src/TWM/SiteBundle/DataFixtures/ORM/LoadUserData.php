@@ -9,40 +9,46 @@
  * file that was distributed with this source code.
  */
 
-namespace TWM\SiteBundle\DataFixtures\ORM;
-
-use Doctrine\Common\Persistence\ObjectManager;
-use Nelmio\Alice\Fixtures;
-
 /**
- * Load fake User entities to fill the database
- *
- * @author Antoine Froger <antfroger@gmail.com>
+ * @unused
+ * While Alice does not allow managing references between fixtures files
+ * this file is not used
  */
-class LoadUserData extends AbstractDataFixtureLoader
-{
 
-    /**
-     * {@inheritDoc}
-     */
-    public function load(ObjectManager $om)
-    {
-        parent::load($om);
-
-        Fixtures::load(
-            array(__DIR__ . '/../Fixtures/User.yml'),
-            $om,
-            array(
-                'locale' => $this->locale,
-            )
-        );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 1;
-    }
-}
+//namespace TWM\SiteBundle\DataFixtures\ORM;
+//
+//use Doctrine\Common\Persistence\ObjectManager;
+//use Nelmio\Alice\Fixtures;
+//
+///**
+// * Load fake User entities to fill the database
+// *
+// * @author Antoine Froger <antfroger@gmail.com>
+// */
+//class LoadUserData extends AbstractDataFixtureLoader
+//{
+//
+//    /**
+//     * {@inheritDoc}
+//     */
+//    public function load(ObjectManager $om)
+//    {
+//        parent::load($om);
+//
+//        Fixtures::load(
+//            array(__DIR__ . '/../Fixtures/User.yml'),
+//            $om,
+//            array(
+//                'locale' => $this->locale,
+//            )
+//        );
+//    }
+//
+//    /**
+//     * {@inheritDoc}
+//     */
+//    public function getOrder()
+//    {
+//        return 1;
+//    }
+//}
