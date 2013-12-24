@@ -10,7 +10,6 @@ Users who are travelling can share their impressions with their family or friend
 A [translation service] (http://travelwithme/app_dev.php/_trans/) is available.
 
 ---
-
 Commands
 --------
 
@@ -25,7 +24,6 @@ Some usefull commands :
     phing dump-asset
 
 ---
-
 Hooks
 -----
 
