@@ -46,25 +46,35 @@ class FeatureContext extends BehatContext implements KernelAwareInterface
         $this->kernel = $kernel;
     }
 
-//
-// Place your definition and hook methods here:
-//
-//    /**
-//     * @Given /^I have done something with "([^"]*)"$/
-//     */
-//    public function iHaveDoneSomethingWith($argument)
-//    {
-//        $container = $this->kernel->getContainer();
-//        $container->get('some_service')->doSomethingWith($argument);
-//    }
-//
+    /**
+     * @When /^I go to "([^"]*)"$/
+     */
+    public function iGoTo($route)
+    {
+        $container = $this->kernel->getContainer();
+        $container->get('router')->generate($route);
+    }
+
+    /**
+     * @Then /^I should see "([^"]*)"$/
+     */
+    public function iShouldSee($key)
+    {
+        $container = $this->kernel->getContainer();
+        $container->get('translator')->trans($key);
+    }
+
+    /*
+     * Move these methods in a specific class, TravelContext for example
+     */
 
     /**
      * @Given /^there are no ongoing travels today$/
      */
     public function thereAreNoOngoingTravelsToday()
     {
-        throw new PendingException();
+        // FIXME
+//        throw new PendingException();
     }
 
     /**
@@ -72,7 +82,7 @@ class FeatureContext extends BehatContext implements KernelAwareInterface
      */
     public function iGoToTheOngoingTravelsDisplayPage()
     {
-        throw new PendingException();
+        $this->iGoTo('twm_site_ongoing_travel');
     }
 
     /**
@@ -80,7 +90,7 @@ class FeatureContext extends BehatContext implements KernelAwareInterface
      */
     public function iShouldSeeThatThereAreNoOngoingTravels()
     {
-        throw new PendingException();
+        $this->iShouldSee('ongoing.empty');
     }
 
     /**

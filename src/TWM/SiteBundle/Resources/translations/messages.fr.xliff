@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2013-12-27T11:53:16Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d" resname="hello">
+        <jms:reference-file line="4">views/Default/index.html.twig</jms:reference-file>
+        <source>hello</source>
+        <target>Hello name</target>
+      </trans-unit>
+      <trans-unit id="bdfbb391002363c09f1b779df779b6953b043fb7" resname="home.back">
+        <jms:reference-file line="4">views/Layout/travel_list.html.twig</jms:reference-file>
+        <source>home.back</source>
+        <target>Retour sur la page d'accueil</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
