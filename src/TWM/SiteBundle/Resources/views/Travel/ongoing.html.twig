@@ -3,5 +3,15 @@
 {% trans_default_domain "travel" %}
 
 {% block content %}
-  <p>{{ 'ongoing.empty'|trans }}</p>
+  {#% if travels is empty %#}
+    <p>{{ 'ongoing.empty'|trans }}</p>
+  {#% else%#}
+    <ul>
+      {% for travel in travels %}
+        <li class="travel">
+          <h3>{{ travel.name }}</h3>
+        </li>
+      {% endfor %}
+    </ul>
+  {#% endif %#}
 {% endblock %}

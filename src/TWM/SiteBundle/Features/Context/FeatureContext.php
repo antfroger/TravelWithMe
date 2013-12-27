@@ -2,25 +2,22 @@
 
 namespace TWM\SiteBundle\Features\Context;
 
-use Symfony\Component\HttpKernel\KernelInterface;
+use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
-//use Behat\MinkExtension\Context\MinkContext;
-use Behat\Behat\Context\BehatContext;
-use Behat\Behat\Exception\PendingException;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpKernel\KernelInterface;
+use TWM\SiteBundle\Entity\Travel\Step\Step;
+use TWM\SiteBundle\Entity\Travel\Travel\Travel;
 //use Behat\Gherkin\Node\PyStringNode;
 //use Behat\Gherkin\Node\TableNode;
 
-//
-// Require 3rd-party libraries here:
-//
-//   require_once 'PHPUnit/Autoload.php';
-//   require_once 'PHPUnit/Framework/Assert/Functions.php';
-//
+require_once 'PHPUnit/Autoload.php';
+require_once 'PHPUnit/Framework/Assert/Functions.php';
 
 /**
  * Feature context.
  */
-class FeatureContext extends BehatContext implements KernelAwareInterface
+class FeatureContext extends MinkContext implements KernelAwareInterface
 {
     private $kernel;
     private $parameters;
@@ -52,7 +49,9 @@ class FeatureContext extends BehatContext implements KernelAwareInterface
     public function iGoTo($route)
     {
         $container = $this->kernel->getContainer();
-        $container->get('router')->generate($route);
+        $this->visit(
+            $container->get('router')->generate($route)
+        );
     }
 
     /**
@@ -65,16 +64,17 @@ class FeatureContext extends BehatContext implements KernelAwareInterface
     }
 
     /*
+     * @todo
      * Move these methods in a specific class, TravelContext for example
      */
+
+    private $travels;
 
     /**
      * @Given /^there are no ongoing travels today$/
      */
     public function thereAreNoOngoingTravelsToday()
     {
-        // FIXME
-//        throw new PendingException();
     }
 
     /**
@@ -98,7 +98,30 @@ class FeatureContext extends BehatContext implements KernelAwareInterface
      */
     public function thereAreOngoingTravelsToday()
     {
-        throw new PendingException();
+        $travel1 = new Travel();
+        $travel1
+            ->setName('travel1')
+            ->setSteps(new ArrayCollection(array(
+                new Step(
+                    new \DateTime('-12 days'),
+                    new \DateTime('+ 2 days')
+                )
+            )));
+
+        $travel2 = new Travel();
+        $travel2
+            ->setName('travel2')
+            ->setSteps(new ArrayCollection(array(
+                new Step(
+                    new \DateTime('yesterday'),
+                    new \DateTime('+ 3 days')
+                )
+            )));
+
+        $this->travels = new ArrayCollection(array(
+            $travel1,
+            $travel2
+        ));
     }
 
     /**
@@ -106,6 +129,11 @@ class FeatureContext extends BehatContext implements KernelAwareInterface
      */
     public function iShouldSeeTheOngoingTravelsOrderedByStartDate()
     {
-        throw new PendingException();
+        $this->assertNumElements($this->travels->count(), 'li.travel');
+        $elements = $this->getSession()->getPage()->findAll('css', 'li.travel');
+
+        foreach ($this->travels as $key => $travel) {
+            assertEquals($elements[$key]->getText(), $travel->getName());
+        }
     }
 }
