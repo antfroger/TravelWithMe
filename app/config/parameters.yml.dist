@@ -13,3 +13,4 @@ parameters:
     locale: fr
     secret: 16d76f3bb9694c8b7b8c9295aba4ba5bb268dffa
     database_path: null
+    base_url: http://travelwithme/app_dev.php

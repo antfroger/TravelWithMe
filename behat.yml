@@ -1,3 +1,7 @@
 default:
     extensions:
         Behat\Symfony2Extension\Extension: ~
+        Behat\MinkExtension\Extension:
+          base_url:  'http://travelwithme/app_dev.php'
+          goutte: ~
+          sahi: ~
