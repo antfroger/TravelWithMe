@@ -21,7 +21,7 @@ use TWM\SiteBundle\Entity\Travel\Travel\Budget;
 use TWM\SiteBundle\Entity\Travel\Travel\Photo;
 use TWM\SiteBundle\Entity\Travel\Travel\Theme;
 use TWM\SiteBundle\Entity\Travel\Travel\Profile;
-use TWM\SiteBundle\Entity\Travel\Travel\Type;
+use TWM\SiteBundle\Entity\Travel\Travel\Status;
 use TWM\SiteBundle\Entity\User\User;
 
 /**
@@ -71,7 +71,7 @@ class Travel extends Entity
     /**
      * @ORM\Column(type="integer")
      */
-    protected $type;
+    protected $status;
 
     /**
      * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Profile", inversedBy="travels")
@@ -105,7 +105,7 @@ class Travel extends Entity
         $this->startedAt   = null;
         $this->finishedAt  = null;
         $this->theme       = null;
-        $this->type        = null;
+        $this->status      = null;
         $this->profile     = null;
         $this->duration    = 0;
         $this->budget      = null;
@@ -204,13 +204,13 @@ class Travel extends Entity
     }
 
     /**
-     * Get type
+     * Get status
      *
      * @return integer
      */
-    public function getType()
+    public function getStatus()
     {
-        return $this->type;
+        return $this->status;
     }
 
     /**
@@ -442,7 +442,7 @@ class Travel extends Entity
         $this->startedAt  = $this->guessStartedAt();
         $this->finishedAt = $this->guessFinishedAt();
         $this->duration   = $this->guessDuration();
-        $this->type       = $this->guessType();
+        $this->status     = $this->guessStatus();
     }
 
     /**
@@ -498,48 +498,48 @@ class Travel extends Entity
     }
 
     /**
-     * Guess the type in function of the start and end dates
+     * Guess the status in function of the start and end dates
      *
      * @return intege
      */
-    private function guessType()
+    private function guessStatus()
     {
         if (is_null($this->startedAt) && is_null($this->finishedAt)) {
-            return Type::DRAFT;
+            return Status::DRAFT;
         }
 
-        $type = null;
+        $status = null;
         $now    = new DateTime();
 
         if ($this->startedAt instanceof DateTime
             && is_null($this->finishedAt)
         ) {
             if ($this->startedAt <= $now) {
-                $type = Type::IN_PROGRESS;
+                $status = Status::IN_PROGRESS;
             } else {
-                $type = Type::SCHEDULED;
+                $status = Status::SCHEDULED;
             }
         } elseif (is_null($this->startedAt)
             && $this->finishedAt instanceof DateTime
         ) {
             if ($this->finishedAt < $now) {
-                $type = Type::DONE;
+                $status = Status::DONE;
             } else {
-                $type = Type::IN_PROGRESS;
+                $status = Status::IN_PROGRESS;
             }
         } elseif ($this->startedAt instanceof DateTime
             && $this->finishedAt instanceof DateTime
         ) {
             if ($now < $this->startedAt) {
-                $type = Type::SCHEDULED;
+                $status = Status::SCHEDULED;
             } elseif ($this->startedAt <= $now && $now <= $this->finishedAt) {
-                $type = Type::IN_PROGRESS;
+                $status = Status::IN_PROGRESS;
             } else {
-                $type = Type::DONE;
+                $status = Status::DONE;
             }
         }
 
-        return $type;
+        return $status;
     }
 
 }
