@@ -210,6 +210,10 @@ class Travel extends Entity
      */
     public function getType()
     {
+        if (is_null($this->type)) {
+            $this->type = $this->guessType();
+        }
+        
         return $this->type;
     }
 

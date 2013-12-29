@@ -1,7 +1,10 @@
+kernel:
+  env: 'test'
+
 default:
-    extensions:
-        Behat\Symfony2Extension\Extension: ~
-        Behat\MinkExtension\Extension:
-          base_url:  'http://travelwithme/app_test.php'
-          goutte: ~
-          sahi: ~
+  extensions:
+    Behat\Symfony2Extension\Extension: ~
+    Behat\MinkExtension\Extension:
+      base_url:  'http://travelwithme/app_test.php'
+      goutte: ~
+      sahi: ~
