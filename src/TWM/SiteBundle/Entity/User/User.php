@@ -28,7 +28,8 @@ class User extends BaseUser
 {
 
     /**
-     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Travel", mappedBy="author", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Travel",
+     * mappedBy="author", cascade={"persist"})
      */
     protected $travels;
 
@@ -45,11 +46,39 @@ class User extends BaseUser
         $this->ip      = '';
     }
 
+    /**
+     * Set travels
+     *
+     * @param  \Doctrine\Common\Collections\ArrayCollection $travels
+     * @return User
+     */
+    public function setTravels(ArrayCollection $travels)
+    {
+        $this->clearTravels();
+
+        foreach ($travels as $travel) {
+            $this->addTravel($travel);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get travels
+     *
+     * @return array
+     */
     public function getTravels()
     {
         return $this->travels ?: $this->travels = new ArrayCollection();
     }
 
+    /**
+     * Add a travel
+     *
+     * @param  \TWM\SiteBundle\Entity\Travel\Travel\Travel $travel
+     * @return User
+     */
     public function addTravel(Travel $travel)
     {
         if (!$this->getTravels()->contains($travel)) {
@@ -59,11 +88,29 @@ class User extends BaseUser
         return $this;
     }
 
+    /**
+     * Remove a travel
+     *
+     * @param  \TWM\SiteBundle\Entity\Travel\Travel\Travel $travel
+     * @return User
+     */
     public function removeTravel(Travel $travel)
     {
         if ($this->getTravels()->contains($travel)) {
             $this->getTravels()->removeElement($travel);
         }
+
+        return $this;
+    }
+
+    /**
+     * Remove all the travels
+     *
+     * @return User
+     */
+    public function clearTravels()
+    {
+        $this->getTravels()->clear();
 
         return $this;
     }

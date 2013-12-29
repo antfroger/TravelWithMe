@@ -55,19 +55,6 @@ abstract class Entity implements EntityInterface
     }
 
     /**
-     * Set id
-     *
-     * @param  integer $id
-     * @return Entity
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
      * Get createdAt
      *
      * @return DateTime

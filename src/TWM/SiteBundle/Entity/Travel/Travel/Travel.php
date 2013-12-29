@@ -341,6 +341,23 @@ class Travel extends Entity
     }
 
     /**
+     * Set photos
+     *
+     * @param  \Doctrine\Common\Collections\ArrayCollection $photos
+     * @return Travel
+     */
+    public function setPhotos(ArrayCollection $photos)
+    {
+        $this->clearPhotos();
+
+        foreach ($photos as $photo) {
+            $this->addPhoto($photo);
+        }
+
+        return $this;
+    }
+
+    /**
      * Get photos
      *
      * @return array
@@ -394,6 +411,23 @@ class Travel extends Entity
     }
 
     /**
+     * Set evaluations
+     *
+     * @param  \Doctrine\Common\Collections\ArrayCollection $evaluations
+     * @return Travel
+     */
+    public function setEvaluations(ArrayCollection $evaluations)
+    {
+        $this->clearEvaluations();
+
+        foreach ($evaluations as $evaluation) {
+            $this->addEvaluation($evaluation);
+        }
+
+        return $this;
+    }
+
+    /**
      * Get evaluations
      *
      * @return array
@@ -429,6 +463,18 @@ class Travel extends Entity
         if ($this->getEvaluations()->contains($evaluation)) {
             $this->getEvaluations()->removeElement($evaluation);
         }
+
+        return $this;
+    }
+
+    /**
+     * Remove all the evaluations
+     *
+     * @return Travel
+     */
+    public function clearEvaluations()
+    {
+        $this->getEvaluations()->clear();
 
         return $this;
     }
