@@ -24,15 +24,6 @@ interface EntityInterface
     public function getId();
 
     /**
-     * Sets the user id
-     *
-     * @param int $id
-     *
-     * @return self
-     */
-    public function setId($id);
-
-    /**
      * Gets the user's creation date
      *
      * @return DateTime
