@@ -210,7 +210,7 @@ class Travel extends Entity
      */
     public function getStatus()
     {
-        return $this->status;
+        return $this->guessStatus();
     }
 
     /**
@@ -498,11 +498,11 @@ class Travel extends Entity
      */
     private function guessDuration()
     {
-        if (!$this->startedAt || !$this->finishedAt) {
+        if (!$this->getStartedAt() || !$this->getFinishedAt()) {
             return 0;
         }
 
-        $interval = $this->finishedAt->diff($this->startedAt);
+        $interval = $this->getFinishedAt()->diff($this->getStartedAt());
 
         return (int) $interval->format('%a');
     }
@@ -546,7 +546,7 @@ class Travel extends Entity
     /**
      * Guess the status in function of the start and end dates
      *
-     * @return intege
+     * @return integer
      */
     private function guessStatus()
     {
