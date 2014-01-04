@@ -73,9 +73,9 @@ class Step extends Base
                 ->setHotels(
                     $this->hotels(1, $city)
                 )
-//                ->setPhotos(
-//                    $this->photos(mt_rand(0, 5))
-//                )
+                ->setPhotos(
+                    $this->photos(mt_rand(0, 5))
+                )
             ;
 
             $steps->add($step);

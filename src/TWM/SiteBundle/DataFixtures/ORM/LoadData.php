@@ -14,7 +14,10 @@ namespace TWM\SiteBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
 use Nelmio\Alice\Fixtures;
+use TWM\CommonBundle\Entity\File\File;
+use TWM\CommonBundle\Helper\File as FileHelper;
 use TWM\CommonBundle\Provider\DateTime;
+use TWM\SiteBundle\DataFixtures\Provider\Travel\Step;
 
 /**
  * Load fake entities to fill the database
@@ -29,6 +32,8 @@ class LoadData extends AbstractDataFixtureLoader
      */
     public function load(ObjectManager $om)
     {
+        $this->prepare();
+
         parent::load($om);
 
         $faker = Factory::create($this->locale);
@@ -43,7 +48,7 @@ class LoadData extends AbstractDataFixtureLoader
             array(
                 'locale'    => $this->locale,
                 'providers' => array(
-                    new \TWM\SiteBundle\DataFixtures\Provider\Travel\Step($faker)
+                    new Step($faker)
                 )
             )
         );
@@ -55,5 +60,27 @@ class LoadData extends AbstractDataFixtureLoader
     public function getOrder()
     {
         return 1;
+    }
+
+    /**
+     * Prepare the directories structure before loading fixtures
+     */
+    private function prepare()
+    {
+        $this->prepareFileDirectory();
+    }
+
+    /**
+     * Create or empty the directory containing files
+     */
+    private function prepareFileDirectory()
+    {
+        $dir = File::getUploadRootDir();
+
+        if (!is_dir($dir)) {
+            mkdir($dir);
+        } else {
+            FileHelper::emptyDir($dir);
+        }
     }
 }
