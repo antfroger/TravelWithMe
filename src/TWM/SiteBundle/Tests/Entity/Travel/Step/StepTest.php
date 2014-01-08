@@ -36,7 +36,24 @@ class StepTest extends \PHPUnit_Framework_TestCase
      * @covers TWM\SiteBundle\Entity\Travel\Step\Step::getDuration
      * @covers TWM\SiteBundle\Entity\Travel\Step\Step::guessDuration
      */
-    public function testGetDuration()
+    public function testDuration()
+    {
+        $this->object
+            ->setStartedAt(new \DateTime('-3 days'))
+            ->setFinishedAt(new \DateTime('+2 days'));
+        $this->assertEquals(5, $this->object->getDuration());
+
+        $this->object
+            ->setStartedAt(new \DateTime('yesterday'))
+            ->setFinishedAt(new \DateTime('tomorrow'));
+        $this->assertEquals(2, $this->object->getDuration());
+    }
+
+    /**
+     * @covers TWM\SiteBundle\Entity\Travel\Travel\Travel::getDuration
+     * @covers TWM\SiteBundle\Entity\Travel\Travel\Travel::guessDuration
+     */
+    public function testNoDuration()
     {
         $this->object
             ->setStartedAt(null)
@@ -49,18 +66,8 @@ class StepTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $this->object->getDuration());
 
         $this->object
-            ->setStartedAt(new \DateTime('-3 days'))
-            ->setFinishedAt(new \DateTime('+2 days'));
-        $this->assertEquals(5, $this->object->getDuration());
-
-        $this->object
             ->setStartedAt(new \DateTime('now'))
             ->setFinishedAt(new \DateTime('now'));
         $this->assertEquals(0, $this->object->getDuration());
-
-        $this->object
-            ->setStartedAt(new \DateTime('yesterday'))
-            ->setFinishedAt(new \DateTime('tomorrow'));
-        $this->assertEquals(2, $this->object->getDuration());
     }
 }
