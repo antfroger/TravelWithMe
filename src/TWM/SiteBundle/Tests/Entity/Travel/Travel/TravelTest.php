@@ -13,6 +13,7 @@ namespace TWM\SiteBundle\Tests\Entity\Travel\Travel;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use TWM\SiteBundle\Entity\Travel\Step\Step;
+use TWM\SiteBundle\Entity\Travel\Travel\Status;
 use TWM\SiteBundle\Entity\Travel\Travel\Travel;
 
 /**
@@ -204,7 +205,7 @@ class TravelTest extends \PHPUnit_Framework_TestCase
             $this->object->getDuration()
         );
 
-        // One step without finish date
+        // Steps without finish date
         $this->object->setSteps(new ArrayCollection(array(
             $this->getMockedStep(
                 new \DateTime('+3 days'),
@@ -249,7 +250,26 @@ class TravelTest extends \PHPUnit_Framework_TestCase
      */
     public function testDraftStatus()
     {
-        $this->markTestSkipped();
+        // Steps without start or finish dates
+        $this->object->setSteps(new ArrayCollection(array(
+            $this->getMockedStep(
+            ),
+            $this->getMockedStep(
+            ),
+        )));
+
+        $this->assertEquals(
+            Status::DRAFT,
+            $this->object->getStatus()
+        );
+
+        // No step
+        $this->object->clearSteps();
+
+        $this->assertEquals(
+            Status::DRAFT,
+            $this->object->getStatus()
+        );
     }
 
     /**
@@ -258,7 +278,35 @@ class TravelTest extends \PHPUnit_Framework_TestCase
      */
     public function testScheduledStatus()
     {
-        $this->markTestSkipped();
+        // One step without finish date and start date > now
+        $this->object->setSteps(new ArrayCollection(array(
+            $this->getMockedStep(
+                new \DateTime('+3 days'),
+                null
+            ),
+        )));
+
+        $this->assertEquals(
+            Status::SCHEDULED,
+            $this->object->getStatus()
+        );
+
+        // Steps in the future
+        $this->object->setSteps(new ArrayCollection(array(
+            $this->getMockedStep(
+                new \DateTime('+3 days'),
+                new \DateTime('+5 days')
+            ),
+            $this->getMockedStep(
+                new \DateTime('+5 days'),
+                new \DateTime('+8 days')
+            ),
+        )));
+
+        $this->assertEquals(
+            Status::SCHEDULED,
+            $this->object->getStatus()
+        );
     }
 
     /**
@@ -267,7 +315,92 @@ class TravelTest extends \PHPUnit_Framework_TestCase
      */
     public function testInProgressStatus()
     {
-        $this->markTestSkipped();
+        // One step without finish date and start date <= now
+        $this->object->setSteps(new ArrayCollection(array(
+            $this->getMockedStep(
+                new \DateTime('-3 days'),
+                null
+            ),
+        )));
+
+        $this->assertEquals(
+            Status::IN_PROGRESS,
+            $this->object->getStatus()
+        );
+
+        $this->object->setSteps(new ArrayCollection(array(
+            $this->getMockedStep(
+                new \DateTime('now'),
+                null
+            ),
+        )));
+
+        $this->assertEquals(
+            Status::IN_PROGRESS,
+            $this->object->getStatus()
+        );
+
+        // One step without start date and finish date > now
+        $this->object->setSteps(new ArrayCollection(array(
+            $this->getMockedStep(
+                null,
+                new \DateTime('+3 days')
+            ),
+        )));
+
+        $this->assertEquals(
+            Status::IN_PROGRESS,
+            $this->object->getStatus()
+        );
+
+        // Ongoing steps
+        $this->object->setSteps(new ArrayCollection(array(
+            $this->getMockedStep(
+                new \DateTime('yesterday'),
+                new \DateTime('+1 days')
+            ),
+            $this->getMockedStep(
+                new \DateTime('+1 days'),
+                new \DateTime('+4 days')
+            ),
+        )));
+
+        $this->assertEquals(
+            Status::IN_PROGRESS,
+            $this->object->getStatus()
+        );
+
+        $this->object->setSteps(new ArrayCollection(array(
+            $this->getMockedStep(
+                new \DateTime('now'),
+                new \DateTime('+1 days')
+            ),
+            $this->getMockedStep(
+                new \DateTime('+1 days'),
+                new \DateTime('+4 days')
+            ),
+        )));
+
+        $this->assertEquals(
+            Status::IN_PROGRESS,
+            $this->object->getStatus()
+        );
+
+        $this->object->setSteps(new ArrayCollection(array(
+            $this->getMockedStep(
+                new \DateTime('-6 days'),
+                new \DateTime('-2 days')
+            ),
+            $this->getMockedStep(
+                new \DateTime('-2 days'),
+                new \DateTime('now')
+            ),
+        )));
+
+        $this->assertEquals(
+            Status::IN_PROGRESS,
+            $this->object->getStatus()
+        );
     }
 
     /**
@@ -276,7 +409,35 @@ class TravelTest extends \PHPUnit_Framework_TestCase
      */
     public function testDoneStatus()
     {
-        $this->markTestSkipped();
+        // One step without start date and finish date < now
+        $this->object->setSteps(new ArrayCollection(array(
+            $this->getMockedStep(
+                null,
+                new \DateTime('-1 days')
+            ),
+        )));
+
+        $this->assertEquals(
+            Status::DONE,
+            $this->object->getStatus()
+        );
+
+        // Steps in the past
+        $this->object->setSteps(new ArrayCollection(array(
+            $this->getMockedStep(
+                new \DateTime('-10 days'),
+                new \DateTime('-6 days')
+            ),
+            $this->getMockedStep(
+                new \DateTime('-6 days'),
+                new \DateTime('-2 days')
+            ),
+        )));
+
+        $this->assertEquals(
+            Status::DONE,
+            $this->object->getStatus()
+        );
     }
 
     /**

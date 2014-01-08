@@ -550,35 +550,39 @@ class Travel extends Entity
      */
     private function guessStatus()
     {
-        if (is_null($this->startedAt) && is_null($this->finishedAt)) {
+        if (is_null($this->getStartedAt())
+            && is_null($this->getFinishedAt())
+        ) {
             return Status::DRAFT;
         }
 
         $status = null;
         $now    = new DateTime();
 
-        if ($this->startedAt instanceof DateTime
-            && is_null($this->finishedAt)
+        if ($this->getStartedAt() instanceof DateTime
+            && is_null($this->getFinishedAt())
         ) {
-            if ($this->startedAt <= $now) {
+            if ($this->getStartedAt() <= $now) {
                 $status = Status::IN_PROGRESS;
             } else {
                 $status = Status::SCHEDULED;
             }
-        } elseif (is_null($this->startedAt)
-            && $this->finishedAt instanceof DateTime
+        } elseif (is_null($this->getStartedAt())
+            && $this->getFinishedAt() instanceof DateTime
         ) {
-            if ($this->finishedAt < $now) {
+            if ($this->getFinishedAt() < $now) {
                 $status = Status::DONE;
             } else {
                 $status = Status::IN_PROGRESS;
             }
-        } elseif ($this->startedAt instanceof DateTime
-            && $this->finishedAt instanceof DateTime
+        } elseif ($this->getStartedAt() instanceof DateTime
+            && $this->getFinishedAt() instanceof DateTime
         ) {
-            if ($now < $this->startedAt) {
+            if ($now < $this->getStartedAt()) {
                 $status = Status::SCHEDULED;
-            } elseif ($this->startedAt <= $now && $now <= $this->finishedAt) {
+            } elseif ($this->getStartedAt() <= $now
+                && $now <= $this->getFinishedAt()
+            ) {
                 $status = Status::IN_PROGRESS;
             } else {
                 $status = Status::DONE;
