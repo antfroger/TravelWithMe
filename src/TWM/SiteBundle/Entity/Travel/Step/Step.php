@@ -150,6 +150,7 @@ class Step extends Entity
     public function setStartedAt(DateTime $startedAt = null)
     {
         $this->startedAt = $startedAt;
+        $this->reset();
 
         return $this;
     }
@@ -173,6 +174,7 @@ class Step extends Entity
     public function setFinishedAt(DateTime $finishedAt = null)
     {
         $this->finishedAt = $finishedAt;
+        $this->reset();
 
         return $this;
     }
@@ -194,7 +196,11 @@ class Step extends Entity
      */
     public function getDuration()
     {
-        return $this->guessDuration();
+        if (0 === $this->duration) {
+            $this->duration = $this->guessDuration();
+        }
+
+        return $this->duration;
     }
 
     /**
@@ -523,4 +529,11 @@ class Step extends Entity
         return (int) $interval->format('%a');
     }
 
+    /**
+     * Reset the properties
+     */
+    private function reset()
+    {
+        $this->duration = 0;
+    }
 }

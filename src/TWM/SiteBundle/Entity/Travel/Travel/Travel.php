@@ -144,7 +144,11 @@ class Travel extends Entity
      */
     public function getStartedAt()
     {
-        return $this->guessStartedAt();
+        if (is_null($this->startedAt)) {
+            $this->startedAt = $this->guessStartedAt();
+        }
+
+        return $this->startedAt;
     }
 
     /**
@@ -154,7 +158,11 @@ class Travel extends Entity
      */
     public function getFinishedAt()
     {
-        return $this->guessFinishedAt();
+        if (is_null($this->finishedAt)) {
+            $this->finishedAt = $this->guessFinishedAt();
+        }
+
+        return $this->finishedAt;
     }
 
     /**
@@ -210,7 +218,11 @@ class Travel extends Entity
      */
     public function getStatus()
     {
-        return $this->guessStatus();
+        if (is_null($this->status)) {
+            $this->status = $this->guessStatus();
+        }
+
+        return $this->status;
     }
 
     /**
@@ -243,7 +255,11 @@ class Travel extends Entity
      */
     public function getDuration()
     {
-        return $this->guessDuration();
+        if (0 === $this->duration) {
+            $this->duration = $this->guessDuration();
+        }
+
+        return $this->duration;
     }
 
     /**
@@ -307,6 +323,8 @@ class Travel extends Entity
         if (!$this->getSteps()->contains($step)) {
             $step->setTravel($this);
             $this->getSteps()->add($step);
+
+            $this->reset();
         }
 
         return $this;
@@ -323,6 +341,8 @@ class Travel extends Entity
         if ($this->getSteps()->contains($step)) {
             $step->setTravel(null);
             $this->getSteps()->removeElement($step);
+
+            $this->reset();
         }
 
         return $this;
@@ -336,6 +356,7 @@ class Travel extends Entity
     public function clearSteps()
     {
         $this->getSteps()->clear();
+        $this->reset();
 
         return $this;
     }
@@ -592,4 +613,14 @@ class Travel extends Entity
         return $status;
     }
 
+    /**
+     * Reset the properties dependant on steps
+     */
+    private function reset()
+    {
+        $this->startedAt  = null;
+        $this->finishedAt = null;
+        $this->duration   = 0;
+        $this->status     = null;
+    }
 }
