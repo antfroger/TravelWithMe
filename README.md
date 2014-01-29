@@ -19,7 +19,8 @@ Some usefull commands :
     phing load-fixtures
     phing gen-entity -De=TWM/DemoBundle/Entity/Product
     phing check
-    phing translate -Db=TWMDemoBundle
+    phing trans -Db=TWMDemoBundle -Dlg=fr
+    phing trans-routes -Db=TWMDemoBundle -Dlg=fr
     phing clear-cache
     phing dump-asset
 

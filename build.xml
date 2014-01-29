@@ -22,8 +22,12 @@
     <exec command="phpunit -c app/ --testdox-html ${documentation.directory}/agile-documentation/index.html --coverage-html ${documentation.directory}/code-coverage --colors" dir="." passthru="true" />
   </target>
 
-  <target name="translate" description="Extract all translation variables">
-    <exec command="php app/console translation:extract fr --bundle=${b} --output-format=xliff --exclude-dir='Features'" dir="." passthru="true" />
+  <target name="trans" description="Extract all translation variables">
+    <exec command="php app/console translation:extract ${lg} --bundle=${b} --exclude-dir='Features' --output-format=xliff" dir="." passthru="true" />
+  </target>
+
+  <target name="trans-routes" description="Extract routing translation">
+    <exec command="php app/console translation:extract ${lg} --bundle=${b} --exclude-dir='Features' --enable-extractor=jms_i18n_routing" dir="." passthru="true" />
   </target>
 
   <target name="dump-asset" description="Dump the assets">
