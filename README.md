@@ -31,4 +31,4 @@ Hooks
 
 Please, install the provided hooks with this simple command :
 
-    ln -s ../.hooks/ .git/hooks
+    ln -s ../.hooks .git/hooks
