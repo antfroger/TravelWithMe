@@ -24,6 +24,9 @@ Some usefull commands :
     phing clear-cache
     phing dump-asset
 
+    // Test bundle with Behat
+    bin/behat "@TWMSiteBundle"
+
 ---
 Hooks
 -----
