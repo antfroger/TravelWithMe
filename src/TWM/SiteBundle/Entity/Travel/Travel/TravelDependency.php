@@ -35,7 +35,11 @@ abstract class TravelDependency extends Entity
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Travel", mappedBy="author", cascade={"persist"})
+     * @ORM\OneToMany(
+     *  targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Travel",
+     *  mappedBy="author",
+     *  cascade={"persist"}
+     * )
      */
     protected $travels;
 
@@ -45,11 +49,62 @@ abstract class TravelDependency extends Entity
         $this->travels = new ArrayCollection();
     }
 
+    /**
+     * Set name
+     *
+     * @param  string           $name
+     * @return TravelDependency
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set travels
+     *
+     * @param  \Doctrine\Common\Collections\ArrayCollection $travels
+     * @return TravelDependency
+     */
+    public function setTravels(ArrayCollection $travels)
+    {
+        $this->clearTravels();
+
+        foreach ($travels as $travel) {
+            $this->addTravel($travel);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get travels
+     *
+     * @return array
+     */
     public function getTravels()
     {
         return $this->travels ?: $this->travels = new ArrayCollection();
     }
 
+    /**
+     * Add a travel
+     *
+     * @param  \TWM\SiteBundle\Entity\Travel\Travel\Travel $travel
+     * @return TravelDependency
+     */
     public function addTravel(Travel $travel)
     {
         if (!$this->getTravels()->contains($travel)) {
@@ -59,6 +114,12 @@ abstract class TravelDependency extends Entity
         return $this;
     }
 
+    /**
+     * Remove a travel
+     *
+     * @param  \TWM\SiteBundle\Entity\Travel\Travel\Travel $travel
+     * @return TravelDependency
+     */
     public function removeTravel(Travel $travel)
     {
         if ($this->getTravels()->contains($travel)) {
@@ -68,4 +129,15 @@ abstract class TravelDependency extends Entity
         return $this;
     }
 
+    /**
+     * Remove all the travels
+     *
+     * @return TravelDependency
+     */
+    public function clearTravels()
+    {
+        $this->getTravels()->clear();
+
+        return $this;
+    }
 }

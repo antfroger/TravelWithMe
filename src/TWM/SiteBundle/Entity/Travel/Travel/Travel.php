@@ -21,7 +21,7 @@ use TWM\SiteBundle\Entity\Travel\Travel\Budget;
 use TWM\SiteBundle\Entity\Travel\Travel\Photo;
 use TWM\SiteBundle\Entity\Travel\Travel\Theme;
 use TWM\SiteBundle\Entity\Travel\Travel\Profile;
-use TWM\SiteBundle\Entity\Travel\Travel\Type;
+use TWM\SiteBundle\Entity\Travel\Travel\Status;
 use TWM\SiteBundle\Entity\User\User;
 
 /**
@@ -71,7 +71,7 @@ class Travel extends Entity
     /**
      * @ORM\Column(type="integer")
      */
-    protected $type;
+    protected $status;
 
     /**
      * @ORM\ManyToOne(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Profile", inversedBy="travels")
@@ -105,7 +105,7 @@ class Travel extends Entity
         $this->startedAt   = null;
         $this->finishedAt  = null;
         $this->theme       = null;
-        $this->type        = null;
+        $this->status      = null;
         $this->profile     = null;
         $this->duration    = 0;
         $this->budget      = null;
@@ -144,7 +144,11 @@ class Travel extends Entity
      */
     public function getStartedAt()
     {
-        return $this->guessStartedAt();
+        if (is_null($this->startedAt)) {
+            $this->startedAt = $this->guessStartedAt();
+        }
+
+        return $this->startedAt;
     }
 
     /**
@@ -154,7 +158,11 @@ class Travel extends Entity
      */
     public function getFinishedAt()
     {
-        return $this->guessFinishedAt();
+        if (is_null($this->finishedAt)) {
+            $this->finishedAt = $this->guessFinishedAt();
+        }
+
+        return $this->finishedAt;
     }
 
     /**
@@ -204,17 +212,17 @@ class Travel extends Entity
     }
 
     /**
-     * Get type
+     * Get status
      *
      * @return integer
      */
-    public function getType()
+    public function getStatus()
     {
-        if (is_null($this->type)) {
-            $this->type = $this->guessType();
+        if (is_null($this->status)) {
+            $this->status = $this->guessStatus();
         }
-        
-        return $this->type;
+
+        return $this->status;
     }
 
     /**
@@ -247,7 +255,11 @@ class Travel extends Entity
      */
     public function getDuration()
     {
-        return $this->guessDuration();
+        if (0 === $this->duration) {
+            $this->duration = $this->guessDuration();
+        }
+
+        return $this->duration;
     }
 
     /**
@@ -311,6 +323,8 @@ class Travel extends Entity
         if (!$this->getSteps()->contains($step)) {
             $step->setTravel($this);
             $this->getSteps()->add($step);
+
+            $this->reset();
         }
 
         return $this;
@@ -327,6 +341,8 @@ class Travel extends Entity
         if ($this->getSteps()->contains($step)) {
             $step->setTravel(null);
             $this->getSteps()->removeElement($step);
+
+            $this->reset();
         }
 
         return $this;
@@ -340,6 +356,24 @@ class Travel extends Entity
     public function clearSteps()
     {
         $this->getSteps()->clear();
+        $this->reset();
+
+        return $this;
+    }
+
+    /**
+     * Set photos
+     *
+     * @param  \Doctrine\Common\Collections\ArrayCollection $photos
+     * @return Travel
+     */
+    public function setPhotos(ArrayCollection $photos)
+    {
+        $this->clearPhotos();
+
+        foreach ($photos as $photo) {
+            $this->addPhoto($photo);
+        }
 
         return $this;
     }
@@ -398,6 +432,23 @@ class Travel extends Entity
     }
 
     /**
+     * Set evaluations
+     *
+     * @param  \Doctrine\Common\Collections\ArrayCollection $evaluations
+     * @return Travel
+     */
+    public function setEvaluations(ArrayCollection $evaluations)
+    {
+        $this->clearEvaluations();
+
+        foreach ($evaluations as $evaluation) {
+            $this->addEvaluation($evaluation);
+        }
+
+        return $this;
+    }
+
+    /**
      * Get evaluations
      *
      * @return array
@@ -438,6 +489,18 @@ class Travel extends Entity
     }
 
     /**
+     * Remove all the evaluations
+     *
+     * @return Travel
+     */
+    public function clearEvaluations()
+    {
+        $this->getEvaluations()->clear();
+
+        return $this;
+    }
+
+    /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
      */
@@ -446,7 +509,7 @@ class Travel extends Entity
         $this->startedAt  = $this->guessStartedAt();
         $this->finishedAt = $this->guessFinishedAt();
         $this->duration   = $this->guessDuration();
-        $this->type       = $this->guessType();
+        $this->status     = $this->guessStatus();
     }
 
     /**
@@ -456,11 +519,11 @@ class Travel extends Entity
      */
     private function guessDuration()
     {
-        if (!$this->startedAt || !$this->finishedAt) {
+        if (!$this->getStartedAt() || !$this->getFinishedAt()) {
             return 0;
         }
 
-        $interval = $this->finishedAt->diff($this->startedAt);
+        $interval = $this->getFinishedAt()->diff($this->getStartedAt());
 
         return (int) $interval->format('%a');
     }
@@ -502,48 +565,62 @@ class Travel extends Entity
     }
 
     /**
-     * Guess the type in function of the start and end dates
+     * Guess the status in function of the start and end dates
      *
-     * @return intege
+     * @return integer
      */
-    private function guessType()
+    private function guessStatus()
     {
-        if (is_null($this->startedAt) && is_null($this->finishedAt)) {
-            return Type::DRAFT;
+        if (is_null($this->getStartedAt())
+            && is_null($this->getFinishedAt())
+        ) {
+            return Status::DRAFT;
         }
 
-        $type = null;
+        $status = null;
         $now    = new DateTime();
 
-        if ($this->startedAt instanceof DateTime
-            && is_null($this->finishedAt)
+        if ($this->getStartedAt() instanceof DateTime
+            && is_null($this->getFinishedAt())
         ) {
-            if ($this->startedAt <= $now) {
-                $type = Type::IN_PROGRESS;
+            if ($this->getStartedAt() <= $now) {
+                $status = Status::IN_PROGRESS;
             } else {
-                $type = Type::SCHEDULED;
+                $status = Status::SCHEDULED;
             }
-        } elseif (is_null($this->startedAt)
-            && $this->finishedAt instanceof DateTime
+        } elseif (is_null($this->getStartedAt())
+            && $this->getFinishedAt() instanceof DateTime
         ) {
-            if ($this->finishedAt < $now) {
-                $type = Type::DONE;
+            if ($this->getFinishedAt() < $now) {
+                $status = Status::DONE;
             } else {
-                $type = Type::IN_PROGRESS;
+                $status = Status::IN_PROGRESS;
             }
-        } elseif ($this->startedAt instanceof DateTime
-            && $this->finishedAt instanceof DateTime
+        } elseif ($this->getStartedAt() instanceof DateTime
+            && $this->getFinishedAt() instanceof DateTime
         ) {
-            if ($now < $this->startedAt) {
-                $type = Type::SCHEDULED;
-            } elseif ($this->startedAt <= $now && $now <= $this->finishedAt) {
-                $type = Type::IN_PROGRESS;
+            if ($now < $this->getStartedAt()) {
+                $status = Status::SCHEDULED;
+            } elseif ($this->getStartedAt() <= $now
+                && $now <= $this->getFinishedAt()
+            ) {
+                $status = Status::IN_PROGRESS;
             } else {
-                $type = Type::DONE;
+                $status = Status::DONE;
             }
         }
 
-        return $type;
+        return $status;
     }
 
+    /**
+     * Reset the properties dependant on steps
+     */
+    private function reset()
+    {
+        $this->startedAt  = null;
+        $this->finishedAt = null;
+        $this->duration   = 0;
+        $this->status     = null;
+    }
 }

@@ -44,12 +44,12 @@ TWM\SiteBundle\Entity\Travel\Travel\Evaluation:
         grade: <numberBetween(0, 5)>
         comment: 60%? <text(rand(100, 500))>
 
-#TWM\SiteBundle\Entity\Travel\Travel\Photo:
-#    photo{1..15}:
-#        name: 60%? <word()>
-#        path: <image('web/' . \TWM\SiteBundle\Entity\Travel\Step\Photo::getUploadDir(), 50, 50)>
-#        comment: 40%? <text(rand(50, 250))>
-#        travel:
+TWM\SiteBundle\Entity\Travel\Travel\Photo:
+    photo{1..15}:
+        name: 60%? <word()>
+        path: <image('web/' . \TWM\SiteBundle\Entity\Travel\Step\Photo::getUploadDir(), 50, 50)>
+        comment: 40%? <text(rand(50, 250))>
+        travel: @travel*
 
 TWM\SiteBundle\Entity\Travel\Travel\Travel:
     travel{1..8}:

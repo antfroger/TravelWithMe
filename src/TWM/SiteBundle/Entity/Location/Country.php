@@ -45,7 +45,8 @@ class Country extends Entity
     protected $continent;
 
     /**
-     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Location\City", mappedBy="country", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Location\City",
+     * mappedBy="country", cascade={"persist", "remove"})
      */
     protected $cities;
 
@@ -108,6 +109,33 @@ class Country extends Entity
     }
 
     /**
+     * Set cities
+     *
+     * @param  \Doctrine\Common\Collections\ArrayCollection $cities
+     * @return Country
+     */
+    public function setCities(ArrayCollection $cities)
+    {
+        $this->clearCities();
+
+        foreach ($cities as $city) {
+            $this->addCity($city);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get cities
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCities()
+    {
+        return $this->cities ?: $this->cities = new ArrayCollection();
+    }
+
+    /**
      * Add cities
      *
      * @param  \TWM\SiteBundle\Entity\Location\City $city
@@ -137,13 +165,15 @@ class Country extends Entity
     }
 
     /**
-     * Get cities
+     * Remove all the cities
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Country
      */
-    public function getCities()
+    public function clearCities()
     {
-        return $this->cities ?: $this->cities = new ArrayCollection();
+        $this->getCities()->clear();
+
+        return $this;
     }
 
     /**

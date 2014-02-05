@@ -12,12 +12,12 @@
 namespace TWM\SiteBundle\Entity\Travel\Travel;
 
 /**
- * Represents a Travel Type
+ * Represents a Travel Status
  *
  * @author Antoine Froger <antfroger@gmail.com>
  *
  */
-class Type
+class Status
 {
 
     /** @const integer */
@@ -50,7 +50,7 @@ class Type
      * @param  integer $type
      * @return boolean
      */
-    public static function isValidType($type)
+    public static function isValid($type)
     {
         return in_array($type, self::getAll());
     }
