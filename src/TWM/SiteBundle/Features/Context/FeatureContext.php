@@ -57,10 +57,16 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     /**
      * @Then /^I should see "([^"]*)"$/
      */
-    public function iShouldSee($key)
+    public function iShouldSee($key, $domain)
     {
-        $container = $this->kernel->getContainer();
-        $container->get('translator')->trans($key);
+        $container   = $this->kernel->getContainer();
+        $translation = $container->get('translator')->trans(
+            $key,
+            array(),
+            $domain
+        );
+
+        $this->assertResponseContains($translation);
     }
 
     /*
@@ -90,7 +96,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
      */
     public function iShouldSeeThatThereAreNoOngoingTravels()
     {
-        $this->iShouldSee('ongoing.empty');
+        $this->iShouldSee('ongoing.empty', 'travel');
     }
 
     /**
