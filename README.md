@@ -39,6 +39,7 @@ Some useful commands :
 
     // Test a bundle with Behat
     bin/behat "@TWMSiteBundle"
+    bin/behat -p=travel
 
 ---
 Hooks
