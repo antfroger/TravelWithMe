@@ -1,5 +1,0 @@
-demo:
-    login: 'Aller à la page de connexion'
-    secured: 'Aller dans la zone sécurisée'
-
-hello: 'Bonjour %name%'

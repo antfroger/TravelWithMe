@@ -43,7 +43,6 @@ assetic:
     debug:          "%kernel.debug%"
     use_controller: "%kernel.debug%"
     bundles:
-#      - TWMDemoBundle
       - TWMSiteBundle
     java: "/usr/bin/java"
     sass: "/usr/local/bin/sass"
