@@ -31,9 +31,6 @@ Some useful commands :
     phing trans -Db=TWMDemoBundle -Dlg=fr
     phing trans-routes -Db=TWMDemoBundle -Dlg=fr
 
-    // Clear cache
-    phing clear-cache
-
     // Dump the assets using assetic
     phing dump-asset
 

@@ -34,8 +34,4 @@
     <exec command="php app/console assetic:dump --env=prod --no-debug" dir="." passthru="true" />
   </target>
 
-  <target name="clear-cache" description="Clear cache">
-    <exec command="php app/console cache:clear" dir="." passthru="true" />
-  </target>
-
 </project>
