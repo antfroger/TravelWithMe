@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of Travel With Me
  *
@@ -11,6 +10,8 @@
 
 namespace TWM\SiteBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
@@ -20,6 +21,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class DefaultController extends Controller
 {
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route(
+     *   name = "twm_site_homepage",
+     *   path = "/"
+     * )
+     * @Template()
+     */
     public function indexAction()
     {
         return $this->render('TWMSiteBundle:Default:index.html.twig');

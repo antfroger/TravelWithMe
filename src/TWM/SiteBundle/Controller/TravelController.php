@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of Travel With Me
  *
@@ -12,6 +11,8 @@
 namespace TWM\SiteBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use TWM\SiteBundle\Entity\Travel\Step\Step;
 use TWM\SiteBundle\Entity\Travel\Travel\Travel;
@@ -26,8 +27,14 @@ class TravelController extends Controller
 
     /**
      * List all the ongoing travels
-     * 
+     *
      * @return Response A Response instance
+     *
+     * @Route(
+     *   name = "twm_site_ongoing_travel",
+     *   path = "/voyages/encours"
+     * )
+     * @Template("TWMSiteBundle:Travel:ongoing.html.twig")
      */
     public function viewOngoingAction()
     {
@@ -56,9 +63,8 @@ class TravelController extends Controller
             $travel2
         ));
 
-        return $this->render(
-            'TWMSiteBundle:Travel:ongoing.html.twig',
-            array('travels' => $travels)
-        );
+        return [
+            'travels' => $travels
+        ];
     }
 }

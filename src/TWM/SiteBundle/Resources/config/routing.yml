@@ -1,7 +1,0 @@
-twm_site_homepage:
-    pattern:  /
-    defaults: { _controller: TWMSiteBundle:Default:index }
-
-twm_site_ongoing_travel:
-    pattern:  /voyages/encours
-    defaults: { _controller: TWMSiteBundle:Travel:viewOngoing }

@@ -1,5 +1,6 @@
 twm_site:
-    resource: "@TWMSiteBundle/Resources/config/routing.yml"
+    resource: "@TWMSiteBundle/Controller"
+    type:     annotation
     prefix:   /
 
 fos_user_security:
