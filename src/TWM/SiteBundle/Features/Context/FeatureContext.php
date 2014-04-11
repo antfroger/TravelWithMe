@@ -4,9 +4,8 @@ namespace TWM\SiteBundle\Features\Context;
 
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
-//use Behat\Gherkin\Node\PyStringNode;
-//use Behat\Gherkin\Node\TableNode;
 
 /**
  * Feature context.
@@ -42,9 +41,8 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
      */
     public function iGoTo($route)
     {
-        $container = $this->kernel->getContainer();
         $this->visit(
-            $container->get('router')->generate($route)
+            $this->getContainer()->get('router')->generate($route)
         );
     }
 
@@ -53,13 +51,57 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
      */
     public function iShouldSee($key, $domain)
     {
-        $container   = $this->kernel->getContainer();
-        $translation = $container->get('translator')->trans(
+        $translation = $this->getContainer()->get('translator')->trans(
             $key,
             array(),
             $domain
         );
 
         $this->assertResponseContains($translation);
+    }
+
+    /**
+     * @Given /There is no "([^"]*)" in database/
+     */
+    public function thereIsNoRecordInDatabase($entityName)
+    {
+        $entities = $this->getEntityManager()->getRepository('TWMSiteBundle:'.$entityName)->findAll();
+        foreach ($entities as $eachEntity) {
+            $this->getEntityManager()->remove($eachEntity);
+        }
+
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * Gets the container of the kernel.
+     *
+     * @return ContainerInterface A ContainerInterface instance
+     */
+    protected function getContainer()
+    {
+        return $this->kernel->getContainer();
+    }
+
+    /**
+     * Returns the Doctrine entity manager.
+     *
+     * @return Doctrine\ORM\EntityManager
+     */
+    protected function getEntityManager()
+    {
+        return $this->getContainer()->get('doctrine')->getManager();
+    }
+
+    /**
+     * Returns the Doctrine repository manager for a given entity.
+     *
+     * @param string $entityName The name of the entity.
+     *
+     * @return Doctrine\ORM\EntityRepository
+     */
+    protected function getRepository($entityName)
+    {
+        return $this->getEntityManager()->getRepository($entityName);
     }
 }

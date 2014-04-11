@@ -89,4 +89,71 @@ class TravelContext extends FeatureContext
             \PHPUnit_Framework_Assert::assertEquals($elements[$key]->getText(), $travel->getName());
         }
     }
+
+    /**
+     * @Given /I have a travel "([^"]*)"/
+     */
+    public function iHaveATravel($name)
+    {
+        $travel = new Travel();
+        $travel->setName($name);
+
+        $this->getEntityManager()->persist($travel);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given /I have a step starting "([^"]*)" and finishing "([^"]*)"/
+     */
+    public function iHaveAProduct($startDate, $endDate)
+    {
+        $step = new Step(
+            new \DateTime($startDate),
+            new \DateTime($endDate)
+        );
+
+        $this->getEntityManager()->persist($step);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @When /I add a step starting "([^"]*)" and finishing "([^"]*)" to travel "([^"]*)"/
+     */
+    public function iAddStepToTravel($stepStartDate, $stepEndDate, $travelName)
+    {
+        $travel = $this->getRepository('TWMSiteBundle:Travel\Travel\Travel')->findOneByName($travelName);
+        $step   = $this->getRepository('TWMSiteBundle:Travel\Step\Step')->findOneBy(array(
+            'startedAt'  => new \DateTime($stepStartDate),
+            'finishedAt' => new \DateTime($stepEndDate),
+            'travel'     => null
+        ));
+
+//        $step->setTravel($travel); // FIXME : travel properties startedAt, finishedAt and duration are null
+        $travel->addStep($step);
+
+        $this->getEntityManager()->persist($step);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Then /I should find step starting "([^"]*)" and finishing "([^"]*)" in travel "([^"]*)"/
+     */
+    public function iShouldFindProductInCategory($stepStartDate, $stepEndDate, $travelName)
+    {
+        $travel = $this->getRepository('TWMSiteBundle:Travel\Travel\Travel')->findOneByName($travelName);
+        $steps = $travel->getSteps();
+
+        $stepStartDate = new \DateTime($stepStartDate);
+        $stepEndDate   = new \DateTime($stepEndDate);
+
+        $found = false;
+        foreach ($steps as $step) {
+            if ($stepStartDate == $step->getStartedAt() && $stepEndDate == $step->getFinishedAt()) {
+                $found = true;
+                break;
+            }
+        }
+
+        \PHPUnit_Framework_Assert::assertTrue($found);
+    }
 }
