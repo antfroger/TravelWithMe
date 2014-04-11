@@ -88,6 +88,7 @@ class Step extends Base
      * Generate Place entities
      *
      * @param  integer         $number
+     * @param  City            $city
      * @return ArrayCollection
      */
     public function places($number, City $city = null)
@@ -114,6 +115,7 @@ class Step extends Base
      * Generate Restaurant entities
      *
      * @param  integer         $number
+     * @param  City            $city
      * @return ArrayCollection
      */
     public function restaurants($number, City $city = null)
@@ -139,6 +141,7 @@ class Step extends Base
      * Generate Hotel entities
      *
      * @param  integer         $number
+     * @param  City            $city
      * @return ArrayCollection
      */
     public function hotels($number, City $city = null)
