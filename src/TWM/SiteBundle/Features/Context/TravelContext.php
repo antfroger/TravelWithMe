@@ -86,7 +86,7 @@ class TravelContext extends FeatureContext
         $elements = $this->getSession()->getPage()->findAll('css', 'li.travel');
 
         foreach ($this->travels as $key => $travel) {
-            assertEquals($elements[$key]->getText(), $travel->getName());
+            \PHPUnit_Framework_Assert::assertEquals($elements[$key]->getText(), $travel->getName());
         }
     }
 }

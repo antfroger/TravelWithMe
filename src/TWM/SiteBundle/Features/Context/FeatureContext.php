@@ -8,9 +8,6 @@ use Symfony\Component\HttpKernel\KernelInterface;
 //use Behat\Gherkin\Node\PyStringNode;
 //use Behat\Gherkin\Node\TableNode;
 
-require_once 'PHPUnit/Autoload.php';
-require_once 'PHPUnit/Framework/Assert/Functions.php';
-
 /**
  * Feature context.
  */
