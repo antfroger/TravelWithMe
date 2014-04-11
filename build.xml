@@ -10,7 +10,6 @@
   </target>
 
   <target name="load-fixtures" description="Load the fixtures">
-    <phingcall target="sync-database" />
     <exec command="php app/console doctrine:fixtures:load -n" dir="." passthru="true" />
   </target>
 
