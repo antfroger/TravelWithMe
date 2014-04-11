@@ -3,8 +3,10 @@ kernel:
 
 default:
   extensions:
-    Behat\Symfony2Extension\Extension: ~
+    Behat\Symfony2Extension\Extension:
+      mink_driver: true
     Behat\MinkExtension\Extension:
+      default_session: 'symfony2'
       base_url:  'http://travelwithme/app_test.php'
       goutte: ~
       sahi: ~
