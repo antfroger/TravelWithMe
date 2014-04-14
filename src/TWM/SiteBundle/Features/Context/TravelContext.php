@@ -21,51 +21,6 @@ use TWM\SiteBundle\Entity\Travel\Travel\Travel;
 class TravelContext extends FeatureContext
 {
 
-//
-//    /**
-//     * @Given /^there are ongoing travels today$/
-//     */
-//    public function thereAreOngoingTravelsToday()
-//    {
-//        $travel1 = new Travel();
-//        $travel1
-//            ->setName('travel1')
-//            ->setSteps(new ArrayCollection(array(
-//                new Step(
-//                    new \DateTime('-12 days'),
-//                    new \DateTime('+ 2 days')
-//                )
-//            )));
-//
-//        $travel2 = new Travel();
-//        $travel2
-//            ->setName('travel2')
-//            ->setSteps(new ArrayCollection(array(
-//                new Step(
-//                    new \DateTime('yesterday'),
-//                    new \DateTime('+ 3 days')
-//                )
-//            )));
-//
-//        $this->travels = new ArrayCollection(array(
-//            $travel1,
-//            $travel2
-//        ));
-//    }
-//
-//    /**
-//     * @Then /^I should see the ongoing travels ordered by start date$/
-//     */
-//    public function iShouldSeeTheOngoingTravelsOrderedByStartDate()
-//    {
-//        $this->assertNumElements($this->travels->count(), 'li.travel');
-//        $elements = $this->getSession()->getPage()->findAll('css', 'li.travel');
-//
-//        foreach ($this->travels as $key => $travel) {
-//            \PHPUnit_Framework_Assert::assertEquals($elements[$key]->getText(), $travel->getName());
-//        }
-//    }
-
     /**
      * @Given /I have a travel "([^"]*)"/
      */
@@ -124,6 +79,7 @@ class TravelContext extends FeatureContext
 
         $found = false;
         foreach ($steps as $step) {
+            // @fixme often fail but not every time
             if ($stepStartDate == $step->getStartedAt() && $stepEndDate == $step->getFinishedAt()) {
                 $found = true;
                 break;
@@ -147,5 +103,22 @@ class TravelContext extends FeatureContext
         }
 
         $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Then /^I should see the ongoing travels ordered by start date$/
+     */
+    public function iShouldSeeTheOngoingTravelsOrderedByStartDate()
+    {
+        $travels = $this->getEntityManager()
+            ->getRepository('TWMSiteBundle:Travel\Travel\Travel')
+            ->findOngoingTravels();
+
+        $this->assertNumElements(count($travels), 'li.travel');
+        $elements = $this->getSession()->getPage()->findAll('css', 'li.travel');
+
+        foreach ($travels as $key => $travel) {
+            \PHPUnit_Framework_Assert::assertEquals($elements[$key]->getText(), $travel->getName());
+        }
     }
 }
