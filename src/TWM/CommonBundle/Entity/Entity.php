@@ -67,8 +67,8 @@ abstract class Entity implements EntityInterface
     /**
      * Set createdAt
      *
-     * @param  DateTime $createdAt
-     * @return Entity
+     * @param DateTime $date
+     * @return $this
      */
     public function setCreatedAt(DateTime $date = null)
     {
@@ -88,10 +88,8 @@ abstract class Entity implements EntityInterface
     }
 
     /**
-     * Set modificatedAt
-     *
-     * @param  DateTime $modificatedAt
-     * @return Entity
+     * @param DateTime $date
+     * @return $this
      */
     public function setModificatedAt(DateTime $date = null)
     {
