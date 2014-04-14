@@ -10,12 +10,7 @@
 
 namespace TWM\SiteBundle\Controller;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use TWM\SiteBundle\Entity\Travel\Step\Step;
-use TWM\SiteBundle\Entity\Travel\Travel\Travel;
 
 /**
  * Default Controller.
@@ -38,30 +33,9 @@ class TravelController extends Controller
      */
     public function viewOngoingAction()
     {
-        $travel1 = new Travel();
-        $travel1
-            ->setName('travel1')
-            ->setSteps(new ArrayCollection(array(
-                new Step(
-                    new \DateTime('-12 days'),
-                    new \DateTime('+ 2 days')
-                )
-            )));
+        $em = $this->getDoctrine()->getManager();
 
-        $travel2 = new Travel();
-        $travel2
-            ->setName('travel2')
-            ->setSteps(new ArrayCollection(array(
-                new Step(
-                    new \DateTime('yesterday'),
-                    new \DateTime('+ 3 days')
-                )
-            )));
-
-        $travels = new ArrayCollection(array(
-            $travel1,
-            $travel2
-        ));
+        $travels = $em->getRepository('TWMSiteBundle:Travel\Travel\Travel')->findOngoingTravels();
 
         return [
             'travels' => $travels

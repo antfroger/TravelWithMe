@@ -29,7 +29,7 @@ use TWM\SiteBundle\Entity\User\User;
  *
  * @author Antoine Froger <antfroger@gmail.com>
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="TWM\SiteBundle\Repository\TravelRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Travel extends Entity
