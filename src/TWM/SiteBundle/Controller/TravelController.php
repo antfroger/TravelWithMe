@@ -31,9 +31,9 @@ class TravelController extends Controller
      *   name = "twm_site_ongoing_travel",
      *   path = "/voyages/encours"
      * )
-     * @Template("TWMSiteBundle:Travel:ongoing.html.twig")
+     * @Template
      */
-    public function viewOngoingAction()
+    public function listOngoingAction()
     {
         $em = $this->getDoctrine()->getManager();
 

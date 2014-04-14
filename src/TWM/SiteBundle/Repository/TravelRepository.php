@@ -36,9 +36,10 @@ class TravelRepository extends EntityRepository
             ->where('t.startedAt <= :date')
             ->andWhere('t.finishedAt >= :date')
             ->setParameter('date', $now)
+            ->orderBy('t.startedAt')
             ->getQuery()
         ;
 
-        return $query->getArrayResult();
+        return $query->getResult();
     }
 }
