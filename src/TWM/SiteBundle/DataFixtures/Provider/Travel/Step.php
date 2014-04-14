@@ -44,7 +44,7 @@ class Step extends Base
         for ($i = 0; $i < $number; ++ $i) {
             $startedAt  = !empty($finishedAt)
                 ? $finishedAt
-                : $this->generator->dateTimeBetween('-1500 days', 'now');
+                : $this->generator->dateTimeBetween('-1000 days', '+500 days');
 
             $finishedAt = clone $startedAt;
             $finishedAt->add(new DateInterval(

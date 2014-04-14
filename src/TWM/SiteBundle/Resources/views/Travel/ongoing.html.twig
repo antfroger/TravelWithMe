@@ -3,9 +3,9 @@
 {% trans_default_domain "travel" %}
 
 {% block content %}
-  {#% if travels is empty %#}
+  {% if travels is empty %}
     <p>{{ 'ongoing.empty'|trans }}</p>
-  {#% else%#}
+  {% else%}
     <ul>
       {% for travel in travels %}
         <li class="travel">
@@ -13,5 +13,5 @@
         </li>
       {% endfor %}
     </ul>
-  {#% endif %#}
+  {% endif %}
 {% endblock %}
