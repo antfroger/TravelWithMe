@@ -37,30 +37,6 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     }
 
     /**
-     * @When /^I go to "([^"]*)"$/
-     */
-    public function iGoTo($route)
-    {
-        $this->visit(
-            $this->getContainer()->get('router')->generate($route)
-        );
-    }
-
-    /**
-     * @Then /^I should see "([^"]*)"$/
-     */
-    public function iShouldSee($key, $domain)
-    {
-        $translation = $this->getContainer()->get('translator')->trans(
-            $key,
-            array(),
-            $domain
-        );
-
-        $this->assertResponseContains($translation);
-    }
-
-    /**
      * @Given /There is no "([^"]*)" in database/
      */
     public function thereIsNoRecordInDatabase($entityName)

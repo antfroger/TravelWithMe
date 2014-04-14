@@ -3,9 +3,9 @@ Feature: Travel Step Relation
   As a developer
   I need a working relationship
 
-Background:
-  Given There is no "Travel\Travel\Travel" in database
-  And There is no "Travel\Step\Step" in database
+  Background:
+    Given There is no "Travel\Travel\Travel" in database
+    And There is no "Travel\Step\Step" in database
 
   Scenario: A travel contains a step
     Given I have a travel "travel 1"
