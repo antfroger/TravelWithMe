@@ -41,6 +41,11 @@ Some useful commands :
 Hooks
 -----
 
-Please, install the provided hooks with this simple command :
+The git pre-commit hook use SensioLabs' PHP Coding Standards Fixer.
+To install this tool, please follow the instructions: http://cs.sensiolabs.org/
 
-    ln -s ../.hooks .git/hooks
+Then, please, install the provided hooks with these simple command:
+
+    cd /path/to/project/root/directory;
+    rm -rf .git/hooks/;
+    ln -s ../.hooks .git/hooks;
