@@ -11,7 +11,8 @@
 
 namespace TWM\SiteBundle\Features\Context;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Behat\Gherkin\Node\TableNode;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use TWM\SiteBundle\Entity\Travel\Step\Step;
 use TWM\SiteBundle\Entity\Travel\Travel\Travel;
 
@@ -20,46 +21,85 @@ use TWM\SiteBundle\Entity\Travel\Travel\Travel;
  */
 class TravelContext extends FeatureContext
 {
+    /**
+     * @Transform /^table:id,name$/
+     */
+    public function castTravelsTable(TableNode $travelsTable)
+    {
+        $travels = array();
+        foreach ($travelsTable->getHash() as $travelHash) {
+            $travel = new Travel();
+            $travel->setName($travelHash['name']);
+
+            // Property id is protected, use reflection to set this property for the tests
+            $reflClass = new \ReflectionClass($travel);
+            $reflProperty = $reflClass->getProperty('id');
+            $reflProperty->setAccessible(true);
+            $reflProperty->setValue($travel, $travelHash['id']);
+
+            $travels[] = $travel;
+        }
+
+        return $travels;
+    }
 
     /**
-     * @Given /I have a travel "([^"]*)"/
+     * @Transform /^table:id,startedAt,finishedAt$/
      */
-    public function iHaveATravel($name)
+    public function castStepsTable(TableNode $stepsTable)
     {
-        $travel = new Travel();
-        $travel->setName($name);
+        $steps = array();
+        foreach ($stepsTable->getHash() as $stepHash) {
+            $step = new Step();
+            $step->setStartedAt(new \DateTime($stepHash['startedAt']));
+            $step->setFinishedAt(new \DateTime($stepHash['finishedAt']));
 
-        $this->getEntityManager()->persist($travel);
+            // Property id is protected, use reflection to set this property for the tests
+            $reflClass = new \ReflectionClass($step);
+            $reflProperty = $reflClass->getProperty('id');
+            $reflProperty->setAccessible(true);
+            $reflProperty->setValue($step, $stepHash['id']);
+
+            $steps[] = $step;
+        }
+
+        return $steps;
+    }
+
+    /**
+     * @Given /^the following travels|steps$/
+     */
+    public function pushObjects(array $objects)
+    {
+        if (0 === count($objects)) {
+            return;
+        }
+
+        $em = $this->getEntityManager();
+
+        foreach ($objects as $object) {
+            $em->persist($object);
+
+            // Force the id
+            $metadata = $em->getClassMetaData(get_class($object));
+            $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
+        }
+
         $this->getEntityManager()->flush();
     }
 
     /**
-     * @Given /I have a step starting "([^"]*)" and finishing "([^"]*)"/
+     * @When /^I add step (\d+) to travel (\d+)$/
      */
-    public function iHaveAProduct($startDate, $endDate)
+    public function iAddStepToTravel($stepId, $travelId)
     {
-        $step = new Step(
-            new \DateTime($startDate),
-            new \DateTime($endDate)
-        );
+        // fixme repositories should be services
 
-        $this->getEntityManager()->persist($step);
-        $this->getEntityManager()->flush();
-    }
+        /** @var Travel $travel */
+        $travel = $this->getRepository('TWMSiteBundle:Travel\Travel\Travel')->findOneById($travelId);
+        /** @var Step $step */
+        $step   = $this->getRepository('TWMSiteBundle:Travel\Step\Step')->findOneById($stepId);
 
-    /**
-     * @When /I add a step starting "([^"]*)" and finishing "([^"]*)" to travel "([^"]*)"/
-     */
-    public function iAddStepToTravel($stepStartDate, $stepEndDate, $travelName)
-    {
-        $travel = $this->getRepository('TWMSiteBundle:Travel\Travel\Travel')->findOneByName($travelName);
-        $step   = $this->getRepository('TWMSiteBundle:Travel\Step\Step')->findOneBy(array(
-            'startedAt'  => new \DateTime($stepStartDate),
-            'finishedAt' => new \DateTime($stepEndDate),
-            'travel'     => null
-        ));
-
-//        $step->setTravel($travel); // FIXME : travel properties startedAt, finishedAt and duration are null
         $travel->addStep($step);
 
         $this->getEntityManager()->persist($step);
@@ -67,20 +107,17 @@ class TravelContext extends FeatureContext
     }
 
     /**
-     * @Then /I should find step starting "([^"]*)" and finishing "([^"]*)" in travel "([^"]*)"/
+     * @Then /^I should find step (\d+) in travel (\d+)$/
      */
-    public function iShouldFindProductInCategory($stepStartDate, $stepEndDate, $travelName)
+    public function iShouldFindStepInTravel($stepId, $travelId)
     {
-        $travel = $this->getRepository('TWMSiteBundle:Travel\Travel\Travel')->findOneByName($travelName);
-        $steps = $travel->getSteps();
-
-        $stepStartDate = new \DateTime($stepStartDate);
-        $stepEndDate   = new \DateTime($stepEndDate);
+        /** @var Travel $travel */
+        $travel = $this->getRepository('TWMSiteBundle:Travel\Travel\Travel')->findOneById($travelId);
+        $steps  = $travel->getSteps();
 
         $found = false;
         foreach ($steps as $step) {
-            // @fixme often fail but not every time
-            if ($stepStartDate == $step->getStartedAt() && $stepEndDate == $step->getFinishedAt()) {
+            if ($step->getId() === $stepId) {
                 $found = true;
                 break;
             }
@@ -106,9 +143,9 @@ class TravelContext extends FeatureContext
     }
 
     /**
-     * @Then /^I should see the ongoing travels ordered by start date$/
+     * @Then /^I should see (\d+) ongoing travels? ordered by start date$/
      */
-    public function iShouldSeeTheOngoingTravelsOrderedByStartDate()
+    public function iShouldSeeTheOngoingTravelsOrderedByStartDate($travelCount)
     {
         $travels = $this->getEntityManager()
             ->getRepository('TWMSiteBundle:Travel\Travel\Travel')
@@ -116,6 +153,8 @@ class TravelContext extends FeatureContext
 
         $this->assertNumElements(count($travels), 'li.travel');
         $elements = $this->getSession()->getPage()->findAll('css', 'li.travel');
+
+        \PHPUnit_Framework_Assert::assertEquals($travelCount, count($elements));
 
         foreach ($travels as $key => $travel) {
             \PHPUnit_Framework_Assert::assertEquals($elements[$key]->getText(), $travel->getName());

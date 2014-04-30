@@ -37,19 +37,6 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /There is no "([^"]*)" in database/
-     */
-    public function thereIsNoRecordInDatabase($entityName)
-    {
-        $entities = $this->getEntityManager()->getRepository('TWMSiteBundle:'.$entityName)->findAll();
-        foreach ($entities as $eachEntity) {
-            $this->getEntityManager()->remove($eachEntity);
-        }
-
-        $this->getEntityManager()->flush();
-    }
-
-    /**
      * Gets the container of the kernel.
      *
      * @return ContainerInterface A ContainerInterface instance
@@ -79,5 +66,26 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     protected function getRepository($entityName)
     {
         return $this->getEntityManager()->getRepository($entityName);
+    }
+
+    /**
+     * @Given /There is no "([^"]*)" in database/
+     */
+    public function thereIsNoRecordInDatabase($entityName)
+    {
+        $entities = $this->getEntityManager()->getRepository('TWMSiteBundle:'.$entityName)->findAll();
+        foreach ($entities as $eachEntity) {
+            $this->getEntityManager()->remove($eachEntity);
+        }
+
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Transform /^(\d+)$/
+     */
+    public function castStringToNumber($string)
+    {
+        return intval($string);
     }
 }

@@ -17,11 +17,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use TWM\CommonBundle\Entity\Entity;
 use TWM\SiteBundle\Entity\Travel\Step\Step;
-use TWM\SiteBundle\Entity\Travel\Travel\Budget;
-use TWM\SiteBundle\Entity\Travel\Travel\Photo;
-use TWM\SiteBundle\Entity\Travel\Travel\Theme;
-use TWM\SiteBundle\Entity\Travel\Travel\Profile;
-use TWM\SiteBundle\Entity\Travel\Travel\Status;
 use TWM\SiteBundle\Entity\User\User;
 
 /**
@@ -305,7 +300,7 @@ class Travel extends Entity
     /**
      * Get steps
      *
-     * @return array
+     * @return ArrayCollection
      */
     public function getSteps()
     {

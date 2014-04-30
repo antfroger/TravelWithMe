@@ -11,10 +11,10 @@
 
 namespace TWM\SiteBundle\Entity\Travel\Travel;
 
-use TWM\CommonBundle\Entity\Entity;
-use TWM\SiteBundle\Entity\Community\EvaluationInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use TWM\CommonBundle\Entity\Entity;
+use TWM\SiteBundle\Entity\Community\EvaluationInterface;
 
 /**
  * Represents an Evaluation
@@ -82,7 +82,7 @@ class Evaluation extends Entity implements EvaluationInterface
      * @param  \TWM\SiteBundle\Entity\Travel\Travel\Travel $travel
      * @return Evaluation
      */
-    public function setTravel(\TWM\SiteBundle\Entity\Travel\Travel\Travel $travel = null)
+    public function setTravel(Travel $travel = null)
     {
         $this->travel = $travel;
 
@@ -121,5 +121,4 @@ class Evaluation extends Entity implements EvaluationInterface
     {
         return $this->comment;
     }
-
 }

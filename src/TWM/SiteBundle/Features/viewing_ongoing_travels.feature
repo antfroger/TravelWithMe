@@ -5,19 +5,23 @@ Feature: Viewing the ongoing travels today
     And There is no "Travel\Step\Step" in database
 
   Scenario: Some travels are ongoing today
-    Given I have a travel "travel 1"
-      And I have a step starting "-12 days" and finishing "+2 days"
-      And I have a travel "travel 2"
-      And I have a step starting "-2 days" and finishing "-1 day"
-      And I have a step starting "-1 day" and finishing "+2 days"
-      And I have a travel "travel 3"
-      And I have a step starting "-10 days" and finishing "-5 days"
-    When I add a step starting "-12 days" and finishing "+2 days" to travel "travel 1"
-      And I add a step starting "-2 days" and finishing "-1 day" to travel "travel 2"
-      And I add a step starting "-1 day" and finishing "+2 days" to travel "travel 2"
-      And I add a step starting "-10 days" and finishing "-5 days" to travel "travel 3"
+    Given the following travels
+      | id | name            |
+      | 1  | travel number 1 |
+      | 2  | travel number 2 |
+      | 3  | travel number 3 |
+      And the following steps
+        | id | startedAt | finishedAt |
+        | 1  | -12 days  | +2 days    |
+        | 2  | -2 days   | +1 day     |
+        | 3  | +1 day    | +4 days    |
+        | 4  | -5 days   | +4 days    |
+    When I add step 4 to travel 1
+      And I add step 2 to travel 2
+      And I add step 3 to travel 2
+      And I add step 1 to travel 3
       And I go to "/voyages/encours"
-    Then I should see the ongoing travels ordered by start date
+    Then I should see 3 ongoing travels ordered by start date
 
   Scenario: No ongoing travels today
     Given There are no ongoing travels today
