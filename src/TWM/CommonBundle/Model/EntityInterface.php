@@ -44,7 +44,7 @@ interface EntityInterface
      *
      * @return DateTime
      */
-    public function getModificatedAt();
+    public function getModifiedAt();
 
     /**
      * Sets the user's last modification date
@@ -53,6 +53,6 @@ interface EntityInterface
      *
      * @return self
      */
-    public function setModificatedAt(DateTime $date);
+    public function setModifiedAt(DateTime $date);
 
 }

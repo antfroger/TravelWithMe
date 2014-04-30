@@ -42,7 +42,7 @@ abstract class Entity implements EntityInterface
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $modificatedAt;
+    protected $modifiedAt;
 
     /**
      * Get id
@@ -67,7 +67,7 @@ abstract class Entity implements EntityInterface
     /**
      * Set createdAt
      *
-     * @param DateTime $date
+     * @param  DateTime $date
      * @return $this
      */
     public function setCreatedAt(DateTime $date = null)
@@ -78,22 +78,22 @@ abstract class Entity implements EntityInterface
     }
 
     /**
-     * Get modificatedAt
+     * Get modifiedAt
      *
      * @return DateTime
      */
-    public function getModificatedAt()
+    public function getModifiedAt()
     {
-        return $this->modificatedAt;
+        return $this->modifiedAt;
     }
 
     /**
-     * @param DateTime $date
+     * @param  DateTime $date
      * @return $this
      */
-    public function setModificatedAt(DateTime $date = null)
+    public function setModifiedAt(DateTime $date = null)
     {
-        $this->modificatedAt = $date ? : new DateTime();
+        $this->modifiedAt = $date ? : new DateTime();
 
         return $this;
     }
@@ -104,7 +104,7 @@ abstract class Entity implements EntityInterface
     public function prePersist()
     {
         $this->setCreatedAt(new DateTime('now'));
-        $this->setModificatedAt(new DateTime('now'));
+        $this->setModifiedAt(new DateTime('now'));
     }
 
     /**
@@ -112,7 +112,6 @@ abstract class Entity implements EntityInterface
      */
     public function preUpdate()
     {
-        $this->setModificatedAt(new DateTime('now'));
+        $this->setModifiedAt(new DateTime('now'));
     }
-
 }

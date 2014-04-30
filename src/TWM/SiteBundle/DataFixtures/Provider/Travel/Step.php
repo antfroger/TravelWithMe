@@ -164,7 +164,7 @@ class Step extends Base
     }
 
     /**
-     * Generate Hotel entities
+     * Generate Photo entities
      *
      * @param  integer         $number
      * @return ArrayCollection
