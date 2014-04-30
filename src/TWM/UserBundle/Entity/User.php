@@ -73,9 +73,9 @@ abstract class User extends BaseUser implements EntityInterface
      * @param  DateTime $createdAt
      * @return Entity
      */
-    public function setCreatedAt(DateTime $date = null)
+    public function setCreatedAt(DateTime $createdAt = null)
     {
-        $this->createdAt = $date ? : new DateTime();
+        $this->createdAt = $createdAt ? : new DateTime();
 
         return $this;
     }
@@ -94,11 +94,11 @@ abstract class User extends BaseUser implements EntityInterface
      * Set modifiedAt
      *
      * @param  DateTime $modifiedAt
-     * @return Entity
+     * @return $this
      */
-    public function setModifiedAt(DateTime $date = null)
+    public function setModifiedAt(DateTime $modifiedAt = null)
     {
-        $this->modifiedAt = $date ? : new DateTime();
+        $this->modifiedAt = $modifiedAt ? : new DateTime();
 
         return $this;
     }
