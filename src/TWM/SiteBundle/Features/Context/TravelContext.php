@@ -45,6 +45,7 @@ class TravelContext extends FeatureContext
 
     /**
      * @Transform /^table:id,startedAt,finishedAt$/
+     * @Transform /^table:id,startedAt,finishedAt,travelId$/
      */
     public function castStepsTable(TableNode $stepsTable)
     {
@@ -53,6 +54,13 @@ class TravelContext extends FeatureContext
             $step = new Step();
             $step->setStartedAt(new \DateTime($stepHash['startedAt']));
             $step->setFinishedAt(new \DateTime($stepHash['finishedAt']));
+
+            if (isset($stepHash['travelId'])) {
+                /** @var Travel $travel */
+                $travel = $this->getRepository('TWMSiteBundle:Travel\Travel\Travel')
+                    ->findOneById($stepHash['travelId']);
+                $travel->addStep($step);
+            }
 
             // Property id is protected, use reflection to set this property for the tests
             $reflClass = new \ReflectionClass($step);
