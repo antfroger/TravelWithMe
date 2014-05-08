@@ -256,8 +256,8 @@ class Step extends Entity
     /**
      * Add a place
      *
-     * @param TWM\SiteBundle\Entity\Travel\Step\Place
-     * @return Travel
+     * @param Place $place
+     * @return $this
      */
     public function addPlace(Place $place)
     {
@@ -271,8 +271,8 @@ class Step extends Entity
     /**
      * Remove a place
      *
-     * @param TWM\SiteBundle\Entity\Travel\Step\Place
-     * @return Travel
+     * @param Place $place
+     * @return $this
      */
     public function removePlace(Place $place)
     {
@@ -286,7 +286,7 @@ class Step extends Entity
     /**
      * Remove all the places
      *
-     * @return Travel
+     * @return this
      */
     public function clearPlaces()
     {
@@ -299,7 +299,7 @@ class Step extends Entity
      * Set restaurants
      *
      * @param  \Doctrine\Common\Collections\ArrayCollection $restaurants
-     * @return Travel
+     * @return this
      */
     public function setRestaurants(ArrayCollection $restaurants)
     {
@@ -325,8 +325,8 @@ class Step extends Entity
     /**
      * Add a restaurant
      *
-     * @param TWM\SiteBundle\Entity\Travel\Step\Restaurant
-     * @return Travel
+     * @param  Restaurant $restaurant
+     * @return this
      */
     public function addRestaurant(Restaurant $restaurant)
     {
@@ -340,8 +340,8 @@ class Step extends Entity
     /**
      * Remove a restaurant
      *
-     * @param TWM\SiteBundle\Entity\Travel\Step\Restaurant
-     * @return Travel
+     * @param  Restaurant $restaurant
+     * @return this
      */
     public function removeRestaurant(Restaurant $restaurant)
     {
@@ -355,7 +355,7 @@ class Step extends Entity
     /**
      * Remove all the restaurants
      *
-     * @return Travel
+     * @return this
      */
     public function clearRestaurants()
     {
@@ -368,7 +368,7 @@ class Step extends Entity
      * Set hotels
      *
      * @param  \Doctrine\Common\Collections\ArrayCollection $hotels
-     * @return Travel
+     * @return this
      */
     public function setHotels(ArrayCollection $hotels)
     {
@@ -394,8 +394,8 @@ class Step extends Entity
     /**
      * Add a hotel
      *
-     * @param TWM\SiteBundle\Entity\Travel\Step\Hotel
-     * @return Travel
+     * @param  Hotel $hotel
+     * @return this
      */
     public function addHotel(Hotel $hotel)
     {
@@ -409,8 +409,8 @@ class Step extends Entity
     /**
      * Remove a hotel
      *
-     * @param TWM\SiteBundle\Entity\Travel\Step\Hotel
-     * @return Travel
+     * @param  Hotel $hotel
+     * @return this
      */
     public function removeHotel(Hotel $hotel)
     {
@@ -424,7 +424,7 @@ class Step extends Entity
     /**
      * Remove all the hotels
      *
-     * @return Travel
+     * @return this
      */
     public function clearHotels()
     {
@@ -437,7 +437,7 @@ class Step extends Entity
      * Set photos
      *
      * @param  \Doctrine\Common\Collections\ArrayCollection $photos
-     * @return Travel
+     * @return this
      */
     public function setPhotos(ArrayCollection $photos)
     {
@@ -463,8 +463,8 @@ class Step extends Entity
     /**
      * Add a photo
      *
-     * @param TWM\SiteBundle\Entity\Travel\Step\Photo
-     * @return Travel
+     * @param  Photo $photo
+     * @return this
      */
     public function addPhoto(Photo $photo)
     {
@@ -479,8 +479,8 @@ class Step extends Entity
     /**
      * Remove a photo
      *
-     * @param TWM\SiteBundle\Entity\Travel\Step\Photo
-     * @return Travel
+     * @param  Photo $photo
+     * @return this
      */
     public function removePhoto(Photo $photo)
     {
@@ -495,7 +495,7 @@ class Step extends Entity
     /**
      * Remove all the photos
      *
-     * @return Travel
+     * @return this
      */
     public function clearPhotos()
     {

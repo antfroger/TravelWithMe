@@ -1,5 +1,20 @@
 {% extends 'TWMSiteBundle:Layout:layout.html.twig' %}
 
 {% block content %}
-  <p>Hello World!</p>
+  <p>{{ 'hello'|trans({name: 'World'}) }}</p>
+
+  <ul>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+      <li><a href="{{ path('fos_user_profile_show') }}">
+        {{ 'viewMyProfile'|trans({}, 'site') }}
+      </a></li>
+    {% else %}
+      <li><a href="{{ path('fos_user_security_login') }}">
+        {{ 'login'|trans({}, 'site') }}
+      </a></li>
+    {% endif %}
+    <li><a href="{{ path('twm_site_ongoing_travel') }}">
+      {{ 'ongoing.goto'|trans({}, 'travel') }}
+    </a></li>
+  </ul>
 {% endblock %}

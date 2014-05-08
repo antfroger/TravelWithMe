@@ -35,7 +35,11 @@ abstract class TravelDependency extends Entity
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Travel", mappedBy="author", cascade={"persist"})
+     * @ORM\OneToMany(
+     *  targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Travel",
+     *  mappedBy="author",
+     *  cascade={"persist"}
+     * )
      */
     protected $travels;
 
@@ -48,7 +52,7 @@ abstract class TravelDependency extends Entity
     /**
      * Set name
      *
-     * @param  string $name
+     * @param  string           $name
      * @return TravelDependency
      */
     public function setName($name)

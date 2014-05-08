@@ -19,19 +19,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  *
  * @author Antoine Froger <antfroger@gmail.com>
  */
-class DefaultController extends Controller
+class TravelController extends Controller
 {
+
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
+     * List all the ongoing travels
+     *
+     * @return Response A Response instance
      *
      * @Route(
-     *   name = "twm_site_homepage",
-     *   path = "/"
+     *   name = "twm_site_ongoing_travel",
+     *   path = "/voyages/encours"
      * )
-     * @Template()
+     * @Template
      */
-    public function indexAction()
+    public function listOngoingAction()
     {
-        return $this->render('TWMSiteBundle:Default:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $travels = $em->getRepository('TWMSiteBundle:Travel\Travel\Travel')->findOngoingTravels();
+
+        return [
+            'travels' => $travels
+        ];
     }
 }

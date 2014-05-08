@@ -24,13 +24,19 @@
         "sensio/framework-extra-bundle": "2.3.*",
         "sensio/generator-bundle": "2.3.*",
         "twig/extensions": "1.0.*",
+        "behat/behat": "2.*@stable",
+        "behat/mink": "1.*@stable",
+        "behat/mink-extension": "*",
+        "behat/mink-browserkit-driver": "*",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-sahi-driver": "*",
+        "behat/symfony2-extension": "*@stable",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/di-extra-bundle": "1.*",
         "jms/i18n-routing-bundle": "1.*",
         "jms/translation-bundle": "1.*",
-        "nelmio/alice": "1.5.*",
-        "phpunit/phpunit": "3.7.*"
+        "nelmio/alice": "1.5.*"
     },
     "scripts": {
         "post-install-cmd": [
@@ -49,7 +55,7 @@
         ]
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin/"
     },
     "minimum-stability": "stable",
     "extra": {

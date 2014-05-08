@@ -44,7 +44,7 @@ class Step extends Base
         for ($i = 0; $i < $number; ++ $i) {
             $startedAt  = !empty($finishedAt)
                 ? $finishedAt
-                : $this->generator->dateTimeBetween('-1500 days', 'now');
+                : $this->generator->dateTimeBetween('-1000 days', '+500 days');
 
             $finishedAt = clone $startedAt;
             $finishedAt->add(new DateInterval(
@@ -88,6 +88,7 @@ class Step extends Base
      * Generate Place entities
      *
      * @param  integer         $number
+     * @param  City            $city
      * @return ArrayCollection
      */
     public function places($number, City $city = null)
@@ -114,6 +115,7 @@ class Step extends Base
      * Generate Restaurant entities
      *
      * @param  integer         $number
+     * @param  City            $city
      * @return ArrayCollection
      */
     public function restaurants($number, City $city = null)
@@ -139,6 +141,7 @@ class Step extends Base
      * Generate Hotel entities
      *
      * @param  integer         $number
+     * @param  City            $city
      * @return ArrayCollection
      */
     public function hotels($number, City $city = null)
@@ -161,7 +164,7 @@ class Step extends Base
     }
 
     /**
-     * Generate Hotel entities
+     * Generate Photo entities
      *
      * @param  integer         $number
      * @return ArrayCollection

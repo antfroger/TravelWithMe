@@ -442,8 +442,8 @@ class TravelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Get a mock Step object
-     * @param \DateTime $startedAt
-     * @param \DateTime $finishedAt
+     * @param  \DateTime $startedAt
+     * @param  \DateTime $finishedAt
      * @return Step
      */
     private function getMockedStep(\DateTime $startedAt = null,

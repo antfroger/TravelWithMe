@@ -1,0 +1,17 @@
+{% extends 'TWMSiteBundle:Layout:travel_list.html.twig' %}
+
+{% trans_default_domain "travel" %}
+
+{% block content %}
+  {% if travels is empty %}
+    <p>{{ 'ongoing.empty'|trans }}</p>
+  {% else%}
+    <ul>
+      {% for travel in travels %}
+        <li class="travel">
+          <h3>{{ travel.name }}</h3>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

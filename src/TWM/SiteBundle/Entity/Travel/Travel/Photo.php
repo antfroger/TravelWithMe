@@ -13,7 +13,6 @@ namespace TWM\SiteBundle\Entity\Travel\Travel;
 
 use Doctrine\ORM\Mapping as ORM;
 use TWM\SiteBundle\Entity\File\Photo as BasePhoto;
-use TWM\SiteBundle\Entity\Travel\Travel\Travel;
 
 /**
  * Represents a Photo of a Travel
@@ -53,5 +52,4 @@ class Photo extends BasePhoto
     {
         return $this->travel;
     }
-
 }

@@ -42,7 +42,7 @@ abstract class User extends BaseUser implements EntityInterface
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $modificatedAt;
+    protected $modifiedAt;
 
     /**
      * Set id
@@ -73,32 +73,32 @@ abstract class User extends BaseUser implements EntityInterface
      * @param  DateTime $createdAt
      * @return Entity
      */
-    public function setCreatedAt(DateTime $date = null)
+    public function setCreatedAt(DateTime $createdAt = null)
     {
-        $this->createdAt = $date ? : new DateTime();
+        $this->createdAt = $createdAt ? : new DateTime();
 
         return $this;
     }
 
     /**
-     * Get modificatedAt
+     * Get modifiedAt
      *
      * @return DateTime
      */
-    public function getModificatedAt()
+    public function getModifiedAt()
     {
-        return $this->modificatedAt;
+        return $this->modifiedAt;
     }
 
     /**
-     * Set modificatedAt
+     * Set modifiedAt
      *
-     * @param  DateTime $modificatedAt
-     * @return Entity
+     * @param  DateTime $modifiedAt
+     * @return $this
      */
-    public function setModificatedAt(DateTime $date = null)
+    public function setModifiedAt(DateTime $modifiedAt = null)
     {
-        $this->modificatedAt = $date ? : new DateTime();
+        $this->modifiedAt = $modifiedAt ? : new DateTime();
 
         return $this;
     }
@@ -109,7 +109,7 @@ abstract class User extends BaseUser implements EntityInterface
     public function prePersist()
     {
         $this->setCreatedAt(new DateTime('now'));
-        $this->setModificatedAt(new DateTime('now'));
+        $this->setModifiedAt(new DateTime('now'));
     }
 
     /**
@@ -117,7 +117,7 @@ abstract class User extends BaseUser implements EntityInterface
      */
     public function preUpdate()
     {
-        $this->setModificatedAt(new DateTime('now'));
+        $this->setModifiedAt(new DateTime('now'));
     }
 
 }

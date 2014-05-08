@@ -10,25 +10,42 @@ Users who are traveling can share their impressions with their family or friends
 A [translation service] (http://travelwithme/app_dev.php/_trans/) is available.
 
 ---
-
 Commands
 --------
 
 Some useful commands :
 
-    phing sync-database // Synchronise the database using the Doctrine command
-    phing load-fixtures // Load the fixtures
-    phing gen-entity -De=TWM/DemoBundle/Entity/Product // Generate an entity using Symfony2 command
-    phing check         // Run the unit tests
-    phing translate -Db=TWMDemoBundle // Extract the translation keys of a bundle
-    phing clear-cache   // Clear cache
-    phing dump-asset    // Dump the assets using assetic
+    // Synchronise the database using the Doctrine command
+    phing sync-database
+
+    // Load the fixtures
+    phing load-fixtures
+
+    // Generate an entity using Symfony2 command
+    phing gen-entity -De=TWM/DemoBundle/Entity/Product
+
+    // Run the unit tests
+    phing check
+
+    // Extract the translation keys of a bundle
+    phing trans -Db=TWMDemoBundle -Dlg=fr
+    phing trans-routes -Db=TWMDemoBundle -Dlg=fr
+
+    // Dump the assets using assetic
+    phing dump-asset
+
+    // Test a bundle with Behat
+    bin/behat -p=travel
 
 ---
-
 Hooks
 -----
 
-Please, install the provided hooks with this simple command :
+The git pre-commit hook use SensioLabs' PHP Coding Standards Fixer.
+To install this tool, please follow the instructions: http://cs.sensiolabs.org/
 
-    ln -s ../.hooks .git/hooks
+Then, please, install the provided hooks with these simple command:
+
+    cd /path/to/project/root/directory;
+    rm -rf .git/hooks/;
+    ln -s ../.hooks .git/hooks;

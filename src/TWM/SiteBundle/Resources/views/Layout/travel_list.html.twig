@@ -1,0 +1,5 @@
+{% extends 'TWMSiteBundle:Layout:layout.html.twig' %}
+
+{% block content_footer %}
+  <a href="{{ path('twm_site_homepage') }}">{{ 'home.back'|trans ({}, 'site') }}</a>
+{% endblock %}

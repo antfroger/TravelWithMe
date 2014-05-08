@@ -12,6 +12,9 @@
 namespace TWM\CommonBundle\Helper;
 
 /**
+ * Helper class to manage file
+ *
+ * @author Antoine Froger <antfroger@gmail.com>
  *
  */
 class File
@@ -33,7 +36,7 @@ class File
     /**
      * Recursively remove the content of the given directory
      *
-     * @param  string  $dir
+     * @param string $dir
      */
     public static function emptyDir($dir)
     {

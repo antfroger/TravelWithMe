@@ -177,7 +177,8 @@ abstract class File extends Entity
      */
     public function removeUpload()
     {
-        if ($file = $this->getAbsolutePath()) {
+        $file = $this->getAbsolutePath();
+        if ($file && is_file($file)) {
             unlink($file);
         }
     }

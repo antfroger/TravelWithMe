@@ -43,7 +43,6 @@ assetic:
     debug:          "%kernel.debug%"
     use_controller: "%kernel.debug%"
     bundles:
-#      - TWMDemoBundle
       - TWMSiteBundle
     java: "/usr/bin/java"
     sass: "/usr/local/bin/sass"
@@ -82,11 +81,6 @@ swiftmailer:
 #JMSTranslation Configuration
 jms_translation:
     configs:
-#        twm_demo:
-#          dirs: ["%kernel.root_dir%/../src/TWM/DemoBundle"]
-#          output_dir: "%kernel.root_dir%/../src/TWM/DemoBundle/Resources/translations"
-#          excluded_names: ["*TestCase.php", "*Test.php"]
-#          excluded_dirs: [cache, data, logs]
         twm_site:
           dirs: ["%kernel.root_dir%/../src/TWM/SiteBundle"]
           output_dir: "%kernel.root_dir%/../src/TWM/SiteBundle/Resources/translations"
