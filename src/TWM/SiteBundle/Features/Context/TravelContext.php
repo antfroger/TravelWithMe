@@ -101,8 +101,6 @@ class TravelContext extends FeatureContext
      */
     public function iAddStepToTravel($stepId, $travelId)
     {
-        // fixme repositories should be services
-
         /** @var Travel $travel */
         $travel = $this->getRepository('TWMSiteBundle:Travel\Travel\Travel')->findOneById($travelId);
         /** @var Step $step */

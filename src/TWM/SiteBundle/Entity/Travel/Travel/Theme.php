@@ -23,5 +23,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Theme extends TravelDependency
 {
-
+    /**
+     * @ORM\OneToMany(
+     *  targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Travel",
+     *  mappedBy="theme",
+     *  cascade={"persist"}
+     * )
+     */
+    protected $travels;
 }

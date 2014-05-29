@@ -35,11 +35,7 @@ abstract class TravelDependency extends Entity
     protected $name;
 
     /**
-     * @ORM\OneToMany(
-     *  targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Travel",
-     *  mappedBy="author",
-     *  cascade={"persist"}
-     * )
+     * Mapped in classes which extend this one
      */
     protected $travels;
 

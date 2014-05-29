@@ -1,6 +1,8 @@
 TravelWithMe
 ============
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/c175acc7-6c0e-4cb6-a0dc-699fd11ca92d/mini.png)](https://insight.sensiolabs.com/projects/c175acc7-6c0e-4cb6-a0dc-699fd11ca92d "SensioLabsInsight")
+
 TravelWithMe is a community website.
 
 Users can share their travels around the world, the good addresses, hostels, restaurants they found.
@@ -8,8 +10,6 @@ Users who prepare their journey can find good advice of people that already went
 Users who are traveling can share their impressions with their family or friends thanks to a personal blog.
 
 A [translation service] (http://travelwithme/app_dev.php/_trans/) is available.
-
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/c175acc7-6c0e-4cb6-a0dc-699fd11ca92d/mini.png)](https://insight.sensiolabs.com/projects/c175acc7-6c0e-4cb6-a0dc-699fd11ca92d "SensioLabsInsight")
 
 ---
 Commands

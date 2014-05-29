@@ -23,5 +23,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Budget extends TravelDependency
 {
-
+    /**
+     * @ORM\OneToMany(
+     *  targetEntity="TWM\SiteBundle\Entity\Travel\Travel\Travel",
+     *  mappedBy="budget",
+     *  cascade={"persist"}
+     * )
+     */
+    protected $travels;
 }
