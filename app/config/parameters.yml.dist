@@ -1,4 +1,3 @@
-# This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
@@ -6,11 +5,13 @@ parameters:
     database_name: TravelWithMe
     database_user: TravelWithMe
     database_password: TravelWithMe
+
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
     mailer_password: null
+
     locale: fr
     secret: 16d76f3bb9694c8b7b8c9295aba4ba5bb268dffa
-    database_path: null
-    base_url: http://travelwithme/app_dev.php
+
+    translator.class: Af\Bundle\DontTranslateBundle\Translation\Translator

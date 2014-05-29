@@ -2,20 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
-services:
-    twig.text_extension:
-        class: Twig_Extensions_Extension_Text
-        tags:
-            - name: twig.extension
-
-parameters:
-    # Assetic
-    #assetic.filter.compass.images_dir: %kernel.root_dir%/../web/images
-    #assetic.filter.compass.http_path:  /images
-
-
 framework:
-    #esi:             ~
     translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
@@ -26,7 +13,6 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:         ~

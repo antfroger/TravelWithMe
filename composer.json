@@ -1,6 +1,8 @@
 {
-    "name": "travel-with-me",
+    "name": "af/travel-with-me",
     "description": "Travel With Me - the social travel guide",
+    "homepage": "https://github.com/antfroger/TravelWithMe",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Antoine Froger",
@@ -30,8 +32,8 @@
         "jms/translation-bundle": "1.*"
     },
     "require-dev": {
-        "doctrine/data-fixtures" : "dev-master",
-        "doctrine/doctrine-fixtures-bundle" : "dev-master",
+        "doctrine/data-fixtures" : "1.*",
+        "doctrine/doctrine-fixtures-bundle" : "2.*",
         "behat/behat": "2.*@stable",
         "behat/mink": "1.*@stable",
         "behat/mink-extension": "*",

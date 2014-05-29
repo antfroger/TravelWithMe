@@ -152,7 +152,7 @@ abstract class File extends Entity
     public function preUpload()
     {
         if (null !== $this->file) {
-            // FIXME use a class to generate the unique name
+            // TODO use a class to generate the unique name
             $this->path = sha1(uniqid(mt_rand(), true)) . '.' . $this->file->guessExtension();
         }
     }

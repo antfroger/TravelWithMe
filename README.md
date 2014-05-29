@@ -9,6 +9,8 @@ Users who are traveling can share their impressions with their family or friends
 
 A [translation service] (http://travelwithme/app_dev.php/_trans/) is available.
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/c175acc7-6c0e-4cb6-a0dc-699fd11ca92d/mini.png)](https://insight.sensiolabs.com/projects/c175acc7-6c0e-4cb6-a0dc-699fd11ca92d "SensioLabsInsight")
+
 ---
 Commands
 --------
