@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Af\Bundle\DontTranslateBundle\AfDontTranslateBundle(),
             new TWM\CommonBundle\TWMCommonBundle(),
             new TWM\SiteBundle\TWMSiteBundle(),
             new TWM\UserBundle\TWMUserBundle(),
