@@ -92,4 +92,5 @@ fos_user:
 
 # AfDontTranslate Configuration
 af_dont_translate:
-    get_param_name: untrans
+    get_param_name: "untrans"
+    roles: %af_dont_translate.authorized_roles%

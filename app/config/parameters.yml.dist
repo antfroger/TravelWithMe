@@ -13,3 +13,5 @@ parameters:
 
     locale: fr
     secret: 16d76f3bb9694c8b7b8c9295aba4ba5bb268dffa
+
+    af_dont_translate.authorized_roles: ["ROLE_ADMIN"]

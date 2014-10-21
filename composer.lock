@@ -4,21 +4,21 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "39eafd39dcd591fb6324450369fa4ebb",
+    "hash": "c5811192161fbb74750497f4dd1544fd",
     "packages": [
         {
             "name": "af/dont-translate-bundle",
-            "version": "v1.1.0",
+            "version": "dev-master",
             "target-dir": "Af/Bundle/DontTranslateBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antfroger/AfDontTranslateBundle.git",
-                "reference": "bc871e67462bd0fb39bade6f6b6782c699ba793f"
+                "reference": "fea7cf6f9e14d7aecac001e9415337b389cbcb28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antfroger/AfDontTranslateBundle/zipball/bc871e67462bd0fb39bade6f6b6782c699ba793f",
-                "reference": "bc871e67462bd0fb39bade6f6b6782c699ba793f",
+                "url": "https://api.github.com/repos/antfroger/AfDontTranslateBundle/zipball/fea7cf6f9e14d7aecac001e9415337b389cbcb28",
+                "reference": "fea7cf6f9e14d7aecac001e9415337b389cbcb28",
                 "shasum": ""
             },
             "require": {
@@ -28,7 +28,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -48,7 +48,7 @@
             ],
             "description": "A bundle to translate or don't translate a Symfony2 application",
             "homepage": "https://github.com/antfroger/AfDontTranslateBundle",
-            "time": "2014-06-21 21:23:34"
+            "time": "2014-10-21 20:35:35"
         },
         {
             "name": "doctrine/annotations",
@@ -3429,6 +3429,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "friendsofsymfony/user-bundle": 20,
+        "af/dont-translate-bundle": 20,
         "behat/behat": 0,
         "behat/mink": 0,
         "behat/symfony2-extension": 0
