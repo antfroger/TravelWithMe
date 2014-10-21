@@ -13,5 +13,3 @@ parameters:
 
     locale: fr
     secret: 16d76f3bb9694c8b7b8c9295aba4ba5bb268dffa
-
-    translator.class: Af\Bundle\DontTranslateBundle\Translation\Translator

@@ -8,27 +8,27 @@
     "packages": [
         {
             "name": "af/dont-translate-bundle",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "target-dir": "Af/Bundle/DontTranslateBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antfroger/AfDontTranslateBundle.git",
-                "reference": "645eb858a3db4bdcd0d80a907cb4bcba4d2053d8"
+                "reference": "bc871e67462bd0fb39bade6f6b6782c699ba793f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antfroger/AfDontTranslateBundle/zipball/645eb858a3db4bdcd0d80a907cb4bcba4d2053d8",
-                "reference": "645eb858a3db4bdcd0d80a907cb4bcba4d2053d8",
+                "url": "https://api.github.com/repos/antfroger/AfDontTranslateBundle/zipball/bc871e67462bd0fb39bade6f6b6782c699ba793f",
+                "reference": "bc871e67462bd0fb39bade6f6b6782c699ba793f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "symfony/framework-bundle": "~2.3"
+                "symfony/translation": ">=2.3"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -48,7 +48,7 @@
             ],
             "description": "A bundle to translate or don't translate a Symfony2 application",
             "homepage": "https://github.com/antfroger/AfDontTranslateBundle",
-            "time": "2014-05-20 21:02:49"
+            "time": "2014-06-21 21:23:34"
         },
         {
             "name": "doctrine/annotations",
@@ -3425,9 +3425,7 @@
             "time": "2013-01-13 10:24:48"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "friendsofsymfony/user-bundle": 20,
@@ -3435,10 +3433,9 @@
         "behat/mink": 0,
         "behat/symfony2-extension": 0
     },
+    "prefer-stable": false,
     "platform": {
         "php": ">=5.3.3"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }
